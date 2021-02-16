@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Categorii="clr-namespace:FinantePersonale.Views"
+             x:Class="FinantePersonale.Views.MainPage"
+             SelectedTabColor="{StaticResource culoareTabMenu}">
+    <!--CA SA POT ADAUGA PAGINILE CREATE IN TAB, TREBUIE SA DEFINESC xmlns:nume="denumire solutie"-->
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="Istoric Venituri"    
+                     Clicked="IstoricVen_ToolbarItem_Clicked"/>
+        <ToolbarItem Text="Istoric Cheltuieli"    
+                     Clicked="IstoricCh_ToolbarItem_Clicked"/>
+        <!--Istoricul balantei (V-C pe o perioada), al veniturilor sau al cheltuielilor-->
+    </TabbedPage.ToolbarItems>
+
+    <!--<Categorii:Balance Title="Balanță"
+                    IconImageSource="BalanceImg.png"/>-->
+    <Categorii:Venituri Title="Venituri"
+                    IconImageSource="VenituriImg.png"/>
+    <Categorii:Cheltuieli Title="Cheltuieli"
+                      IconImageSource="CheltuieliImg.png"/>
+    <Categorii:Wishlist Title="Wishlist"
+                    IconImageSource="WishlistImg.png"/>
+
+</TabbedPage>

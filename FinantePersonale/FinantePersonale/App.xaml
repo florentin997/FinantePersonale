@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinantePersonale.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="lightGreenColor">
+                #37D4A0
+            </Color>
+            <Color x:Key="textColor">
+                #000000
+            </Color>
+            <Color x:Key="culoareFundal">
+                #99CCFF
+            </Color>
+            <Color x:Key="culoareTabMenu">
+                #FFFFFF
+            </Color>
+
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource lightGreenColor}"/>
+                <!-- Style-> Setter->Property (textColor,background,size etc.)-> Value) -->
+                <Setter Property="TextColor" Value="{StaticResource textColor}"/>
+            </Style>
+
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <!-- am pus contentPage, fiindca acela aste tipul din LoginPage-->
+                <Setter Property="BackgroundColor"  Value="{StaticResource culoareFundal}"/>
+            </Style>
+
+            <Style TargetType="TabbedPage">
+                <Setter Property="SelectedTabColor" Value="{StaticResource culoareTabMenu}"/>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="PlaceholderColor"  Value="black"/>
+                <Setter Property="TextColor" Value="black"/>
+                <Setter Property="FontSize" Value="24"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
