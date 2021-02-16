@@ -2,12 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.Venituri">
-    <!--
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:CheltuieliVM x:Key="vm"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salveaza"
-                     Clicked="ToolbarItem_Clicked_Venituri"/>
-    </ContentPage.ToolbarItems>-->
+                     Command="{Binding Source={StaticResource vm}, Path=SaveVenituriCommand}"/>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout>
@@ -16,9 +23,6 @@
                    x:Name="EntrySuma"
                        />
                 <Picker x:Name="SubcatVen"/>  <!-- AICI E UN PICKER PTR SUBCATEGORII, sa las entry sau picker??-->
-                <Entry Placeholder="Subcategorie"
-                   x:Name="EntrySubcategorie"
-                        />
                 <DatePicker x:Name="DataPickerVenituri" 
                             Format="yyyy/MM/dd" />
             </StackLayout>

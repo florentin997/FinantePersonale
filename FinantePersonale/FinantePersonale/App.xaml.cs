@@ -19,9 +19,9 @@ namespace FinantePersonale
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
-
             DatabasePath = databasePath;
+
+            MainPage = new NavigationPage(new MainPage());
         }
 
 

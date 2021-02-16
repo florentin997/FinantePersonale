@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FinantePersonale.Models
 {
-    public class Cheltuieli
+    public class ValueModel
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -16,26 +16,26 @@ namespace FinantePersonale.Models
 
         public DateTime Date { get; set; }
 
-        public Cheltuieli()
+        public ValueModel()
         {
 
         }
-
-        public static int InsertCheltuieli(Cheltuieli cheltuieli)
+        
+        public static int InsertValue(ValueModel cheltuieli)
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
-                conn.CreateTable<Cheltuieli>();
+                conn.CreateTable<ValueModel>();
                 return conn.Insert(cheltuieli);
             }
         }
 
-        public static List<Cheltuieli> GetExpenses()
+        public static List<ValueModel> GetValue()
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
-                conn.CreateTable<Cheltuieli>();
-                return conn.Table<Cheltuieli>().ToList();
+                conn.CreateTable<ValueModel>();
+                return conn.Table<ValueModel>().ToList();
             }
         }
     }
