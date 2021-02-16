@@ -2,11 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.Cheltuieli">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:CheltuieliVM x:Key="vm"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salveaza"
-                     Clicked="ToolbarItem_Clicked_Cheltuieli"/>
+                     Command="{Binding Source={StaticResource vm}, Path=SaveCheltuieliCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -14,8 +21,7 @@
             <StackLayout Margin="50,0,50,0" >
                 <Entry Placeholder="Suma"
                    x:Name="EntrySuma"/>
-                <Entry Placeholder="Subcategorie"
-                   x:Name="EntrySubcategorie"/>
+                <Picker x:Name="SubcatVen"/>
                 <DatePicker x:Name="DataPickerCheltuieli" 
                             Format="yyyy/MM/dd" />
             </StackLayout>
