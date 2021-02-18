@@ -6,57 +6,53 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class CheltuieliVM
+    public class CheltuieliVM : INotifyPropertyChanged
     {
-        public ObservableCollection<ValueModel> Expenses
-        {
-            get;
-            set;
-        }
-
-
         //PROPRIETATILE AICI
         private string subcategorie;
-        public string Subcategorie
+        public string SubcatergorieC
         {
             get { return subcategorie; }
             set
             {
                 subcategorie = value;
-                OnPropertyChanged("ExpenseName");
+                OnPropertyChanged("SubcatergorieC");
             }
         }
 
 
         private decimal sumaCheltuieli;   //POSIBIL SA FIE NECESAR FLOAT PTR GRAFICE
-        public decimal SumaCheltuieli
+        public decimal SumaC
         {
             get { return sumaCheltuieli; }
             set
             {
                 sumaCheltuieli = value;
-                OnPropertyChanged("ExpenseAmmount");
+                OnPropertyChanged("SumaC");
             }
         }
 
         private DateTime expenseDate;
-        public DateTime ExpenseDate
+        public DateTime DateC
         {
             get { return expenseDate; }
             set
             {
                 expenseDate = value;
-                OnPropertyChanged("ExpenseDate");
+                OnPropertyChanged("DateC");
             }
         }
 
         public Command SaveCheltuieliCommand { get; set; }
-
+        //------------
+        public ObservableCollection<string> SubcategoriiCheltuieli{ get;set;}
+        //-------------
         public CheltuieliVM()
         {
-            //Expenses = new ObservableCollection<Cheltuieli>();
+            SubcategoriiCheltuieli = new ObservableCollection<string>();
+            DateC = DateTime.Today;
             SaveCheltuieliCommand = new Command(InsertCheltuieli);
-            //GetExpenses();
+            GetSubcategorieCheltuieli();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -67,41 +63,35 @@ namespace FinantePersonale.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        /*   PARTEA CU GET TREBUIE  PUSA LA ISTORIC, NU LA CHELTUIELIVM (de aici iau datele, nu le si afisez aici)
-         *   
-        private void GetExpenses()
-        {
-            var expenses = Cheltuieli.GetExpenses();
 
-            Expenses.Clear();
-
-            foreach (var expense in expenses)
-            {
-                Expenses.Add(expense);
-            }
-        }*/
-
-
-        public void InsertCheltuieli()
+         public void InsertCheltuieli()
         {
             ValueModel ch = new ValueModel()
             {
-                Subcategorie = Subcategorie,
-                Suma = SumaCheltuieli,
-                Date=ExpenseDate
+                Subcategorie = SubcatergorieC,
+                Suma = SumaC,
+                Date=DateC
             };
             int response = ValueModel.InsertValue(ch);
 
             if (response > 0)
-                Application.Current.MainPage.Navigation.PopAsync();
+                //Application.Current.MainPage.Navigation.PopAsync();
+                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata cu succes", "ok");
             else
-                Application.Current.MainPage.DisplayAlert("Error", "No items were inserter", "Ok");
+                Application.Current.MainPage.DisplayAlert("Error", "salvare esuata", "Ok");
         }
 
-        /* nav la pag noua, mai ma gandesc daca e necesara
-        public void AdaugareCheltuieli()
+
+        private void GetSubcategorieCheltuieli()
         {
-            Application.Current.MainPage.Navigation.PushAsync(new CheltuieliVM());
-        }*/
+            SubcategoriiCheltuieli.Clear();
+            SubcategoriiCheltuieli.Add("Chirie");
+            SubcategoriiCheltuieli.Add("Mancare");
+            SubcategoriiCheltuieli.Add("Sanatate");
+            SubcategoriiCheltuieli.Add("Recreatie");
+            SubcategoriiCheltuieli.Add("Transport");
+            SubcategoriiCheltuieli.Add("Calatorii");
+            SubcategoriiCheltuieli.Add("Altele");
+        }
     }
 }

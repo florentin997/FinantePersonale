@@ -21,12 +21,12 @@ namespace FinantePersonale.Models
 
         }
         
-        public static int InsertValue(ValueModel cheltuieli)
+        public static int InsertValue(ValueModel value)
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
                 conn.CreateTable<ValueModel>();
-                return conn.Insert(cheltuieli);
+                return conn.Insert(value);
             }
         }
 

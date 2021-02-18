@@ -1,29 +1,43 @@
-﻿using System;
+﻿using FinantePersonale.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Xamarin.Forms;
 
-namespace UdemyCourse.ViewModels
+namespace FinantePersonale.ViewModels
 {
-    class IstoricCheltuieliVM
+    public class IstoricCheltuieliVM
     {
-        public ObservableCollection<string> SubcategorieC { get; set; }
+        public ObservableCollection<ValueModel> IstCheltuieli
+        {
+            get;
+            set;
+        }
+
+        public Command AddExpenseCommand
+        {
+            get;
+            set;
+        }
 
         public IstoricCheltuieliVM()
         {
-            GetSubcategorieC();
+            IstCheltuieli = new ObservableCollection<ValueModel>();
+
+            GetExpenses();
         }
 
-        private void GetSubcategorieC()
+        private void GetExpenses()
         {
-            SubcategorieC = new ObservableCollection<string>();
-            /*
-            Subcategorie.Add("Chirie");
-            Subcategorie.Add("Mancare");
-            Subcategorie.Add("Haine");
-            Subcategorie.Add("Divertisment");
-            Subcategorie.Add("Utilitati");
-            */
+            var expenses = ValueModel.GetValue();
+
+            IstCheltuieli.Clear();
+
+            foreach (var expense in expenses)
+            {
+                IstCheltuieli.Add(expense);
+            }
         }
     }
 }

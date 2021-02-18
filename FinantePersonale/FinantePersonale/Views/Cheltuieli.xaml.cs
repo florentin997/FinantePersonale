@@ -18,11 +18,11 @@ namespace FinantePersonale.Views
 
         private readonly ChartEntry[] entries = new[]
        {
-            new ChartEntry(150)
+            new ChartEntry(150) //valoarea din chart
             {
-                Label = "Haine",
+                Label = "Haine",     //categoria
                 ValueLabelColor=SKColor.Parse("#2c3e50"),
-                ValueLabel = "112",
+                ValueLabel = "112", //valoarea care apare sub categorie
                 Color = SKColor.Parse("#2c3e50")
             },
             new ChartEntry(150)

@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class VenituVM
+    public class VenituriVM : INotifyPropertyChanged
     {
         public ObservableCollection<ValueModel> Expenses
         {
@@ -15,44 +15,52 @@ namespace FinantePersonale.ViewModels
         }
 
         private string subcategorie;
-        public string Subcategorie
+        public string SubcategorieV
         {
             get { return subcategorie; }
             set
             {
                 subcategorie = value;
-                OnPropertyChanged("SubcategorieVenituri");
+                OnPropertyChanged("SubcategorieV");
             }
         }
 
 
-        private decimal venituriSuma;   
-        public decimal SumaVenituri
+        private decimal sumaVenituri;   
+        public decimal SumaV
         {
-            get { return venituriSuma; }
+            get { return sumaVenituri; }
             set
             {
-                venituriSuma = value;
-                OnPropertyChanged("SumaVenituri");
+                sumaVenituri = value;
+                OnPropertyChanged("SumaV");
             }
         }
 
         private DateTime venituriDate;
-        public DateTime VenituriDate
+        public DateTime DateV
         {
             get { return venituriDate; }
             set
             {
                 venituriDate = value;
-                OnPropertyChanged("VenituriDate");
+                OnPropertyChanged("DateV");
             }
         }
 
         public Command SaveVenituriCommand { get; set; }
-
-        public VenituVM()
+        //-----------
+        public ObservableCollection<string> SubcategoriiVenituri
         {
+            get;
+            set;
+        }//------------
+        public VenituriVM()
+        {
+            SubcategoriiVenituri = new ObservableCollection<string>();
+            DateV = DateTime.Today;
             SaveVenituriCommand = new Command(InsertVenituri);
+            GetSubcategorieVenituri();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -67,16 +75,28 @@ namespace FinantePersonale.ViewModels
         {
             ValueModel ch = new ValueModel()
             {
-                Subcategorie = Subcategorie,
-                Suma = venituriSuma,
-                Date = VenituriDate
+                Subcategorie = SubcategorieV,
+                Suma = SumaV,
+                Date = DateV
             };
             int response = ValueModel.InsertValue(ch);
 
             if (response > 0)
                 Application.Current.MainPage.Navigation.PopAsync();
             else
-                Application.Current.MainPage.DisplayAlert("Error", "No items were inserter", "Ok");
+                Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "Ok");
+        }
+
+        private void GetSubcategorieVenituri()
+        {
+            SubcategoriiVenituri.Clear();
+            SubcategoriiVenituri.Add("Salariu");
+            SubcategoriiVenituri.Add("Sporuri");
+            SubcategoriiVenituri.Add("Indemnizatii");
+            SubcategoriiVenituri.Add("Dividende");
+            SubcategoriiVenituri.Add("Actiuni");
+            SubcategoriiVenituri.Add("Cryptomonede");
+            SubcategoriiVenituri.Add("Altele");
         }
     }
 }

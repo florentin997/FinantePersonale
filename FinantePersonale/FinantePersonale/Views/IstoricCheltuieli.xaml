@@ -1,20 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.IstoricCheltuieli">
+
+    <!-- in pag asta afisez valorile -->
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:IstoricCheltuieliVM x:Key="vm"/> 
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <ListView>
+        <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstCheltuieli}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label/>
-                            <ProgressBar/>
-                        </StackLayout>
-                    </ViewCell>
+                    <TextCell Text="{Binding Suma}" 
+                              TextColor="Black" 
+                              Detail="{Binding Subcategorie}"/>  <!--nu apare si subcategoria-->
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage.Content>
 </ContentPage>
-    
