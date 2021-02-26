@@ -8,20 +8,25 @@ namespace FinantePersonale.ViewModels
 {
     public class CheltuieliVM : INotifyPropertyChanged
     {
-        //PROPRIETATILE AICI
+        public ObservableCollection<ValueModelVen> Expenses
+        {
+            get;
+            set;
+        }
+
         private string subcategorie;
-        public string SubcatergorieC
+        public string SubcategorieC
         {
             get { return subcategorie; }
             set
             {
                 subcategorie = value;
-                OnPropertyChanged("SubcatergorieC");
+                OnPropertyChanged("SubcategorieC");
             }
         }
 
 
-        private decimal sumaCheltuieli;   //POSIBIL SA FIE NECESAR FLOAT PTR GRAFICE
+        private decimal sumaCheltuieli;
         public decimal SumaC
         {
             get { return sumaCheltuieli; }
@@ -32,21 +37,24 @@ namespace FinantePersonale.ViewModels
             }
         }
 
-        private DateTime expenseDate;
+        private DateTime cheltuieliDate;
         public DateTime DateC
         {
-            get { return expenseDate; }
+            get { return cheltuieliDate; }
             set
             {
-                expenseDate = value;
+                cheltuieliDate = value;
                 OnPropertyChanged("DateC");
             }
         }
 
         public Command SaveCheltuieliCommand { get; set; }
-        //------------
-        public ObservableCollection<string> SubcategoriiCheltuieli{ get;set;}
-        //-------------
+        //-----------
+        public ObservableCollection<string> SubcategoriiCheltuieli
+        {
+            get;
+            set;
+        }//------------
         public CheltuieliVM()
         {
             SubcategoriiCheltuieli = new ObservableCollection<string>();
@@ -63,26 +71,25 @@ namespace FinantePersonale.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
-         public void InsertCheltuieli()
+        public void InsertCheltuieli()
         {
-            ValueModel ch = new ValueModel()
+            ValueModelCh ch = new ValueModelCh()     //**********
             {
-                Subcategorie = SubcatergorieC,
-                Suma = SumaC,
-                Date=DateC
+                SubcategorieCh = SubcategorieC,
+                SumaCh = SumaC,
+                DateCh = DateC
             };
-            int response = ValueModel.InsertValue(ch);
+            int response = ValueModelCh.InsertValue(ch);
 
             if (response > 0)
                 //Application.Current.MainPage.Navigation.PopAsync();
-                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata cu succes", "ok");
+                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
-                Application.Current.MainPage.DisplayAlert("Error", "salvare esuata", "Ok");
+                Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "Ok");
         }
 
-
-        private void GetSubcategorieCheltuieli()
+        //PTR TESTARE
+        private void GetSubcategorieCheltuieli()            //TREBUIE INLOCUIT CU O BAZA DE DATE PENTRU CATEGORII
         {
             SubcategoriiCheltuieli.Clear();
             SubcategoriiCheltuieli.Add("Chirie");

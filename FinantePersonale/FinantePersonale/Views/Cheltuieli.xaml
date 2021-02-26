@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.Cheltuieli">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <vm:CheltuieliVM x:Key="vm"/>
@@ -22,15 +22,19 @@
                 <Entry Placeholder="Suma"
                    x:Name="EntrySuma"
                        Text="{Binding SumaC, Mode=TwoWay}"/>
-                <Picker x:Name="SubcatVen"
+                <Picker x:Name="SubcatCh"
                         SelectedItem="{Binding SubcategorieC,Mode=TwoWay}"
-                        ItemsSource="{Binding SubcategoriiCheltuieli}"/>
+                         ItemsSource="{Binding SubcategoriiCheltuieli}"/>
                 <DatePicker x:Name="DataPickerCheltuieli" 
                             Format="yyyy/MM/dd" 
                             Date="{Binding DateC, Mode=TwoWay}"/>
             </StackLayout>
-                <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="300"  />
+            <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="300" />
+
         </StackLayout>
+
+
     </ContentPage.Content>
-   
+
+
 </ContentPage>

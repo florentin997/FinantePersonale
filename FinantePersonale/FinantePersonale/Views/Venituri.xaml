@@ -25,7 +25,7 @@
                 <Picker x:Name="SubcatVen"
                         SelectedItem="{Binding SubcategorieV,Mode=TwoWay}"
                          ItemsSource="{Binding SubcategoriiVenituri}"/>
-                <DatePicker x:Name="DataPickerCheltuieli" 
+                <DatePicker x:Name="DataPickerVenituri" 
                             Format="yyyy/MM/dd" 
                             Date="{Binding DateV, Mode=TwoWay}"/>
             </StackLayout>

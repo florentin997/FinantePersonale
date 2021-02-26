@@ -8,13 +8,14 @@ namespace FinantePersonale.ViewModels
 {
     public class VenituriVM : INotifyPropertyChanged
     {
-        public ObservableCollection<ValueModel> Expenses
+        public ObservableCollection<ValueModelVen> Expenses
         {
             get;
             set;
         }
 
         private string subcategorie;
+
         public string SubcategorieV
         {
             get { return subcategorie; }
@@ -73,21 +74,22 @@ namespace FinantePersonale.ViewModels
 
         public void InsertVenituri()
         {
-            ValueModel ch = new ValueModel()
+            ValueModelVen vn = new ValueModelVen()
             {
                 Subcategorie = SubcategorieV,
                 Suma = SumaV,
                 Date = DateV
             };
-            int response = ValueModel.InsertValue(ch);
+            int response = ValueModelVen.InsertValue(vn);
 
             if (response > 0)
-                Application.Current.MainPage.Navigation.PopAsync();
+                //Application.Current.MainPage.Navigation.PopAsync();
+                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
-                Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "Ok");
+                Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "OK");
         }
 
-        private void GetSubcategorieVenituri()
+        private void GetSubcategorieVenituri()    //TREBUIE INLOCUIT CU O BAZA DE DATE PENTRU CATEGORII
         {
             SubcategoriiVenituri.Clear();
             SubcategoriiVenituri.Add("Salariu");

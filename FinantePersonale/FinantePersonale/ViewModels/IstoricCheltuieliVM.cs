@@ -9,7 +9,7 @@ namespace FinantePersonale.ViewModels
 {
     public class IstoricCheltuieliVM
     {
-        public ObservableCollection<ValueModel> IstCheltuieli
+        public ObservableCollection<ValueModelCh> IstCheltuieli
         {
             get;
             set;
@@ -23,14 +23,14 @@ namespace FinantePersonale.ViewModels
 
         public IstoricCheltuieliVM()
         {
-            IstCheltuieli = new ObservableCollection<ValueModel>();
+            IstCheltuieli = new ObservableCollection<ValueModelCh>();
 
             GetExpenses();
         }
 
         private void GetExpenses()
         {
-            var expenses = ValueModel.GetValue();
+            var expenses = ValueModelCh.GetValue();
 
             IstCheltuieli.Clear();
 

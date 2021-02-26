@@ -9,7 +9,7 @@ namespace FinantePersonale.ViewModels
 {
     public class IstoricVenituriVM
     {
-        public ObservableCollection<ValueModel> IstVenituri
+        public ObservableCollection<ValueModelVen> IstVenituri
         {
             get;
             set;
@@ -23,14 +23,14 @@ namespace FinantePersonale.ViewModels
 
         public IstoricVenituriVM()
         {
-            IstVenituri = new ObservableCollection<ValueModel>();
+            IstVenituri = new ObservableCollection<ValueModelVen>();
 
             GetExpenses();
         }
 
         private void GetExpenses()
         {
-            var expenses = ValueModel.GetValue();
+            var expenses = ValueModelVen.GetValue();
 
             IstVenituri.Clear();
 
