@@ -12,7 +12,7 @@ namespace FinantePersonale.Models
 
         public string SubcategorieCh { get; set; }
 
-        public decimal SumaCh { get; set; }
+        public float SumaCh { get; set; }
 
         public DateTime DateCh { get; set; }
 

@@ -1,41 +1,43 @@
-﻿using SQLite;
+﻿
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FinantePersonale.Models
 {
-    public class ValueModelVen
+    public class ModelWishlist
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Subcategorie { get; set; }
+        [MaxLength(25)]
+        public string Item { get; set; }
 
-        public float Suma { get; set; }
+        public float ItemValue { get; set; }
 
-        public DateTime Date { get; set; }
+        public float Procent { get; set; }
 
-        public ValueModelVen()
+        public ModelWishlist()
         {
 
         }
-        
-        public static int InsertValue(ValueModelVen value)
+
+        public static int InsertValue(ModelWishlist value)
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
-                conn.CreateTable<ValueModelVen>();
+                conn.CreateTable<ModelWishlist>();
                 return conn.Insert(value);
             }
         }
 
-        public static List<ValueModelVen> GetValue()
+        public static List<ModelWishlist> GetValue()
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
-                conn.CreateTable<ValueModelVen>();
-                return conn.Table<ValueModelVen>().ToList();
+                conn.CreateTable<ModelWishlist>();
+                return conn.Table<ModelWishlist>().ToList();
             }
         }
     }

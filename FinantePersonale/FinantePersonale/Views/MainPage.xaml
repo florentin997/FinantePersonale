@@ -19,7 +19,7 @@
     <Categorii:Venituri Title="Venituri"
                     IconImageSource="VenituriImg.png"/>
     <Categorii:Cheltuieli Title="Cheltuieli"
-                      IconImageSource="CheltuieliImg.png"/>
+                    IconImageSource="CheltuieliImg.png"/>
     <Categorii:Wishlist Title="Wishlist"
                     IconImageSource="WishlistImg.png"/>
 

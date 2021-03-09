@@ -19,7 +19,7 @@
                 <DataTemplate>
                     <TextCell Text="{Binding SumaCh}" 
                               TextColor="Black" 
-                              Detail="{Binding SubcategorieCh}"/>  <!--nu apare si subcategoria-->
+                              Detail="{Binding SubcategorieCh}"/>  
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

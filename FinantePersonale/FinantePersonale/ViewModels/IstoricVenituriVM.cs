@@ -25,18 +25,18 @@ namespace FinantePersonale.ViewModels
         {
             IstVenituri = new ObservableCollection<ValueModelVen>();
 
-            GetExpenses();
+            GetIncome();
         }
 
-        private void GetExpenses()
+        private void GetIncome()    
         {
-            var expenses = ValueModelVen.GetValue();
+            var incomes = ValueModelVen.GetValue();
 
             IstVenituri.Clear();
 
-            foreach (var expense in expenses)
+            foreach (var income in incomes)
             {
-                IstVenituri.Add(expense);
+                IstVenituri.Add(income);
             }
         }
     }

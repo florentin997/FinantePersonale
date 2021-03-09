@@ -27,8 +27,8 @@ namespace FinantePersonale.ViewModels
         }
 
 
-        private decimal sumaVenituri;   
-        public decimal SumaV
+        private float sumaVenituri;   
+        public float SumaV
         {
             get { return sumaVenituri; }
             set

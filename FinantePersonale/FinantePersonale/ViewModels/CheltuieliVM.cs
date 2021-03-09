@@ -26,8 +26,8 @@ namespace FinantePersonale.ViewModels
         }
 
 
-        private decimal sumaCheltuieli;
-        public decimal SumaC
+        private float sumaCheltuieli;
+        public float SumaC
         {
             get { return sumaCheltuieli; }
             set
@@ -89,7 +89,7 @@ namespace FinantePersonale.ViewModels
         }
 
         //PTR TESTARE
-        private void GetSubcategorieCheltuieli()            //TREBUIE INLOCUIT CU O BAZA DE DATE PENTRU CATEGORII
+        private void GetSubcategorieCheltuieli()            //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII
         {
             SubcategoriiCheltuieli.Clear();
             SubcategoriiCheltuieli.Add("Chirie");

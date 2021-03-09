@@ -17,7 +17,6 @@
                     <TextCell Text="{Binding Suma}" 
                               TextColor="Black" 
                               Detail="{Binding Subcategorie}"/>
-                    <!--nu apare si subcategoria-->
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

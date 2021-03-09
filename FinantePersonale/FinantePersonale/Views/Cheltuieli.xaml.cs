@@ -15,6 +15,14 @@ namespace FinantePersonale.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Cheltuieli : ContentPage
     {
+        //SQLiteConnection conn = new SQLiteConnection(App.DatabasePath);
+
+        //ChartEntry entry = new ChartEntry(float.Parse(viewModel.Item.label1))
+        //{
+        //    Label = singleEntry.Label,
+        //    ValueLabel = viewModel.Item.label1,
+        //    Color = singleEntry.Color
+        //};
 
         private readonly ChartEntry[] entries = new[]
        {
@@ -58,11 +66,12 @@ namespace FinantePersonale.Views
             InitializeComponent();
 
             charPieCheltuieli.Chart = new PieChart {
+                //LabelMode.RightOnly;
                 Entries = entries,
                 HoleRadius = 0.5f,
                 LabelTextSize = 40,
                 BackgroundColor = SKColors.Transparent,
-               Typeface=SKTypeface.Default   //nu schimba nimic
+                //Typeface=SKTypeface.Default   //nu schimba nimic
             };
           
 

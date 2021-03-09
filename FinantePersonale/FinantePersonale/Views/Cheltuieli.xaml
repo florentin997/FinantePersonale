@@ -29,11 +29,9 @@
                             Format="yyyy/MM/dd" 
                             Date="{Binding DateC, Mode=TwoWay}"/>
             </StackLayout>
-            <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="300" />
-
+            <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="300"/>
+            <!--<microcharts:ChartView BindingContext=""-->
         </StackLayout>
-
-
     </ContentPage.Content>
 
 

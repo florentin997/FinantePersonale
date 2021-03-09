@@ -1,7 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.Wishlist">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:WishlistVM x:Key="vm"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Salveaza"
+                     Command="{Binding Source={StaticResource vm}, Path=SaveWishlistItemCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="50,0,50,0" BindingContext="{Binding Source={StaticResource vm}}">
+                <Entry x:Name="WishlistItem"
+                       Placeholder="Item"
+                       HorizontalTextAlignment="Center"
+                       Text="{Binding ItemW, Mode=TwoWay}"/>
+                <Entry x:Name="ItemValue"
+                       Placeholder="Costul"
+                       HorizontalTextAlignment="Center"
+                Text="{Binding IValue, Mode=TwoWay}"/>
+            </StackLayout>
+            
+            <StackLayout>
+            <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=ItemsList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Item}"
+                                  TextColor="Black" />
+                        <!--datele ajung in Item, dar nu sunt afisate 
+                        CRED CA AICI E PROBLEMA, de verificat la WishlistVM->WishlistItemsVM
+                        Am adaugat Inca un stackLayout intre linia 27-40
+                        -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+                </StackLayout>
+            
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
+<!--
+<TextCell Text="{Binding Item}"/>
+ datele ajung in Item, dar nu sunt afisate 
+ CRED CA AICI E PROBLEMA, de verificat la WishlistVM->WishlistItemsVM
+    -->
+<!--
     <ContentPage.Content>
         <StackLayout>
             <Label Text="AICI VA FI LISTA CU DORINTE!"
@@ -9,4 +60,4 @@
                 HorizontalOptions="CenterAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</ContentPage>-->

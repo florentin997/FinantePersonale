@@ -81,7 +81,7 @@ namespace FinantePersonale.Views
         {
             BalantaDB venituri = new BalantaDB()
             {
-                Suma = decimal.Parse(EntrySuma.Text),                //TREBUIE CA SUMA CARE AJUNGE IN BD SA FIE DE TIP DECIMAL 
+                Suma = float.Parse(EntrySuma.Text),                //TREBUIE CA SUMA CARE AJUNGE IN BD SA FIE DE TIP DECIMAL 
                 Data = DateTime.Today.ToString()                    //NU SUNT SIGUR DACA ASA SE FACE AICI
             };
 
