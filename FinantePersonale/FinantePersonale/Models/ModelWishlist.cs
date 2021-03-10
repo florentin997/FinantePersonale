@@ -34,7 +34,7 @@ namespace FinantePersonale.Models
 
         public static List<ModelWishlist> GetValue()
         {
-            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
                 conn.CreateTable<ModelWishlist>();
                 return conn.Table<ModelWishlist>().ToList();

@@ -89,7 +89,8 @@ namespace FinantePersonale.ViewModels
         }
 
         //PTR TESTARE
-        private void GetSubcategorieCheltuieli()            //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII
+        //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII
+        private void GetSubcategorieCheltuieli()            
         {
             SubcategoriiCheltuieli.Clear();
             SubcategoriiCheltuieli.Add("Chirie");

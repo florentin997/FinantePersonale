@@ -15,26 +15,11 @@ namespace FinantePersonale.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Venituri : ContentPage
     {
-
-        //trebuie sa il fac sa salveze categoria in tabela de categorii
-       /* async void OnSaveButtonClicked(object sender, EventArgs e)
-        {
-            var categorie = (CategorieDB)BindingContext;
-            categorie.DenumireCategorie = String.Empty;
-            await App.Database.SaveCategorieAsync(categorie);
-            await Navigation.PopAsync();
-        }*/
-        /*
-        async void OnDeleteButtonClicked(object sender, EventArgs e)
-        {
-            var note = (Note)BindingContext;
-            await App.Database.DeleteNoteAsync(note);
-            await Navigation.PopAsync();
-        }
-        */
-
         private readonly ChartEntry[] entries = new[]
         {
+
+
+
             new ChartEntry(300)
             {
                 Label = "Salariu",
@@ -71,7 +56,7 @@ namespace FinantePersonale.Views
 
             charPieVenituri.Chart = new PieChart{
                 Entries = entries,
-                HoleRadius = 0.5f,
+                //HoleRadius = 0.5f,
                 LabelTextSize = 40,
                 BackgroundColor = SKColors.Transparent,
             };

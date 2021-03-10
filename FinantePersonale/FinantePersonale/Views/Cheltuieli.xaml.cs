@@ -66,9 +66,8 @@ namespace FinantePersonale.Views
             InitializeComponent();
 
             charPieCheltuieli.Chart = new PieChart {
-                //LabelMode.RightOnly;
                 Entries = entries,
-                HoleRadius = 0.5f,
+                //HoleRadius = 0.5f,
                 LabelTextSize = 40,
                 BackgroundColor = SKColors.Transparent,
                 //Typeface=SKTypeface.Default   //nu schimba nimic

@@ -22,7 +22,7 @@ namespace FinantePersonale.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            //LoadApplication(new App());
 
 
             string dbName = "finante_db.sqlite";                                                               //denumire baza de date

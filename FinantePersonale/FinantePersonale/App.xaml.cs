@@ -8,12 +8,12 @@ namespace FinantePersonale
     {
         public static string DatabasePath;
 
-        public App()
-        {
-            InitializeComponent();
+        //public App()
+        //{
+        //    InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
-        }
+        //    MainPage = new NavigationPage(new MainPage());
+        //}
 
         public App(string databasePath)
         {
