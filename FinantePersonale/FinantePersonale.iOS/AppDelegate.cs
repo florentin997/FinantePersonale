@@ -24,11 +24,13 @@ namespace FinantePersonale.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            //LoadApplication(new App());
 
             string dbName = "finante_db.sqlite";  //denumire baza de date
             string folderPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "..", "Library");  //denumire path pana la folderul ce contine BD
             string fullPath = Path.Combine(folderPath, dbName); //combinam cele 2 de mai sus
+
+            LoadApplication(new App(fullPath));
 
             return base.FinishedLaunching(app, options);
         }

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinantePersonale.Android", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinantePersonale.iOS", "FinantePersonale\FinantePersonale.iOS\FinantePersonale.iOS.csproj", "{9BA4916A-46E4-4EDF-A22F-A7313F451D59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinantePersonale", "FinantePersonale\FinantePersonale\FinantePersonale.csproj", "{8422E9F2-FA73-496F-AA73-422CA6349177}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinantePersonale", "FinantePersonale\FinantePersonale\FinantePersonale.csproj", "{8422E9F2-FA73-496F-AA73-422CA6349177}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

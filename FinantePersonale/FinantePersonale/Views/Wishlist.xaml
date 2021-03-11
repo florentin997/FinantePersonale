@@ -33,19 +33,17 @@
                 <ListView ItemsSource="{Binding Source={StaticResource vmListItems}, Path=ItemsList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Item}"
+                            <TextCell x:Name="WishlistTextCell"
+                                  Tapped="WishlistTextCell_Tapped"
+                                  Text="{Binding Item}"
                                   TextColor="Black"
                                   Detail="{Binding ItemValue}"/>
-                                  
-                            <!--datele ajung in Item, dar nu sunt afisate 
-                        CRED CA AICI E PROBLEMA, de verificat la WishlistVM->WishlistItemsVM
-                        Am adaugat Inca un stackLayout intre linia 27-40
-                        -->
-                    </DataTemplate>
+                        </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
                 </StackLayout>
-            
+            <Button Text="Stergere">
+            </Button>
             </StackLayout>
     </ContentPage.Content>
 </ContentPage>

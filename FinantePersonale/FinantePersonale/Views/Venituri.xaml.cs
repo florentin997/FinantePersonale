@@ -18,8 +18,6 @@ namespace FinantePersonale.Views
         private readonly ChartEntry[] entries = new[]
         {
 
-
-
             new ChartEntry(300)
             {
                 Label = "Salariu",
