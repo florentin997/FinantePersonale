@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using FinantePersonale.Models;
+using SQLite;
 using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
@@ -11,12 +12,25 @@ namespace FinantePersonale.ViewModels
     public class WishlistVM : INotifyPropertyChanged
     {
 
-        public ObservableCollection<ValueModelVen> WishlistItems
+        public ObservableCollection<ModelWishlist> WishlistItems
         {
             get;
             set;
         }
-        
+
+        //-----------------------
+        private int itemID;
+        public int ItemID
+        {
+            get { return itemID; }
+            set
+            {
+                itemID = value;
+                OnPropertyChanged("ItemID");
+            }
+        }
+        //-----------------------
+
         private string itemW;
         public string ItemW
         {
@@ -28,7 +42,7 @@ namespace FinantePersonale.ViewModels
             }
         }
 
-        private float ivalue=99.99f;
+        private float ivalue; //=99.99f;
 
         public float IValue
         {
@@ -40,10 +54,9 @@ namespace FinantePersonale.ViewModels
             }
         }
 
-
         public Command SaveWishlistItemCommand { get; set; }
         
-        public ObservableCollection<string> WishlistItem 
+        public ObservableCollection<string> WishlistItem  
         {
             get; 
             set; 
@@ -51,7 +64,7 @@ namespace FinantePersonale.ViewModels
 
         public WishlistVM()
         {
-            WishlistItem = new ObservableCollection<string>();
+            WishlistItem = new ObservableCollection<string>();  
             //ItemW????
             SaveWishlistItemCommand = new Command(InsertItem);
 
@@ -69,8 +82,8 @@ namespace FinantePersonale.ViewModels
         {
             ModelWishlist givenItem = new ModelWishlist()
             {
-                Item = ItemW,           //Item-ul este adaugat in BD, dar nu este afisat
-                ItemValue = IValue,
+                ItemName = ItemW,           
+                ItemValue = float.Parse(IValue.ToString()),
             };
             int response = ModelWishlist.InsertValue(givenItem);
 
@@ -80,43 +93,58 @@ namespace FinantePersonale.ViewModels
             else
                 Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "Ok");
         }
+
+        //public ObservableCollection<ModelWishlist> ItemsFromDB { get; set; }
+
+        //public Command<ModelWishlist> RemoveItemFromDB
+        //{
+        //    get
+        //    { 
+        //        return new Command<ModelWishlist>((itemFromDB) =>
+        //        {
+        //            ItemsFromDB.Remove(itemFromDB);
+        //        });
+        //    }
+        //}
+
+
     }
 
 
     /// <summary>
     ///Partea asta de cod se ocupa de obtinerea valorilor din BD
     /// </summary>
-    public class WishlistItemsVM
-    {
-        public ObservableCollection<ModelWishlist> ItemsList
-        {
-            get;
-            set;
-        }
+    //public class ListaObiectelor:ObservableCollection<ModelWishlist>
+    //{
+    //    public ObservableCollection<ModelWishlist> ItemsList
+    //    {
+    //        get;
+    //        set;
+    //    }
 
-        public Command AddItemCommand
-        {
-            get;
-            set;
-        }
+    //    public Command AddItemCommand
+    //    {
+    //        get;
+    //        set;
+    //    }
 
-        public WishlistItemsVM()
-        {
-            ItemsList = new ObservableCollection<ModelWishlist>();
+    //    public ListaObiectelor()
+    //    {
+    //        ItemsList = new ObservableCollection<ModelWishlist>();
 
-            GetItems();
-        }
+    //        GetItems();
+    //    }
 
-        private void GetItems()
-        {
-            var items = ModelWishlist.GetValue();
+    //    private void GetItems()
+    //    {
+    //        var items = ModelWishlist.GetValue();
 
-            ItemsList.Clear();
+    //        ItemsList.Clear();
 
-            foreach (var item in items)
-            {
-                ItemsList.Add(item);
-            }
-        }
-    }
+    //        foreach (var item in items)
+    //        {
+    //            ItemsList.Add(item);
+    //        }
+    //    }
+    //}
 }

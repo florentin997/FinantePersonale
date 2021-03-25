@@ -13,13 +13,21 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstCheltuieli}"> 
+        <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstCheltuieli}" IsPullToRefreshEnabled="True"> 
             <!--StaticResource ptr ca am definit resursa in ResourceDictionary, avand cheia "vm"-->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding SumaCh}" 
                               TextColor="Black" 
-                              Detail="{Binding SubcategorieCh}"/>  
+                              Detail="{Binding SubcategorieCh}">
+                        <TextCell.ContextActions>
+                            <MenuItem Text="Delete"
+                                      CommandParameter="{Binding}"
+                                      IsDestructive="True"
+                                      Clicked="MenuItem_Clicked">
+                            </MenuItem>
+                        </TextCell.ContextActions>
+                    </TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

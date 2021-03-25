@@ -56,10 +56,10 @@ namespace FinantePersonale.Views
             }
         };
 
-        internal static object GetCheltuieliS()
-        {
-            throw new NotImplementedException();
-        }
+        //internal static object GetCheltuieliS()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public Cheltuieli()
         {
@@ -74,33 +74,6 @@ namespace FinantePersonale.Views
             };
           
 
-        }
-
-        private void ToolbarItem_Clicked_Cheltuieli(object sender, System.EventArgs e)
-        {
-            /*
-            ClsVenituri venituri = new ClsVenituri()
-            {
-                Suma = Convert.ToDecimal(EntrySuma.Text.ToString()),         //TREBUIE CA SUMA CARE AJUNGE IN BD SA FIE DE TIP DECIMAL 
-                Data = DateTime.Parse(EntryData.Text.ToString())                   
-            };
-            
-            SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation);   //App.DatabaseLocation e pathul din App.xaml.cs care o obtine din Mainactivity 
-            connection.CreateTable<ClsVenituri>();
-
-            
-            int nrRanduri = connection.Insert(venituri);
-
-            connection.Close();
-            if (nrRanduri > 0)
-            {
-                DisplayAlert("Adaugare date", "Inregistrare efectuata cu succes!", "Ok");
-            }
-            else
-            {
-                DisplayAlert("Adaugare date", "Datele nu au fost inregistrate", "Ok");
-            }
-            */
         }
 
     }

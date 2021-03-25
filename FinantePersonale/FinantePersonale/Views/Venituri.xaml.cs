@@ -59,36 +59,5 @@ namespace FinantePersonale.Views
                 BackgroundColor = SKColors.Transparent,
             };
         }
-        /*
-        private void ToolbarItem_Clicked_Venituri(object sender, System.EventArgs e)
-        {
-            BalantaDB venituri = new BalantaDB()
-            {
-                Suma = float.Parse(EntrySuma.Text),                //TREBUIE CA SUMA CARE AJUNGE IN BD SA FIE DE TIP DECIMAL 
-                Data = DateTime.Today.ToString()                    //NU SUNT SIGUR DACA ASA SE FACE AICI
-            };
-
-            SubcategorieDB subcategorie = new SubcategorieDB()
-            {
-                DenumireSubcategorie = EntrySubcategorie.Text.ToString()
-            };
-
-            SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation);   //App.DatabaseLocation e pathul din App.xaml.cs care o obtine din Mainactivity 
-            connection.CreateTable<BalantaDB>();
-
-            //test daca insereaza datele
-            int nrRanduri = connection.Insert(venituri);
-            int nrRanduriInSubcateg= connection.Insert(subcategorie);
-            
-            connection.Close();
-            if (nrRanduri > 0 && nrRanduriInSubcateg>0)
-            {
-                DisplayAlert("Adaugare date","Inregistrare efectuata cu succes!","Ok");
-            }
-            else
-            {
-                DisplayAlert("Adaugare date", "Datele nu au fost inregistrate", "Ok");
-            }
-        }*/
     }
 }

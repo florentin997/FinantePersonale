@@ -11,7 +11,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstVenituri}">
+        <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstVenituri}" IsPullToRefreshEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Suma}" 

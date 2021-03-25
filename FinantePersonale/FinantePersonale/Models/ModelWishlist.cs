@@ -3,20 +3,22 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FinantePersonale.Models
 {
+    //[Table("WishlistItems")]
     public class ModelWishlist
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         [MaxLength(25)]
-        public string Item { get; set; }
+        public string ItemName { get; set; }
 
         public float ItemValue { get; set; }
 
-        public float Procent { get; set; }
+        //public float Procent { get; set; }
 
         public ModelWishlist()
         {

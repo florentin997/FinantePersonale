@@ -18,7 +18,7 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Margin="50,0,50,0" BindingContext="{Binding Source={StaticResource vm}}">
+            <StackLayout Margin="75,0,75,0" BindingContext="{Binding Source={StaticResource vm}}">
                 <Entry Placeholder="Suma"
                    x:Name="EntrySuma"
                        Text="{Binding SumaC, Mode=TwoWay}"/>

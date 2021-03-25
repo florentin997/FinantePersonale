@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class IstoricCheltuieliVM
+    public class IstoricCheltuieliVM:ObservableCollection<ValueModelCh>
     {
         public ObservableCollection<ValueModelCh> IstCheltuieli
         {
@@ -39,5 +39,8 @@ namespace FinantePersonale.ViewModels
                 IstCheltuieli.Add(expense);
             }
         }
+        //------------------------------
+
+
     }
 }

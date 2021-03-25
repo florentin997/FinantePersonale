@@ -15,5 +15,10 @@ namespace FinantePersonale.Views
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

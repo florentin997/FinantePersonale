@@ -71,10 +71,12 @@ namespace FinantePersonale.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
         public void InsertCheltuieli()
         {
-            ValueModelCh ch = new ValueModelCh()     //**********
+            ValueModelCh ch = new ValueModelCh()     
             {
+                //IdCh   --> NU PRIMESTE NICI O VALOARE SI NU SE AUTO INCREMENTEAZA
                 SubcategorieCh = SubcategorieC,
                 SumaCh = SumaC,
                 DateCh = DateC
@@ -87,6 +89,16 @@ namespace FinantePersonale.ViewModels
             else
                 Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "Ok");
         }
+
+
+
+        //metoda de sters, nu stiu daca merge DE VERIFICAT!!!!
+        //public async void DeleteChFromSB(ValueModelCh cheltuialaDeSters)
+        //{
+        //     await ValueModelCh.Delete(cheltuialaDeSters);
+        //}
+
+
 
         //PTR TESTARE
         //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII
