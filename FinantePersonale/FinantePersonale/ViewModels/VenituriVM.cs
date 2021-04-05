@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using FinantePersonale.Models;
+using SQLite;
 using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
@@ -49,7 +50,23 @@ namespace FinantePersonale.ViewModels
             }
         }
 
+        private ValueModelVen itemVen;
+
+        public ValueModelVen ItemVen
+        {
+            get { return itemVen; }
+            set
+            {
+                if (itemVen != null)
+                {
+                    itemVen = value;
+                }
+                itemVen = value;
+                OnPropertyChanged("itemCh");
+            }
+        }
         public Command SaveVenituriCommand { get; set; }
+        public Command DeleteVenituriCommand { get; set; }
         //-----------
         public ObservableCollection<string> SubcategoriiVenituri
         {
@@ -61,6 +78,7 @@ namespace FinantePersonale.ViewModels
             SubcategoriiVenituri = new ObservableCollection<string>();
             DateV = DateTime.Today;
             SaveVenituriCommand = new Command(InsertVenituri);
+            DeleteVenituriCommand = new Command(DeleteRowVen);
             GetSubcategorieVenituri();
         }
 
@@ -88,6 +106,20 @@ namespace FinantePersonale.ViewModels
             else
                 Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "OK");
         }
+
+        public void DeleteRowVen()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                int rows = conn.Delete(ItemVen);
+
+                if (rows > 0)
+                    App.Current.MainPage.DisplayAlert("Success", "Item succesfully deleted", "Ok");
+                else
+                    App.Current.MainPage.DisplayAlert("Failure", "Item failed to be deleted", "Ok");
+            }
+        }
+
 
         private void GetSubcategorieVenituri()    //TREBUIE INLOCUIT CU O BAZA DE DATE PENTRU CATEGORII
         {

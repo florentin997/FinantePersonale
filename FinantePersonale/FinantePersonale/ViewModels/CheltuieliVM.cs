@@ -2,12 +2,17 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using FinantePersonale.Models;
+using FinantePersonale.ViewModels.Commands;
+using SQLite;
 using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
     public class CheltuieliVM : INotifyPropertyChanged
     {
+        //public DeleteCommand DeleteCommand{get; set;}
+
+        //public ValueModelCh inregistrare { get; set; }
         public ObservableCollection<ValueModelVen> Expenses
         {
             get;
@@ -20,6 +25,16 @@ namespace FinantePersonale.ViewModels
             get { return subcategorie; }
             set
             {
+                //if (subcategorie == value)
+                //    return;
+
+                //------------------
+                //inregistrare = new ValueModelCh
+                //{
+                //    SubcategorieCh = this.SubcategorieC,
+                //    SumaCh = this.SumaC
+                //};
+                //------------------
                 subcategorie = value;
                 OnPropertyChanged("SubcategorieC");
             }
@@ -32,6 +47,8 @@ namespace FinantePersonale.ViewModels
             get { return sumaCheltuieli; }
             set
             {
+                //if (sumaCheltuieli == value)
+                //    return;
                 sumaCheltuieli = value;
                 OnPropertyChanged("SumaC");
             }
@@ -43,12 +60,31 @@ namespace FinantePersonale.ViewModels
             get { return cheltuieliDate; }
             set
             {
+                //if (cheltuieliDate == value)
+                //    return;
                 cheltuieliDate = value;
                 OnPropertyChanged("DateC");
             }
         }
 
+        private ValueModelCh itemCh;
+
+        public ValueModelCh ItemCh
+        {
+            get { return itemCh; }
+            set {
+                if (itemCh != null)
+                {
+                    itemCh = value;
+                }
+                itemCh = value;
+                OnPropertyChanged("itemCh");   
+            }
+        }
+
         public Command SaveCheltuieliCommand { get; set; }
+        public Command DeleteCheltuieliCommand { get; set; }
+
         //-----------
         public ObservableCollection<string> SubcategoriiCheltuieli
         {
@@ -60,6 +96,7 @@ namespace FinantePersonale.ViewModels
             SubcategoriiCheltuieli = new ObservableCollection<string>();
             DateC = DateTime.Today;
             SaveCheltuieliCommand = new Command(InsertCheltuieli);
+            DeleteCheltuieliCommand = new Command(DeleteRowCH);
             GetSubcategorieCheltuieli();
         }
 
@@ -76,7 +113,6 @@ namespace FinantePersonale.ViewModels
         {
             ValueModelCh ch = new ValueModelCh()     
             {
-                //IdCh   --> NU PRIMESTE NICI O VALOARE SI NU SE AUTO INCREMENTEAZA
                 SubcategorieCh = SubcategorieC,
                 SumaCh = SumaC,
                 DateCh = DateC
@@ -87,17 +123,23 @@ namespace FinantePersonale.ViewModels
                 //Application.Current.MainPage.Navigation.PopAsync();
                 Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
-                Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "Ok");
+                Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
         }
 
 
+        
+    public void DeleteRowCH()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                int rows = conn.Delete(ItemCh);   
 
-        //metoda de sters, nu stiu daca merge DE VERIFICAT!!!!
-        //public async void DeleteChFromSB(ValueModelCh cheltuialaDeSters)
-        //{
-        //     await ValueModelCh.Delete(cheltuialaDeSters);
-        //}
-
+                if (rows > 0)
+                   App.Current.MainPage.DisplayAlert("Success", "Item succesfully deleted", "Ok");
+                else
+                    App.Current.MainPage.DisplayAlert("Failure", "Item failed to be deleted", "Ok");
+            }
+        }
 
 
         //PTR TESTARE

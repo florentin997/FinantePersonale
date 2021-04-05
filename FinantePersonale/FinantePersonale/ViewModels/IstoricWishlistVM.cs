@@ -1,14 +1,14 @@
 ﻿using FinantePersonale.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
 
-
 namespace FinantePersonale.ViewModels
 {
-    public class IstoricListaObiecteVM : ObservableCollection<ModelWishlist>
+    public class IstoricWishlistVM : ObservableCollection<ModelWishlist>
     {
         public ObservableCollection<ModelWishlist> IstWishlistItems
         {
@@ -23,7 +23,7 @@ namespace FinantePersonale.ViewModels
         }
 
 
-        public IstoricListaObiecteVM()
+        public IstoricWishlistVM()
         {
             IstWishlistItems = new ObservableCollection<ModelWishlist>();
 
@@ -43,7 +43,13 @@ namespace FinantePersonale.ViewModels
         }
         //------------------------------
 
-
+        private void OnDelete(object sender, EventArgs e)
+        {
+            SwipeItem item = sender as SwipeItem;
+            ModelWishlist model = item.BindingContext as ModelWishlist;
+            //viewModel.Items.Remove(model);
+            IstWishlistItems.Remove(model);
+        }
     }
 }
 

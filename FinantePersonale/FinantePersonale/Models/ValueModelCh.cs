@@ -57,6 +57,13 @@ namespace FinantePersonale.Models
             }
         }
 
-        
+        public static ValueModelCh GetRowFromDB(int id)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                return conn.Table<ValueModelCh>().FirstOrDefault(x => x.IdCh == id);
+                //return conn.Find<ModelWishlist>(Id);
+            }
+        }
     }
 }

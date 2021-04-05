@@ -72,7 +72,7 @@ namespace FinantePersonale.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
@@ -91,21 +91,10 @@ namespace FinantePersonale.ViewModels
                 //Application.Current.MainPage.Navigation.PopAsync();
                 Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
-                Application.Current.MainPage.DisplayAlert("Error", "Insertie esuata", "Ok");
+                Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
         }
 
-        //public ObservableCollection<ModelWishlist> ItemsFromDB { get; set; }
-
-        //public Command<ModelWishlist> RemoveItemFromDB
-        //{
-        //    get
-        //    { 
-        //        return new Command<ModelWishlist>((itemFromDB) =>
-        //        {
-        //            ItemsFromDB.Remove(itemFromDB);
-        //        });
-        //    }
-        //}
+        //---------------------------------------
 
 
     }

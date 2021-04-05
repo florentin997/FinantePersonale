@@ -1,13 +1,18 @@
 ﻿using FinantePersonale.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Text;
 using Xamarin.Forms;
+using System.Windows.Input;//se ocupa de ICommand
+
 
 namespace FinantePersonale.ViewModels
 {
-    public class IstoricCheltuieliVM:ObservableCollection<ValueModelCh>
+    public class IstoricCheltuieliVM : ObservableCollection<ValueModelCh>,INotifyPropertyChanged
     {
         public ObservableCollection<ValueModelCh> IstCheltuieli
         {
@@ -15,11 +20,11 @@ namespace FinantePersonale.ViewModels
             set;
         }
 
-        public Command AddExpenseCommand
-        {
-            get;
-            set;
-        }
+        //public Command AddExpenseCommand
+        //{
+        //    get;
+        //    set;
+        //}
 
         public IstoricCheltuieliVM()
         {
@@ -39,8 +44,5 @@ namespace FinantePersonale.ViewModels
                 IstCheltuieli.Add(expense);
             }
         }
-        //------------------------------
-
-
     }
 }

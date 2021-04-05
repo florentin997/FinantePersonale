@@ -2,34 +2,50 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:FinantePersonale.ViewModels"  
-             x:Class="FinantePersonale.Views.IstoricCheltuieli">
+             x:Class="FinantePersonale.Views.IstoricCheltuieli"
+             >
     <!--xmlns, ns=namespace -->
     <!-- in pag asta afisez valorile -->
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
-            <vm:IstoricCheltuieliVM x:Key="vm"/> 
+            <vm:IstoricCheltuieliVM x:Key="vm"/>
+            <vm:CheltuieliVM x:Key="vmCheltuieli"/>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
 
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstCheltuieli}" IsPullToRefreshEnabled="True"> 
-            <!--StaticResource ptr ca am definit resursa in ResourceDictionary, avand cheia "vm"-->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding SumaCh}" 
+
+
+        <StackLayout>
+            <ListView 
+                     ItemsSource="{Binding Source={StaticResource vm}, Path=IstCheltuieli}" IsPullToRefreshEnabled="True"
+                     SelectedItem="{Binding Source={StaticResource vmCheltuieli}, Path=ItemCh, Mode=TwoWay}">
+                <!--StaticResource ptr ca am definit resursa in ResourceDictionary, avand cheia "vm"-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding SumaCh}" 
                               TextColor="Black" 
-                              Detail="{Binding SubcategorieCh}">
-                        <TextCell.ContextActions>
-                            <MenuItem Text="Delete"
-                                      CommandParameter="{Binding}"
-                                      IsDestructive="True"
-                                      Clicked="MenuItem_Clicked">
-                            </MenuItem>
-                        </TextCell.ContextActions>
-                    </TextCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                              Detail="{Binding SubcategorieCh}"
+                              />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button
+                VerticalOptions="End"
+                Text="Stergere"
+                BackgroundColor="Red"
+                Margin="100,0,100,0"
+                Command="{Binding Source={StaticResource vmCheltuieli}, Path=DeleteCheltuieliCommand}"
+            />
+        </StackLayout>
+        
+
+
+
     </ContentPage.Content>
 </ContentPage>
+
+<!-- CommandParameter="{Binding Source={StaticResource vmCheltuieli}, Path=parameter}"-->

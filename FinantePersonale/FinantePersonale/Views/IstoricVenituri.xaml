@@ -7,18 +7,37 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <vm:IstoricVenituriVM x:Key="vm"/>
+            <vm:VenituriVM x:Key="vmVenituri"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstVenituri}" IsPullToRefreshEnabled="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Suma}" 
+
+        <StackLayout>
+
+            <ListView 
+            ItemsSource="{Binding Source={StaticResource vm}, Path=IstVenituri}" IsPullToRefreshEnabled="True"
+            SelectedItem="{Binding Source={StaticResource vmVenituri}, Path=ItemVen, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Suma}" 
                               TextColor="Black" 
                               Detail="{Binding Subcategorie}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button
+                VerticalOptions="End"
+                Text="Stergere"
+                BackgroundColor="Red"
+                Margin="100,0,100,0"
+                Command="{Binding Source={StaticResource vmVenituri}, Path=DeleteVenituriCommand}"
+            />
+            
+        </StackLayout>
+       
+        
+        
     </ContentPage.Content>
 </ContentPage>

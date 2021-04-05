@@ -15,11 +15,11 @@ namespace FinantePersonale.ViewModels
             set;
         }
 
-        public Command AddExpenseCommand
-        {
-            get;
-            set;
-        }
+        //public Command AddExpenseCommand
+        //{
+        //    get;
+        //    set;
+        //}
 
         public IstoricVenituriVM()
         {

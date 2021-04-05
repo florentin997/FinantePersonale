@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using FinantePersonale.Models;
 using FinantePersonale.Views;
 
 namespace FinantePersonale.Views
@@ -24,6 +25,8 @@ namespace FinantePersonale.Views
         //    Color = singleEntry.Color
         //};
 
+        List<ValueModelCh> piechartElements = new List<ValueModelCh>(); //lista in care urmeaza sa introduc elementele din BD pentru cheltuieli 
+        
         private readonly ChartEntry[] entries = new[]
        {
             new ChartEntry(150) //valoarea din chart
