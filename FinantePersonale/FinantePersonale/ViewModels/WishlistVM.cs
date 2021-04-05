@@ -53,9 +53,27 @@ namespace FinantePersonale.ViewModels
                 OnPropertyChanged("IValue");
             }
         }
+        
+
+        private ModelWishlist itemToDelete;
+
+        public ModelWishlist ItemToDelete
+        {
+            get { return itemToDelete; }
+            set {
+                if(itemToDelete != null)
+                {
+                    itemToDelete = value;
+                }
+                itemToDelete = value;
+                OnPropertyChanged("ItemToDelete");
+            }
+        }
+
 
         public Command SaveWishlistItemCommand { get; set; }
-        
+        public Command DeleteItemFromWLCommand { get; set; }
+
         public ObservableCollection<string> WishlistItem  
         {
             get; 
@@ -64,8 +82,8 @@ namespace FinantePersonale.ViewModels
 
         public WishlistVM()
         {
-            WishlistItem = new ObservableCollection<string>();  
-            //ItemW????
+            WishlistItem = new ObservableCollection<string>();
+            DeleteItemFromWLCommand = new Command(DeleteRowItem);
             SaveWishlistItemCommand = new Command(InsertItem);
 
         }
@@ -95,7 +113,18 @@ namespace FinantePersonale.ViewModels
         }
 
         //---------------------------------------
+        public void DeleteRowItem()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                int rows = conn.Delete(ItemToDelete);
 
+                if (rows > 0)
+                    App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
+                else
+                    App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
+            }
+        }
 
     }
 

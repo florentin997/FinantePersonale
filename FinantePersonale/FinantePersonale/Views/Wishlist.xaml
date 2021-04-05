@@ -6,22 +6,22 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <vm:WishlistVM x:Key="vm"/>
-            <vm:IstoricWishlistVM x:Key="vmListItems"/>
+            <vm:WishlistVM x:Key="vmWishlist"/>
+            <vm:IstoricWishlistVM x:Key="vm"/>
             
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salveaza"
-                     Command="{Binding Source={StaticResource vm}, Path=SaveWishlistItemCommand}"/>
+                     Command="{Binding Source={StaticResource vmWishlist}, Path=SaveWishlistItemCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
 
         <StackLayout>
 
-            <StackLayout Margin="75,0,75,0" BindingContext="{Binding Source={StaticResource vm}}">
+            <StackLayout Margin="75,0,75,0" BindingContext="{Binding Source={StaticResource vmWishlist}}">
                 <Entry x:Name="WishlistItem"
                        Placeholder="Item"
                        HorizontalTextAlignment="Center"
@@ -33,15 +33,26 @@
             </StackLayout>
 
             <StackLayout>
-                <ListView ItemsSource="{Binding Source={StaticResource vmListItems}, Path=IstWishlistItems}">
+                <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstWishlistItems}"
+                          SelectedItem="{Binding Source={StaticResource vmWishlist}, Path=ItemToDelete, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding ItemW}" 
+                            <TextCell 
+                              Text="{Binding ItemName, Mode=TwoWay}" 
                               TextColor="Black" 
-                              Detail="{Binding ItemID}"/>
+                              Detail="{Binding  ItemValue, Mode=TwoWay}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+
+                <Button
+                VerticalOptions="End"
+                Text="Stergere"
+                BackgroundColor="Red"
+                Margin="100,0,100,0"
+                Command="{Binding Source={StaticResource vmWishlist}, Path=DeleteItemFromWLCommand}"
+            />
+
             </StackLayout>
             
         </StackLayout>

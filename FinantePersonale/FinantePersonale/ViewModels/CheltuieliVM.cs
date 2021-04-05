@@ -68,7 +68,6 @@ namespace FinantePersonale.ViewModels
         }
 
         private ValueModelCh itemCh;
-
         public ValueModelCh ItemCh
         {
             get { return itemCh; }
@@ -135,9 +134,9 @@ namespace FinantePersonale.ViewModels
                 int rows = conn.Delete(ItemCh);   
 
                 if (rows > 0)
-                   App.Current.MainPage.DisplayAlert("Success", "Item succesfully deleted", "Ok");
+                    App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
                 else
-                    App.Current.MainPage.DisplayAlert("Failure", "Item failed to be deleted", "Ok");
+                    App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
             }
         }
 
