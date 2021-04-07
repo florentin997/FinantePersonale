@@ -25,11 +25,15 @@
                 <Entry x:Name="WishlistItem"
                        Placeholder="Item"
                        HorizontalTextAlignment="Center"
-                       Text="{Binding ItemW, Mode=TwoWay}"/>
+                       Text="{Binding ItemW, Mode=TwoWay}"
+                       MaxLength="25"
+                       Keyboard="Text"/>
                 <Entry x:Name="ItemValue"
                        Placeholder="Costul"
                        HorizontalTextAlignment="Center"
-                       Text="{Binding IValue, Mode=TwoWay}"/>
+                       Text="{Binding IValue, Mode=TwoWay}"
+                       MaxLength="5"
+                       Keyboard="Numeric"/>
             </StackLayout>
 
             <StackLayout>

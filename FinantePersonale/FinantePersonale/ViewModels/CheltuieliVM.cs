@@ -81,21 +81,23 @@ namespace FinantePersonale.ViewModels
             }
         }
 
+        public Command PopUpAddCategorieCommand { get; set; }
         public Command SaveCheltuieliCommand { get; set; }
         public Command DeleteCheltuieliCommand { get; set; }
 
-        //-----------
+        
         public ObservableCollection<string> SubcategoriiCheltuieli
         {
             get;
             set;
-        }//------------
+        }
         public CheltuieliVM()
         {
             SubcategoriiCheltuieli = new ObservableCollection<string>();
             DateC = DateTime.Today;
             SaveCheltuieliCommand = new Command(InsertCheltuieli);
             DeleteCheltuieliCommand = new Command(DeleteRowCH);
+            PopUpAddCategorieCommand = new Command(PopUpScreen);
             GetSubcategorieCheltuieli();
         }
 
@@ -125,8 +127,6 @@ namespace FinantePersonale.ViewModels
                 Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
         }
 
-
-        
     public void DeleteRowCH()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
@@ -140,6 +140,10 @@ namespace FinantePersonale.ViewModels
             }
         }
 
+        public void PopUpScreen()
+        {
+            App.Current.MainPage.Navigation.PushAsync(new Views.PopUpCategorie());
+        }
 
         //PTR TESTARE
         //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII

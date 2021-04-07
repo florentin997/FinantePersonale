@@ -18,19 +18,27 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Margin="75,0,75,0" BindingContext="{Binding Source={StaticResource vm}}">
-                <Entry Placeholder="Suma"
-                   x:Name="EntrySuma"
-                       Text="{Binding SumaC, Mode=TwoWay}"/>
-                <Picker x:Name="SubcatCh"
+            <StackLayout Margin="125,0,125,0" 
+                         BindingContext="{Binding Source={StaticResource vm}}">
+                <Entry 
+                       Placeholder="Suma"
+                       HorizontalTextAlignment="Center"
+                       Text="{Binding SumaC, Mode=TwoWay}"
+                       Keyboard="Numeric"/>
+                <Picker
                         SelectedItem="{Binding SubcategorieC,Mode=TwoWay}"
-                         ItemsSource="{Binding SubcategoriiCheltuieli}"/>
-                <DatePicker x:Name="DataPickerCheltuieli" 
-                            Format="yyyy/MM/dd" 
-                            Date="{Binding DateC, Mode=TwoWay}"/>
+                        ItemsSource="{Binding SubcategoriiCheltuieli}"
+                        HorizontalTextAlignment="Center"/>
+                <DatePicker 
+                        Format="yyyy/MM/dd" 
+                        Date="{Binding DateC, Mode=TwoWay}"/>
+                <Button 
+                        Text="Add categorie"
+                        BackgroundColor="Green"
+                        Margin="20"
+                        Command="{Binding Source={StaticResource vm}, Path=PopUpAddCategorieCommand}"/>
             </StackLayout>
-            <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="300"/>
-            <!--<microcharts:ChartView BindingContext=""-->
+            <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250"/>
         </StackLayout>
     </ContentPage.Content>
 

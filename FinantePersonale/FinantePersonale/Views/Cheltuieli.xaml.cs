@@ -25,10 +25,16 @@ namespace FinantePersonale.Views
         //    Color = singleEntry.Color
         //};
 
-        List<ValueModelCh> piechartElements = new List<ValueModelCh>(); //lista in care urmeaza sa introduc elementele din BD pentru cheltuieli 
-        
-        private readonly ChartEntry[] entries = new[]
-       {
+        public static List<ValueModelCh> piechartElements = new List<ValueModelCh>(); //lista in care urmeaza sa introduc elementele din BD pentru cheltuieli 
+
+        //private readonly List<ChartEntry> _entries = new List<ChartEntry>()
+        //{
+
+        //};
+
+
+    private readonly ChartEntry[] entries = new[]
+            {
             new ChartEntry(150) //valoarea din chart
             {
                 Label = "Haine",     //categoria
@@ -59,11 +65,6 @@ namespace FinantePersonale.Views
             }
         };
 
-        //internal static object GetCheltuieliS()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public Cheltuieli()
         {
             InitializeComponent();
@@ -71,7 +72,7 @@ namespace FinantePersonale.Views
             charPieCheltuieli.Chart = new PieChart {
                 Entries = entries,
                 //HoleRadius = 0.5f,
-                LabelTextSize = 40,
+                LabelTextSize = 40f,
                 BackgroundColor = SKColors.Transparent,
                 //Typeface=SKTypeface.Default   //nu schimba nimic
             };

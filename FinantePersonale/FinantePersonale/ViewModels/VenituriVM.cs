@@ -100,9 +100,9 @@ namespace FinantePersonale.ViewModels
             int response = ValueModelVen.InsertValue(vn);
 
             if (response > 0)
-                App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
+                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
-                App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
+                Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
         }
 
         public void DeleteRowVen()

@@ -55,7 +55,7 @@ namespace FinantePersonale.Views
             charPieVenituri.Chart = new PieChart{
                 Entries = entries,
                 //HoleRadius = 0.5f,
-                LabelTextSize = 40,
+                LabelTextSize = 40f,
                 BackgroundColor = SKColors.Transparent,
             };
         }

@@ -13,11 +13,10 @@
             <vm:CheltuieliVM x:Key="vmCheltuieli"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
 
     <ContentPage.Content>
-
-
+        
         <StackLayout>
             <ListView 
                      ItemsSource="{Binding Source={StaticResource vm}, Path=IstCheltuieli}" IsPullToRefreshEnabled="True"
@@ -41,9 +40,7 @@
                 Command="{Binding Source={StaticResource vmCheltuieli}, Path=DeleteCheltuieliCommand}"
             />
         </StackLayout>
-        
-
-
+       
 
     </ContentPage.Content>
 </ContentPage>

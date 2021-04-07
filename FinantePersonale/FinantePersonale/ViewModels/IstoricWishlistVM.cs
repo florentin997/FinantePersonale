@@ -26,7 +26,6 @@ namespace FinantePersonale.ViewModels
         public IstoricWishlistVM()
         {
             IstWishlistItems = new ObservableCollection<ModelWishlist>();
-
             GetWishlist();
         }
 
@@ -40,15 +39,6 @@ namespace FinantePersonale.ViewModels
             {
                 IstWishlistItems.Add(item);
             }
-        }
-        //------------------------------
-
-        private void OnDelete(object sender, EventArgs e)
-        {
-            SwipeItem item = sender as SwipeItem;
-            ModelWishlist model = item.BindingContext as ModelWishlist;
-            //viewModel.Items.Remove(model);
-            IstWishlistItems.Remove(model);
         }
     }
 }

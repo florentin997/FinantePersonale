@@ -18,18 +18,21 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Margin="75,0,75,0" BindingContext="{Binding Source={StaticResource vm}}">
+            <StackLayout Margin="125,0,125,0" 
+                         BindingContext="{Binding Source={StaticResource vm}}">
                 <Entry Placeholder="Suma"
-                   x:Name="EntrySuma"
-                       Text="{Binding SumaV, Mode=TwoWay}"/>
+                       Text="{Binding SumaV, Mode=TwoWay}"
+                       Keyboard="Numeric"
+                       HorizontalTextAlignment="Center"/>
                 <Picker x:Name="SubcatVen"
-                        SelectedItem="{Binding SubcategorieV,Mode=TwoWay}"
-                         ItemsSource="{Binding SubcategoriiVenituri}"/>
-                <DatePicker x:Name="DataPickerVenituri" 
-                            Format="yyyy/MM/dd" 
-                            Date="{Binding DateV, Mode=TwoWay}"/>
+                       SelectedItem="{Binding SubcategorieV,Mode=TwoWay}"
+                       ItemsSource="{Binding SubcategoriiVenituri}"
+                       HorizontalTextAlignment="Center"/>
+                <DatePicker 
+                       Format="yyyy/MM/dd" 
+                       Date="{Binding DateV, Mode=TwoWay}"/>
             </StackLayout>
-            <microcharts:ChartView x:Name="charPieVenituri" HeightRequest="300" />
+            <microcharts:ChartView x:Name="charPieVenituri" HeightRequest="250" />
           
         </StackLayout>
 

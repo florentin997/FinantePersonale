@@ -70,7 +70,6 @@ namespace FinantePersonale.ViewModels
             }
         }
 
-
         public Command SaveWishlistItemCommand { get; set; }
         public Command DeleteItemFromWLCommand { get; set; }
 
@@ -106,7 +105,6 @@ namespace FinantePersonale.ViewModels
             int response = ModelWishlist.InsertValue(givenItem);
 
             if (response > 0)
-                //Application.Current.MainPage.Navigation.PopAsync();
                 Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
                 Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
