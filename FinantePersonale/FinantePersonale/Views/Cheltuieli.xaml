@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <vm:CheltuieliVM x:Key="vm"/>
         </ResourceDictionary>
+        
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
@@ -19,26 +20,31 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Margin="125,0,125,0" 
+                         HorizontalOptions="CenterAndExpand"
                          BindingContext="{Binding Source={StaticResource vm}}">
                 <Entry 
-                       Placeholder="Suma"
-                       HorizontalTextAlignment="Center"
-                       Text="{Binding SumaC, Mode=TwoWay}"
-                       Keyboard="Numeric"/>
-                <Picker
-                        SelectedItem="{Binding SubcategorieC,Mode=TwoWay}"
-                        ItemsSource="{Binding SubcategoriiCheltuieli}"
-                        HorizontalTextAlignment="Center"/>
+                    Placeholder="Suma"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding SumaC, Mode=OneWayToSource}"
+                    Keyboard="Numeric"/>
+                <Picker   
+                    ItemsSource="{Binding SubcategoriiCheltuieli}"
+                    SelectedItem="{Binding SubcategorieC, Mode=OneWayToSource}"   
+                    HorizontalTextAlignment="Center"/>
                 <DatePicker 
-                        Format="yyyy/MM/dd" 
-                        Date="{Binding DateC, Mode=TwoWay}"/>
-                <Button 
-                        Text="Add categorie"
-                        BackgroundColor="Green"
-                        Margin="20"
-                        Command="{Binding Source={StaticResource vm}, Path=PopUpAddCategorieCommand}"/>
+                    Format="yyyy/MM/dd" 
+                    Date="{Binding DateC, Mode=TwoWay}"/>
+                
             </StackLayout>
+            
             <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250"/>
+            <Button 
+                Text="Add categorie"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="Green"
+                Margin="125,0"
+                Command="{Binding Source={StaticResource vm}, Path=PopUpAddCategorieCommand}"/>
+            
         </StackLayout>
     </ContentPage.Content>
 

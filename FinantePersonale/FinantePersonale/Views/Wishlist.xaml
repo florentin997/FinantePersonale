@@ -8,7 +8,6 @@
         <ResourceDictionary>
             <vm:WishlistVM x:Key="vmWishlist"/>
             <vm:IstoricWishlistVM x:Key="vm"/>
-            
         </ResourceDictionary>
     </ContentPage.Resources>
 

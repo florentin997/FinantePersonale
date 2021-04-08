@@ -11,10 +11,10 @@
                 #000000
             </Color>
             <Color x:Key="culoareFundal">
-                #99CCFF
+                #ffdead
             </Color>
             <Color x:Key="culoareTabMenu">
-                #FFFFFF
+                #000000
             </Color>
 
 
@@ -31,6 +31,9 @@
 
             <Style TargetType="TabbedPage">
                 <Setter Property="SelectedTabColor" Value="{StaticResource culoareTabMenu}"/>
+            </Style>
+            <Style TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="NavajoWhite"/>
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="PlaceholderColor"  Value="black"/>

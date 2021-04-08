@@ -10,9 +10,7 @@ namespace FinantePersonale.ViewModels
 {
     public class CheltuieliVM : INotifyPropertyChanged
     {
-        //public DeleteCommand DeleteCommand{get; set;}
 
-        //public ValueModelCh inregistrare { get; set; }
         public ObservableCollection<ValueModelVen> Expenses
         {
             get;

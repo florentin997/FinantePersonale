@@ -1,12 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.PopUpCategorie">
+
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:CategorieVM x:Key="vmCategorie"/>
+            <vm:IstoricCategoriiVM x:Key="vmIstoric"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
+
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Categorii de cheltuieli"
+                   FontFamily="Calibri"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="40"/>
+            <Entry HorizontalOptions="Center"
+                   Placeholder="Categorie"
+                   Text="{Binding Source={StaticResource vmCategorie},Path=NumeSubcategorie, Mode=OneWayToSource}"
+                   />
+
+            <StackLayout>
+                <ListView ItemsSource="{Binding Source={StaticResource vmIstoric}, Path=IstCategorii}"
+                          SelectedItem="{Binding Source={StaticResource vmCategorie}, Path=ItemCategorie, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell 
+                              Text="{Binding NumeSubcategorie, Mode=TwoWay}" 
+                              TextColor="Black"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            
+            <Grid RowDefinitions="50" 
+                Margin="20,15,20,15">
+                <Button 
+                    Text="Save"
+                    BackgroundColor="LightGreen"
+                    Command="{Binding Source={StaticResource vmCategorie}, Path=SaveCategorieCommand}"/>
+                <Button 
+                    Grid.Column="1"
+                    Text="Delete"
+                    BackgroundColor="IndianRed"
+                    Command="{Binding Source={StaticResource vmCategorie}, Path=DeleteCategorieCommand}"/>
+            </Grid>
+            
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

@@ -21,11 +21,11 @@
             <StackLayout Margin="125,0,125,0" 
                          BindingContext="{Binding Source={StaticResource vm}}">
                 <Entry Placeholder="Suma"
-                       Text="{Binding SumaV, Mode=TwoWay}"
+                       Text="{Binding SumaV,  Mode=OneWayToSource}"
                        Keyboard="Numeric"
                        HorizontalTextAlignment="Center"/>
-                <Picker x:Name="SubcatVen"
-                       SelectedItem="{Binding SubcategorieV,Mode=TwoWay}"
+                <Picker 
+                       SelectedItem="{Binding SubcategorieV, Mode=OneWayToSource}"
                        ItemsSource="{Binding SubcategoriiVenituri}"
                        HorizontalTextAlignment="Center"/>
                 <DatePicker 
