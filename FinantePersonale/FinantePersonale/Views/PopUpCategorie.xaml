@@ -21,6 +21,7 @@
                    FontSize="40"/>
             <Entry HorizontalOptions="Center"
                    Placeholder="Categorie"
+                   Keyboard="Text"
                    Text="{Binding Source={StaticResource vmCategorie},Path=NumeSubcategorie, Mode=OneWayToSource}"
                    />
 

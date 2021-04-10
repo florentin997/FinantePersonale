@@ -6,6 +6,7 @@ using System.Text;
 using FinantePersonale.Models;
 using SQLite;
 using Xamarin.Forms;
+using FinantePersonale.Views;
 
 namespace FinantePersonale.ViewModels
 {
@@ -18,7 +19,6 @@ namespace FinantePersonale.ViewModels
             set;
         }
 
-        //-----------------------
         private int itemID;
         public int ItemID
         {
@@ -29,7 +29,6 @@ namespace FinantePersonale.ViewModels
                 OnPropertyChanged("ItemID");
             }
         }
-        //-----------------------
 
         private string itemW;
         public string ItemW
@@ -42,7 +41,7 @@ namespace FinantePersonale.ViewModels
             }
         }
 
-        private float ivalue; //=99.99f;
+        private float ivalue;
 
         public float IValue
         {
@@ -84,7 +83,6 @@ namespace FinantePersonale.ViewModels
             WishlistItem = new ObservableCollection<string>();
             DeleteItemFromWLCommand = new Command(DeleteRowItem);
             SaveWishlistItemCommand = new Command(InsertItem);
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -95,12 +93,12 @@ namespace FinantePersonale.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void InsertItem()
+        public void InsertItem()  
         {
             ModelWishlist givenItem = new ModelWishlist()
             {
                 ItemName = ItemW,           
-                ItemValue = float.Parse(IValue.ToString()),
+                ItemValue = IValue
             };
             int response = ModelWishlist.InsertValue(givenItem);
 
@@ -110,8 +108,7 @@ namespace FinantePersonale.ViewModels
                 Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
         }
 
-        //---------------------------------------
-        public void DeleteRowItem()
+        public void DeleteRowItem()  
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
@@ -121,6 +118,14 @@ namespace FinantePersonale.ViewModels
                     App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
                 else
                     App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
+            }
+        }
+
+        public void RefreshWishlist()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+
             }
         }
 

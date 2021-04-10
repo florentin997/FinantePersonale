@@ -16,8 +16,13 @@
 
 
     <ContentPage.Content>
-        
+
         <StackLayout>
+            
+           <!-- <StackLayout>
+                <Label Text="{Binding Source={StaticResource vmCheltuieli}, Path=}"/>
+            </StackLayout>
+            -->
             <ListView 
                      ItemsSource="{Binding Source={StaticResource vm}, Path=IstCheltuieli}" IsPullToRefreshEnabled="True"
                      SelectedItem="{Binding Source={StaticResource vmCheltuieli}, Path=ItemCh, Mode=TwoWay}">

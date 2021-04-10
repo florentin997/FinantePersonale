@@ -12,7 +12,7 @@ using System.Windows.Input;//se ocupa de ICommand
 
 namespace FinantePersonale.ViewModels
 {
-    public class IstoricCheltuieliVM : ObservableCollection<ValueModelCh>,INotifyPropertyChanged
+    public class IstoricCheltuieliVM 
     {
         public ObservableCollection<ValueModelCh> IstCheltuieli
         {

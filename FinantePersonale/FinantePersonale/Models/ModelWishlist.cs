@@ -29,14 +29,14 @@ namespace FinantePersonale.Models
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
-                //conn.CreateTable<ModelWishlist>();
+                conn.CreateTable<ModelWishlist>();
                 return conn.Insert(value);
             }
         }
 
         public static List<ModelWishlist> GetValue()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
                 conn.CreateTable<ModelWishlist>();
                 return conn.Table<ModelWishlist>().ToList();
@@ -45,7 +45,7 @@ namespace FinantePersonale.Models
 
         public static ModelWishlist GetRowFromDB(int id)
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
                 return conn.Table<ModelWishlist>().FirstOrDefault(x=>x.Id==id);
                 //return conn.Find<ModelWishlist>(Id);

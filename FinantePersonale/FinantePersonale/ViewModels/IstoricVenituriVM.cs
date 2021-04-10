@@ -18,7 +18,6 @@ namespace FinantePersonale.ViewModels
         public IstoricVenituriVM()
         {
             IstVenituri = new ObservableCollection<ValueModelVen>();
-
             GetIncome();
         }
 

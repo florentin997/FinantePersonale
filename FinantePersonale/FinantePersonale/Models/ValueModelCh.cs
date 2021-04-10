@@ -31,23 +31,6 @@ namespace FinantePersonale.Models
             }
         }
         
-        //METODA DE STERS nu stiu daca merge 
-        //public static async Task<bool> Delete(ValueModelCh cheltuiala)
-        //{
-          
-        //    using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-        //    {
-
-        //        if (cheltuiala != null)
-        //        {
-        //            conn.Delete(cheltuiala);
-        //            return true;
-        //        }
-        //        else
-        //            return false;
-        //    }
-        //}
-
         public static List<ValueModelCh> GetValue()
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
@@ -62,7 +45,6 @@ namespace FinantePersonale.Models
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
                 return conn.Table<ValueModelCh>().FirstOrDefault(x => x.IdCh == id);
-                //return conn.Find<ModelWishlist>(Id);
             }
         }
     }

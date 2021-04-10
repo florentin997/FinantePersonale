@@ -1,5 +1,4 @@
 ﻿using FinantePersonale.Models;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,20 +7,13 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class IstoricWishlistVM : ObservableCollection<ModelWishlist>
+    public class IstoricWishlistVM 
     {
         public ObservableCollection<ModelWishlist> IstWishlistItems
         {
             get;
             set;
         }
-
-        public Command AddExpenseCommand
-        {
-            get;
-            set;
-        }
-
 
         public IstoricWishlistVM()
         {

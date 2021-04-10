@@ -11,7 +11,7 @@ namespace FinantePersonale.ViewModels
     public class CheltuieliVM : INotifyPropertyChanged
     {
 
-        public ObservableCollection<ValueModelVen> Expenses
+        public ObservableCollection<ValueModelCh> Expenses
         {
             get;
             set;
@@ -119,13 +119,12 @@ namespace FinantePersonale.ViewModels
             int response = ValueModelCh.InsertValue(ch);
 
             if (response > 0)
-                //Application.Current.MainPage.Navigation.PopAsync();
                 Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
                 Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
         }
 
-    public void DeleteRowCH()
+        public void DeleteRowCH()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
@@ -142,6 +141,15 @@ namespace FinantePersonale.ViewModels
         {
             App.Current.MainPage.Navigation.PushAsync(new Views.PopUpCategorie());
         }
+
+        //public void TotalCheltuieli()
+        //{
+        //    using(SQLite.SQLiteConnection conn=new SQLiteConnection(App.DatabasePath))
+        //    {
+        //        var nr = from s in 
+        //    }
+        //}
+
 
         //PTR TESTARE
         //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII

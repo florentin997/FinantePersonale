@@ -7,21 +7,21 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <vm:CheltuieliVM x:Key="vm"/>
+            <vm:CheltuieliVM x:Key="vmCheltuieli"/>
         </ResourceDictionary>
         
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salveaza"
-                     Command="{Binding Source={StaticResource vm}, Path=SaveCheltuieliCommand}"/>
+                     Command="{Binding Source={StaticResource vmCheltuieli}, Path=SaveCheltuieliCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Margin="125,0,125,0" 
                          HorizontalOptions="CenterAndExpand"
-                         BindingContext="{Binding Source={StaticResource vm}}">
+                         BindingContext="{Binding Source={StaticResource vmCheltuieli}}">
                 <Entry 
                     Placeholder="Suma"
                     HorizontalTextAlignment="Center"
@@ -43,7 +43,7 @@
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="Green"
                 Margin="125,0"
-                Command="{Binding Source={StaticResource vm}, Path=PopUpAddCategorieCommand}"/>
+                Command="{Binding Source={StaticResource vmCheltuieli}, Path=PopUpAddCategorieCommand}"/>
             
         </StackLayout>
     </ContentPage.Content>

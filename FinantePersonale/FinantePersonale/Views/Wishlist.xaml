@@ -36,14 +36,17 @@
             </StackLayout>
 
             <StackLayout>
-                <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=IstWishlistItems}"
-                          SelectedItem="{Binding Source={StaticResource vmWishlist}, Path=ItemToDelete, Mode=TwoWay}">
+                <ListView x:Name="lvWishlistItems"
+                          ItemsSource="{Binding Source={StaticResource vm}, Path=IstWishlistItems}"
+                          SelectedItem="{Binding Source={StaticResource vmWishlist}, Path=ItemToDelete, Mode=TwoWay}"
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding Source={StaticResource vmWishlist}, Path=RefreshWishlist}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell 
-                              Text="{Binding ItemName, Mode=TwoWay}" 
+                              Text="{Binding ItemName}" 
                               TextColor="Black" 
-                              Detail="{Binding  ItemValue, Mode=TwoWay}"/>
+                              Detail="{Binding  ItemValue}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -53,8 +56,7 @@
                 Text="Stergere"
                 BackgroundColor="Red"
                 Margin="100,0,100,0"
-                Command="{Binding Source={StaticResource vmWishlist}, Path=DeleteItemFromWLCommand}"
-            />
+                Command="{Binding Source={StaticResource vmWishlist}, Path=DeleteItemFromWLCommand}"/>
 
             </StackLayout>
             
