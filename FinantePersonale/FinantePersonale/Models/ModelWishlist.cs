@@ -51,5 +51,14 @@ namespace FinantePersonale.Models
                 //return conn.Find<ModelWishlist>(Id);
             }
         }
+
+        //public static  List<ModelWishlist> Read()
+        //{
+        //    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+        //    {
+        //        var posts = ModelWishlist.GetValue();// Where(p => p.UserId == App.user.Id).ToListAsync();
+        //        return posts;
+        //    }
+        //}
     }
 }

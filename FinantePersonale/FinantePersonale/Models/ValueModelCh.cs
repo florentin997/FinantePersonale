@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinantePersonale.Models
 {
+    //[Table("ValueModelCh")]
     public class ValueModelCh
     {
         [PrimaryKey, AutoIncrement, NotNull]
@@ -37,6 +38,15 @@ namespace FinantePersonale.Models
             {
                 conn.CreateTable<ValueModelCh>();
                 return conn.Table<ValueModelCh>().ToList();
+            }
+        }
+
+        public static List<ValueModelCh> GetValue(string subcategorie)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                conn.CreateTable<ValueModelCh>();
+                return conn.Table<ValueModelCh>().Where(e => e.SubcategorieCh == subcategorie).ToList();
             }
         }
 

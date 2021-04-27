@@ -76,8 +76,6 @@ namespace FinantePersonale.Views
                 BackgroundColor = SKColors.Transparent,
                 //Typeface=SKTypeface.Default   //nu schimba nimic
             };
-          
-
         }
 
     }

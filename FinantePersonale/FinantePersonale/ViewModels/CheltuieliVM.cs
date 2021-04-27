@@ -1,15 +1,102 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using FinantePersonale.Models;
 using FinantePersonale.ViewModels.Commands;
+using Microcharts;
 using SQLite;
 using Xamarin.Forms;
+//using FinantePersonale.Services;
 
 namespace FinantePersonale.ViewModels
 {
-    public class CheltuieliVM : INotifyPropertyChanged
+    public class CheltuieliVM : BaseViewModel //ObservableCollection<ValueModelCh>
     {
+
+        ////////////////////////////////------------------------------ luate din ItemsViewModel App2 
+        //private ValueModelCh _selectedItem;
+        //public ObservableCollection<ValueModelCh> Items { get; }
+        //public Command LoadItemsCommand { get; }
+        //public Command AddItemCommand { get; }
+        //public Command<ValueModelCh> ItemTapped { get; }
+
+
+        //public ObservableCollection<string> SubcategoriiCheltuieli
+        //{
+        //    get;
+        //    set;
+        //}
+
+        //public CheltuieliVM()
+        //{
+        //    Title = "Browse";
+        //    Items = new ObservableCollection<ValueModelCh>();
+        //    LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+        //    //77777777777777777777777
+        //    SubcategoriiCheltuieli = new ObservableCollection<string>();
+        //    GetSubcategorieCheltuieli();
+        //    //777777777777777777777777
+        //    ItemTapped = new Command<ValueModelCh>(OnItemSelected);
+
+        //    AddItemCommand = new Command(OnAddItem);
+        //}
+
+        //async Task ExecuteLoadItemsCommand()
+        //{
+        //    IsBusy = true;
+
+        //    try
+        //    {
+        //        Items.Clear();
+        //        var items = await DataStore.GetItemsAsync(true);
+        //        foreach (var item in items)
+        //        {
+        //            Items.Add(item);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex);
+        //    }
+        //    finally
+        //    {
+        //        IsBusy = false;
+        //    }
+        //}
+
+        //public void OnAppearing()
+        //{
+        //    IsBusy = true;
+        //    SelectedItem = null;
+        //}
+
+        //public ValueModelCh SelectedItem
+        //{
+        //    get => _selectedItem;
+        //    set
+        //    {
+        //        SetProperty(ref _selectedItem, value);
+        //        OnItemSelected(value);
+        //    }
+        //}
+
+        //private async void OnAddItem(object obj)
+        //{
+        //    await Shell.Current.GoToAsync(nameof(IstoricCheltuieliVM));
+        //}
+
+        //async void OnItemSelected(ValueModelCh item)
+        //{
+        //    if (item == null)
+        //        return;
+
+        //    // This will push the ItemDetailPage onto the navigation stack
+        //    //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+        //}
+        ///////////////////////--------------------------------------------------------------------------------------------------------------- pana aici
 
         public ObservableCollection<ValueModelCh> Expenses
         {
@@ -69,21 +156,23 @@ namespace FinantePersonale.ViewModels
         public ValueModelCh ItemCh
         {
             get { return itemCh; }
-            set {
+            set
+            {
                 if (itemCh != null)
                 {
                     itemCh = value;
                 }
                 itemCh = value;
-                OnPropertyChanged("itemCh");   
+                OnPropertyChanged("itemCh");
             }
         }
 
         public Command PopUpAddCategorieCommand { get; set; }
         public Command SaveCheltuieliCommand { get; set; }
         public Command DeleteCheltuieliCommand { get; set; }
+        //public Command ChPerCategCommand { get; set; }
 
-        
+
         public ObservableCollection<string> SubcategoriiCheltuieli
         {
             get;
@@ -97,6 +186,8 @@ namespace FinantePersonale.ViewModels
             DeleteCheltuieliCommand = new Command(DeleteRowCH);
             PopUpAddCategorieCommand = new Command(PopUpScreen);
             GetSubcategorieCheltuieli();
+
+            //ChPerCategCommand = new Command(ChPeCategorie);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -110,7 +201,7 @@ namespace FinantePersonale.ViewModels
 
         public void InsertCheltuieli()
         {
-            ValueModelCh ch = new ValueModelCh()     
+            ValueModelCh ch = new ValueModelCh()
             {
                 SubcategorieCh = SubcategorieC,
                 SumaCh = SumaC,
@@ -128,7 +219,7 @@ namespace FinantePersonale.ViewModels
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
-                int rows = conn.Delete(ItemCh);   
+                int rows = conn.Delete(ItemCh);
 
                 if (rows > 0)
                     App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
@@ -142,14 +233,24 @@ namespace FinantePersonale.ViewModels
             App.Current.MainPage.Navigation.PushAsync(new Views.PopUpCategorie());
         }
 
-        //public void TotalCheltuieli()
+
+        //-----------UPDATE LA GRAFIC
+        public Chart Chart { get; set; }
+
+
+        //------------------------------
+
+        //public void ChPeCategorie()
         //{
-        //    using(SQLite.SQLiteConnection conn=new SQLiteConnection(App.DatabasePath))
+        //    using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
         //    {
-        //        var nr = from s in 
+        //        var valCh = conn.Table<ValueModelCh>().ToList();
+
+        //        var nr = (from c in valCh group c.SumaCh by c.SubcategorieCh).ToList();
         //    }
         //}
 
+        //from c in valCh select count * groupby c.Value
 
         //PTR TESTARE
         //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII

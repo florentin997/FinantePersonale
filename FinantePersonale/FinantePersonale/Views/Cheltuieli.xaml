@@ -14,7 +14,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salveaza"
-                     Command="{Binding Source={StaticResource vmCheltuieli}, Path=SaveCheltuieliCommand}"/>
+                    Command="{Binding SaveCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -36,17 +36,26 @@
                     Date="{Binding DateC, Mode=TwoWay}"/>
                 
             </StackLayout>
+
+            <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250" Chart="{Binding Source={StaticResource vmCheltuieli}, Path=Chart}"/>
             
-            <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250"/>
-            <Button 
-                Text="Add categorie"
-                VerticalOptions="EndAndExpand"
-                BackgroundColor="Green"
-                Margin="125,0"
-                Command="{Binding Source={StaticResource vmCheltuieli}, Path=PopUpAddCategorieCommand}"/>
+            
             
         </StackLayout>
     </ContentPage.Content>
 
 
 </ContentPage>
+    
+    
+    <!--
+    <Button 
+                Text="Add categorie"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="Green"
+                Margin="125,0"
+                Command="{Binding Source={StaticResource vmCheltuieli}, Path=PopUpAddCategorieCommand}"/>
+    -->
+
+
+<!-- Command="{Binding Source={StaticResource vmCheltuieli}, Path=SaveCheltuieliCommand}"/>-->

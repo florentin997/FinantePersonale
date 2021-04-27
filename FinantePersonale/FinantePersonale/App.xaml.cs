@@ -21,7 +21,8 @@ namespace FinantePersonale
 
             DatabasePath = databasePath;
 
-            MainPage = new NavigationPage(new MainPage());
+            //MainPage = new NavigationPage(new MainPage());
+            MainPage = new AppShell();
         }
 
 

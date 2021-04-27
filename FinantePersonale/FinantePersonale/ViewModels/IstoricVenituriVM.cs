@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class IstoricVenituriVM
+    public class IstoricVenituriVM //: INotifyPropertyChanged
     {
         public ObservableCollection<ValueModelVen> IstVenituri
         {
@@ -20,6 +21,8 @@ namespace FinantePersonale.ViewModels
             IstVenituri = new ObservableCollection<ValueModelVen>();
             GetIncome();
         }
+
+       // public event PropertyChangedEventHandler PropertyChanged;
 
         private void GetIncome()    
         {

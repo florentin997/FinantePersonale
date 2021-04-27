@@ -15,12 +15,6 @@ namespace FinantePersonale.ViewModels.Commands
         {
             obiectDeSters = obiect;
         }
-        public IstoricCheltuieliVM IstoricCheltuieliViewModel { get; set; }
-
-        public DeleteCommand(IstoricCheltuieliVM item)
-        {
-
-        }
 
         public event EventHandler CanExecuteChanged;
 
@@ -39,15 +33,14 @@ namespace FinantePersonale.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            using(SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
-                //conn.CreateTable<ModelWishlist>();
-                int rows = conn.Delete(parameter);   //metoda delete primeste ca parametru obiectul ce trebuie sters
+                int rows = conn.Delete(parameter);
 
                 if (rows > 0)
-                    App.Current.MainPage.DisplayAlert("Success", "Item succesfully deleted", "Ok");
+                    App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
                 else
-                    App.Current.MainPage.DisplayAlert("Failure", "Item failed to be deleted", "Ok");
+                    App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
             }
         }
     }

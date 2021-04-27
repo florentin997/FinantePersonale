@@ -18,8 +18,8 @@
     <ContentPage.Content>
 
         <StackLayout>
-            
-           <!-- <StackLayout>
+
+            <!-- <StackLayout>
                 <Label Text="{Binding Source={StaticResource vmCheltuieli}, Path=}"/>
             </StackLayout>
             -->
@@ -36,6 +36,26 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <!--  
+            <StackLayout>
+                <ListView  ItemsSource="{Binding Source={StaticResource vmCheltuieli}}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding ChPerCategCommand}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            -->
+
+
+            <!--       <ViewCell>
+                            <Grid>
+                                <Label Text="{Binding SubcategorieCh}" />
+                                <ProgressBar Progress="{Binding}"/>
+                            </Grid>
+                        </ViewCell>
+            -->
 
             <Button
                 VerticalOptions="End"
@@ -45,7 +65,6 @@
                 Command="{Binding Source={StaticResource vmCheltuieli}, Path=DeleteCheltuieliCommand}"
             />
         </StackLayout>
-       
 
     </ContentPage.Content>
 </ContentPage>

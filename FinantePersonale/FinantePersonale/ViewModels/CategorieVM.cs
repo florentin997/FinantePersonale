@@ -72,6 +72,7 @@ namespace FinantePersonale.ViewModels
             CategoriiCollection = new ObservableCollection<Categorie>();
             SaveCategorieCommand = new Command(InsertCheltuieli);
             DeleteCategorieCommand = new Command(DeleteRowCategorie);
+
         }
 
 

@@ -7,6 +7,7 @@ using FinantePersonale.Models;
 using SQLite;
 using Xamarin.Forms;
 using FinantePersonale.Views;
+using System.Threading.Tasks;
 
 namespace FinantePersonale.ViewModels
 {
@@ -19,6 +20,7 @@ namespace FinantePersonale.ViewModels
             set;
         }
 
+      
         private int itemID;
         public int ItemID
         {
@@ -71,26 +73,24 @@ namespace FinantePersonale.ViewModels
 
         public Command SaveWishlistItemCommand { get; set; }
         public Command DeleteItemFromWLCommand { get; set; }
+        public Command RefreshCommand { get; set; }
+        //public Command UpdateWishlistCommand { get; set; }
 
-        public ObservableCollection<string> WishlistItem  
-        {
-            get; 
-            set; 
-        }
 
         public WishlistVM()
         {
-            WishlistItem = new ObservableCollection<string>();
+            WishlistItems = new ObservableCollection<ModelWishlist>();
             DeleteItemFromWLCommand = new Command(DeleteRowItem);
             SaveWishlistItemCommand = new Command(InsertItem);
+            RefreshCommand = new Command(RefreshWishlist);
+            //UpdateWishlistCommand = new Command(UpdateList);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void InsertItem()  
@@ -125,10 +125,29 @@ namespace FinantePersonale.ViewModels
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
-
+                 
+               //verific daca ce am in BD e acelasi cu ce am in View si daca nu, adaug ultimul element?
             }
         }
 
+        //------
+        //-----------
+
+        //public void  UpdateList()
+        //{
+
+        //        var posts =  ModelWishlist.Read();
+        //        if (posts != null)
+        //        {
+        //            WishlistItems.Clear();
+        //            foreach (var post in posts)
+        //                WishlistItems.Add(post);
+        //        }
+        //}
+        ////------------------
+
+
+        //------
     }
 
 

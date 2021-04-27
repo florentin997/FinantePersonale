@@ -37,10 +37,10 @@
 
             <StackLayout>
                 <ListView x:Name="lvWishlistItems"
-                          ItemsSource="{Binding Source={StaticResource vm}, Path=IstWishlistItems}"
+                          ItemsSource="{Binding Source={StaticResource vm}, Path=IstWishlistItems, Mode=OneWay}"
                           SelectedItem="{Binding Source={StaticResource vmWishlist}, Path=ItemToDelete, Mode=TwoWay}"
                           IsPullToRefreshEnabled="True"
-                          RefreshCommand="{Binding Source={StaticResource vmWishlist}, Path=RefreshWishlist}">
+                          RefreshCommand="{Binding Source={StaticResource vmWishlist}, Path=UpdateWishlistCommand}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell 
