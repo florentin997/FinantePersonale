@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using FinantePersonale.Models;
 using FinantePersonale.Views;
+using System.Collections.ObjectModel;
 
 namespace FinantePersonale.Views
 {
@@ -33,50 +34,50 @@ namespace FinantePersonale.Views
         //};
 
 
-    private readonly ChartEntry[] entries = new[]
-            {
-            new ChartEntry(150) //valoarea din chart
-            {
-                Label = "Haine",     //categoria
-                ValueLabelColor=SKColor.Parse("#2c3e50"),
-                ValueLabel = "112", //valoarea care apare sub categorie
-                Color = SKColor.Parse("#2c3e50")
-            },
-            new ChartEntry(150)
-            {
-                Label = "Divertisment",
-                ValueLabelColor=SKColor.Parse("#77d065"),
-                ValueLabel = "648",
-                Color = SKColor.Parse("#77d065")
-            },
-            new ChartEntry(600)
-            {
-                Label = "Mancare",
-                ValueLabelColor=SKColor.Parse("#0328fc"),
-                ValueLabel = "428",
-                Color = SKColor.Parse("#0328fc")
-            },
-            new ChartEntry(100)
-            {
-                Label = "Transport",
-                ValueLabelColor=SKColor.Parse("#5d1885"),
-                ValueLabel = "214",
-                Color = SKColor.Parse("#5d1885")
-            }
-        };
+        //private readonly ChartEntry[] entries = new[]
+        //        {
+        //        new ChartEntry(150) //valoarea din chart
+        //        {
+        //            Label = "Haine",     //categoria
+        //            ValueLabelColor=SKColor.Parse("#2c3e50"),
+        //            ValueLabel = "112", //valoarea care apare sub categorie
+        //            Color = SKColor.Parse("#2c3e50")
+        //        },
+        //        new ChartEntry(150)
+        //        {
+        //            Label = "Divertisment",
+        //            ValueLabelColor=SKColor.Parse("#77d065"),
+        //            ValueLabel = "648",
+        //            Color = SKColor.Parse("#77d065")
+        //        },
+        //        new ChartEntry(600)
+        //        {
+        //            Label = "Mancare",
+        //            ValueLabelColor=SKColor.Parse("#0328fc"),
+        //            ValueLabel = "428",
+        //            Color = SKColor.Parse("#0328fc")
+        //        },
+        //        new ChartEntry(100)
+        //        {
+        //            Label = "Transport",
+        //            ValueLabelColor=SKColor.Parse("#5d1885"),
+        //            ValueLabel = "214",
+        //            Color = SKColor.Parse("#5d1885")
+        //        }
+        //    };
 
         public Cheltuieli()
         {
             InitializeComponent();
 
-            charPieCheltuieli.Chart = new PieChart {
-                Entries = entries,
-                //HoleRadius = 0.5f,
-                LabelTextSize = 40f,
-                BackgroundColor = SKColors.Transparent,
-                //Typeface=SKTypeface.Default   //nu schimba nimic
-            };
+            //charPieCheltuieli.Chart = new PieChart {
+            //    Entries = entries,
+            //    //HoleRadius = 0.5f,
+            //    LabelTextSize = 40f,
+            //    BackgroundColor = SKColors.Transparent,
+            //Typeface=SKTypeface.Default   //nu schimba nimic
         }
+
 
     }
 }

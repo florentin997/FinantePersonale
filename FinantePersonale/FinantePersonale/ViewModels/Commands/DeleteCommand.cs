@@ -20,28 +20,20 @@ namespace FinantePersonale.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            var obiect = (ValueModelCh)parameter;
+            //var obiect = (ValueModelCh)parameter;
                 
-            if(string.IsNullOrEmpty(obiect.SubcategorieCh) || 
-                string.IsNullOrEmpty(obiect.IdCh.ToString()) || 
-                string.IsNullOrEmpty(obiect.SumaCh.ToString()))
-            {
-                return false;
-            }
-            return true;
+            //if(//string.IsNullOrEmpty(obiect.SubcategorieCh) || 
+            //    string.IsNullOrEmpty(obiect.IdCh.ToString()))  
+            //    //string.IsNullOrEmpty(obiect.SumaCh.ToString()))
+            //{
+            //    return false;
+            //}
+            return true; 
         }
 
         public void Execute(object parameter)
         {
-            using(SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-            {
-                int rows = conn.Delete(parameter);
-
-                if (rows > 0)
-                    App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
-                else
-                    App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
-            }
+            this.obiectDeSters.DeleteMethod(parameter as ValueModelCh);
         }
     }
 }

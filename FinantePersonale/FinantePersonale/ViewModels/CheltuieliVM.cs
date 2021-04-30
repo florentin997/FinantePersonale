@@ -13,97 +13,8 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class CheltuieliVM : BaseViewModel //ObservableCollection<ValueModelCh>
+    public class CheltuieliVM //: ObservableCollection<ValueModelCh>
     {
-
-        ////////////////////////////////------------------------------ luate din ItemsViewModel App2 
-        //private ValueModelCh _selectedItem;
-        //public ObservableCollection<ValueModelCh> Items { get; }
-        //public Command LoadItemsCommand { get; }
-        //public Command AddItemCommand { get; }
-        //public Command<ValueModelCh> ItemTapped { get; }
-
-
-        //public ObservableCollection<string> SubcategoriiCheltuieli
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public CheltuieliVM()
-        //{
-        //    Title = "Browse";
-        //    Items = new ObservableCollection<ValueModelCh>();
-        //    LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-        //    //77777777777777777777777
-        //    SubcategoriiCheltuieli = new ObservableCollection<string>();
-        //    GetSubcategorieCheltuieli();
-        //    //777777777777777777777777
-        //    ItemTapped = new Command<ValueModelCh>(OnItemSelected);
-
-        //    AddItemCommand = new Command(OnAddItem);
-        //}
-
-        //async Task ExecuteLoadItemsCommand()
-        //{
-        //    IsBusy = true;
-
-        //    try
-        //    {
-        //        Items.Clear();
-        //        var items = await DataStore.GetItemsAsync(true);
-        //        foreach (var item in items)
-        //        {
-        //            Items.Add(item);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine(ex);
-        //    }
-        //    finally
-        //    {
-        //        IsBusy = false;
-        //    }
-        //}
-
-        //public void OnAppearing()
-        //{
-        //    IsBusy = true;
-        //    SelectedItem = null;
-        //}
-
-        //public ValueModelCh SelectedItem
-        //{
-        //    get => _selectedItem;
-        //    set
-        //    {
-        //        SetProperty(ref _selectedItem, value);
-        //        OnItemSelected(value);
-        //    }
-        //}
-
-        //private async void OnAddItem(object obj)
-        //{
-        //    await Shell.Current.GoToAsync(nameof(IstoricCheltuieliVM));
-        //}
-
-        //async void OnItemSelected(ValueModelCh item)
-        //{
-        //    if (item == null)
-        //        return;
-
-        //    // This will push the ItemDetailPage onto the navigation stack
-        //    //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
-        //}
-        ///////////////////////--------------------------------------------------------------------------------------------------------------- pana aici
-
-        public ObservableCollection<ValueModelCh> Expenses
-        {
-            get;
-            set;
-        }
-
         private string subcategorie;
         public string SubcategorieC
         {
@@ -167,6 +78,7 @@ namespace FinantePersonale.ViewModels
             }
         }
 
+        public DeleteCommand DeleteItemCommand { get; set; } 
         public Command PopUpAddCategorieCommand { get; set; }
         public Command SaveCheltuieliCommand { get; set; }
         public Command DeleteCheltuieliCommand { get; set; }
@@ -183,21 +95,66 @@ namespace FinantePersonale.ViewModels
             SubcategoriiCheltuieli = new ObservableCollection<string>();
             DateC = DateTime.Today;
             SaveCheltuieliCommand = new Command(InsertCheltuieli);
-            DeleteCheltuieliCommand = new Command(DeleteRowCH);
+            //DeleteCheltuieliCommand = new Command(DeleteRowCH); modul veche de delete, cel fara comanda
             PopUpAddCategorieCommand = new Command(PopUpScreen);
             GetSubcategorieCheltuieli();
 
+            IstCheltuieli = new ObservableCollection<ValueModelCh>();
+            GetCh();
+            //-----
+            this.DeleteItemCommand = new DeleteCommand(this);
             //ChPerCategCommand = new Command(ChPeCategorie);
+
+            //SF chart
+            Data = new ObservableCollection<ValueModelCh>();
+            FillData();
+
         }
+
+        //-------SF grafic adaugare date 
+        private void FillData()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                foreach(var item in conn.Table<ValueModelCh>().ToList())
+                {
+                    ValueModelCh obj = new ValueModelCh()
+                    {
+                        SubcategorieCh = item.SubcategorieCh,
+                        SumaCh = item.SumaCh,
+                    };
+                    Data.Add(obj);
+                }
+            }
+        }
+        //------pana aici
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        //-----------ObservableCollection 
+
+        public ObservableCollection<ValueModelCh> IstCheltuieli
+        {
+            get;
+            set;
+        }
+        private void GetCh()
+        {
+            var expenses = ValueModelCh.GetValue();
+
+            IstCheltuieli.Clear();
+
+            foreach (var expense in expenses)
+            {
+                IstCheltuieli.Add(expense);
+            }
+        }
+        //-----------pana aici
 
         public void InsertCheltuieli()
         {
@@ -212,10 +169,25 @@ namespace FinantePersonale.ViewModels
             if (response > 0)
                 Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
-                Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
+                Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
         }
 
-        public void DeleteRowCH()
+        //public void DeleteRowCH()
+        //{
+        //    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+        //    {
+        //        int rows = conn.Delete(ItemCh);
+
+        //        if (rows > 0)
+        //            App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
+        //        else
+        //            App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
+        //    }
+        //}
+
+        //-------------legat de comanda din commands
+
+        public void DeleteMethod(ValueModelCh value)
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
@@ -228,17 +200,22 @@ namespace FinantePersonale.ViewModels
             }
         }
 
+        //-------------pana aici
+
+
         public void PopUpScreen()
         {
             App.Current.MainPage.Navigation.PushAsync(new Views.PopUpCategorie());
         }
 
+        //----- legat de graficul SF
+        public ObservableCollection<ValueModelCh> Data { get; set; }
 
-        //-----------UPDATE LA GRAFIC
-        public Chart Chart { get; set; }
+        //------pana aici
 
 
-        //------------------------------
+
+        //------------------------------ Valoare cheltuieli pe categorie 
 
         //public void ChPeCategorie()
         //{

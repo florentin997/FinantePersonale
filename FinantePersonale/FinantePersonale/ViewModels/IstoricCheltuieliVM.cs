@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class IstoricCheltuieliVM :  BaseViewModel //ObservableCollection<ValueModelCh>
+    public class IstoricCheltuieliVM //: ObservableCollection<ValueModelCh>
     {
 
 
@@ -81,7 +81,7 @@ namespace FinantePersonale.ViewModels
             GetExpenses();
         }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void GetExpenses()
         {
@@ -94,5 +94,18 @@ namespace FinantePersonale.ViewModels
                 IstCheltuieli.Add(expense);
             }
         }
+
+
+        //-------
+        //public void UpdateCh()
+        //{
+        //    var cheltuieli =  ValueModelCh.GetValue();
+        //    if (cheltuieli != null)
+        //    {
+        //        IstCheltuieli.Clear();
+        //        foreach (var ch in cheltuieli)
+        //            IstCheltuieli.Add(ch);
+        //    }
+        //}
     }
 }

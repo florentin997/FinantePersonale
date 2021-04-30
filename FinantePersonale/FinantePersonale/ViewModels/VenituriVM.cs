@@ -85,8 +85,7 @@ namespace FinantePersonale.ViewModels
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void InsertVenituri()
@@ -119,7 +118,7 @@ namespace FinantePersonale.ViewModels
         }
 
 
-        private void GetSubcategorieVenituri()    //TREBUIE INLOCUIT CU O BAZA DE DATE PENTRU CATEGORII
+        private void GetSubcategorieVenituri()    //TREBUIE INLOCUIT CU O BAZA DE DATE PENTRU CATEGORII / sau le adaug intr-un file in file system
         {
             SubcategoriiVenituri.Clear();
             SubcategoriiVenituri.Add("Salariu");

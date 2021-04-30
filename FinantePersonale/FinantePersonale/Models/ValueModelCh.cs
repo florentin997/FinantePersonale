@@ -23,6 +23,14 @@ namespace FinantePersonale.Models
 
         }
 
+        //---------------legat de graficul syncfusion
+        public ValueModelCh(string xValue, float yValue)
+        {
+            SubcategorieCh = xValue;
+            SumaCh = yValue;
+        }
+        //---------------pana aici
+
         public static int InsertValue(ValueModelCh value)
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
@@ -31,7 +39,7 @@ namespace FinantePersonale.Models
                 return conn.Insert(value);
             }
         }
-        
+
         public static List<ValueModelCh> GetValue()
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))

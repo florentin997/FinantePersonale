@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinantePersonale.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,21 @@ namespace FinantePersonale.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class IstoricCheltuieli : ContentPage
     {
+        //IstoricCheltuieliVM viewModel;
         public IstoricCheltuieli()
         {
             InitializeComponent();
+
+            //viewModel = new IstoricCheltuieliVM();
+            //BindingContext = viewModel;
         }
+
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+
+        //    viewModel.UpdateCh();
+        //}
     }
     
 }

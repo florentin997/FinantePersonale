@@ -23,8 +23,9 @@
                 <Label Text="{Binding Source={StaticResource vmCheltuieli}, Path=}"/>
             </StackLayout>
             -->
+                                               <!-- la item source StaticResource era vm nu vmCheltuieli-->
             <ListView 
-                     ItemsSource="{Binding Source={StaticResource vm}, Path=IstCheltuieli}" IsPullToRefreshEnabled="True"
+                     ItemsSource="{Binding Source={StaticResource vmCheltuieli}, Path=IstCheltuieli, Mode=TwoWay}" 
                      SelectedItem="{Binding Source={StaticResource vmCheltuieli}, Path=ItemCh, Mode=TwoWay}">
                 <!--StaticResource ptr ca am definit resursa in ResourceDictionary, avand cheia "vm"-->
                 <ListView.ItemTemplate>
@@ -63,6 +64,14 @@
                 BackgroundColor="Red"
                 Margin="100,0,100,0"
                 Command="{Binding Source={StaticResource vmCheltuieli}, Path=DeleteCheltuieliCommand}"
+            />
+            <Button
+                VerticalOptions="Center"
+                Text="Stergere1"
+                BackgroundColor="Red"
+                Margin="100,0,100,0"
+                Command="{Binding Source={StaticResource vmCheltuieli}, Path=DeleteItemCommand}"
+                CommandParameter="{Binding Source={StaticResource vmCheltuieli}, Path=ItemCh}"
             />
         </StackLayout>
 

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              x:Class="FinantePersonale.Views.Cheltuieli">
 
     <ContentPage.Resources>
@@ -10,14 +11,18 @@
             <vm:CheltuieliVM x:Key="vmCheltuieli"/>
         </ResourceDictionary>
         
+         
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salveaza"
-                    Command="{Binding SaveCommand}"/>
+                    Command="{Binding Source={StaticResource vmCheltuieli}, Path=SaveCheltuieliCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
+        <ScrollView>
+            
+        
         <StackLayout>
             <StackLayout Margin="125,0,125,0" 
                          HorizontalOptions="CenterAndExpand"
@@ -37,11 +42,22 @@
                 
             </StackLayout>
 
-            <microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250" Chart="{Binding Source={StaticResource vmCheltuieli}, Path=Chart}"/>
+            <chart:SfChart BackgroundColor="Transparent">
+                    <chart:SfChart.Series VerticalOptions="FillAndExpand">
+                        <chart:PieSeries ItemsSource="{Binding Data, Source={StaticResource vmCheltuieli}}" 
+                                         XBindingPath="SubcategorieCh" 
+                                         YBindingPath="SumaCh" 
+                                         ExplodeAll="True" 
+                                         EnableSmartLabels = "true" />
+                    </chart:SfChart.Series>
+            </chart:SfChart>
+            
+            <!--<microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250" Chart="{Binding Source={StaticResource vmCheltuieli}, Path=Chart}"/>-->
             
             
             
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 
 
