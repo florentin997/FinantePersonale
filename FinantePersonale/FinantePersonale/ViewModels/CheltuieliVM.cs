@@ -268,27 +268,19 @@ namespace FinantePersonale.ViewModels
         //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII
         private  void GetSubcategorieCheltuieli()            
         {
-            SubcategoriiCheltuieli.Clear();
-            SubcategoriiCheltuieli.Add("Chirie");
-            SubcategoriiCheltuieli.Add("Mancare");
-            SubcategoriiCheltuieli.Add("Sanatate");
-            SubcategoriiCheltuieli.Add("Recreatie");
-            SubcategoriiCheltuieli.Add("Transport");
-            SubcategoriiCheltuieli.Add("Calatorii");
-            SubcategoriiCheltuieli.Add("Altele");
+            try
+            {
+                var categorie = Categorie.GetValue("Cheltuieli");
 
+                SubcategoriiCheltuieli.Clear();
 
-            //TEORETIC l este o lista de nume de subcategorii de tip string . Lista ce trebuie adaugata in lista de subcategorii pentru Pickerul din Cheltuieli VM------------------------------
-
-            //List<string> l = Categorie.CategoriiDeTipDat("Cheltuieli");
-            //SubcategoriiCheltuieli.ToList().ForEach(l.Add);
-
-            //----------------varianta asta nu da eroare
-            //foreach (var c in l)
-            //    SubcategoriiCheltuieli.Add(c);
-
-            //aici iau valorile din tabela Categorie unde la coloana categorie apare "Cheltuieli"
-
+                foreach (var c in categorie)
+                {
+                    SubcategoriiCheltuieli.Add(c.NumeSubcategorie);
+                }
+            }
+            catch(Exception e)
+            {}
         }
     }
 }

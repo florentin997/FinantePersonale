@@ -110,6 +110,8 @@ namespace FinantePersonale.Models
 
                 List<string> listaCategorii = categ.Select(c=>c.NumeSubcategorie).ToList();
                 return listaCategorii;
+                
+
             }
         }
 
@@ -120,6 +122,20 @@ namespace FinantePersonale.Models
             {
                 conn.CreateTable<Categorie>();
                 return conn.Table<Categorie>().ToList();
+            }
+        }
+
+        public static List<Categorie> GetValue(string numeCategoriePrincipala)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                conn.CreateTable<Categorie>();
+
+                var listaCateg = conn.Query<Categorie>("SELECT * FROM Categorie WHERE CategoriePrincipala='"+numeCategoriePrincipala+"'").ToList();
+
+
+
+                return listaCateg;
             }
         }
 

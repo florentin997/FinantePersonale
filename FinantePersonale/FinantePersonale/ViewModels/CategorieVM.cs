@@ -148,8 +148,6 @@ namespace FinantePersonale.ViewModels
             ColectieCategorii.Add("Venituri");
             ColectieCategorii.Add("Cheltuieli");
         }
-
-
     }
 
     

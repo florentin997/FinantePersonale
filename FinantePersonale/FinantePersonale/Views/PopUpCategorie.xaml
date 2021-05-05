@@ -62,12 +62,12 @@
                 Margin="20,15,20,15">
                 <Button 
                     Text="Save"
-                    BackgroundColor="LightGreen"
+                    BackgroundColor="Green"
                     Command="{Binding Source={StaticResource vmCategorie}, Path=SaveCategorieCommand}"/>
                 <Button 
                     Grid.Column="1"
                     Text="Delete"
-                    BackgroundColor="IndianRed"
+                    BackgroundColor="Red"
                     Command="{Binding Source={StaticResource vmCategorie}, Path=DeleteCategorieCommand}"/>
             </Grid>
             

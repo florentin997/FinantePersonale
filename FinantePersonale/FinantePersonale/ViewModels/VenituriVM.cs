@@ -161,14 +161,19 @@ namespace FinantePersonale.ViewModels
 
         private void GetSubcategorieVenituri()    //TREBUIE INLOCUIT CU O BAZA DE DATE PENTRU CATEGORII / sau le adaug intr-un file in file system
         {
-            SubcategoriiVenituri.Clear();
-            SubcategoriiVenituri.Add("Salariu");
-            SubcategoriiVenituri.Add("Sporuri");
-            SubcategoriiVenituri.Add("Indemnizatii");
-            SubcategoriiVenituri.Add("Dividende");
-            SubcategoriiVenituri.Add("Actiuni");
-            SubcategoriiVenituri.Add("Cryptomonede");
-            SubcategoriiVenituri.Add("Altele");
+            try
+            {
+                var categorie = Categorie.GetValue("Venituri");
+
+                SubcategoriiVenituri.Clear();
+
+                foreach (var c in categorie)
+                {
+                    SubcategoriiVenituri.Add(c.NumeSubcategorie);
+                }
+            }
+            catch (Exception e)
+            { }
         }
     }
 }
