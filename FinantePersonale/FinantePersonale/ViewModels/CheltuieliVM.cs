@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinantePersonale.Models;
 using FinantePersonale.ViewModels.Commands;
+using FinantePersonale.ViewModels.Methods;
 using Microcharts;
 using SQLite;
 using Xamarin.Forms;
@@ -81,7 +83,7 @@ namespace FinantePersonale.ViewModels
         public DeleteCommand DeleteItemCommand { get; set; } 
         public Command PopUpAddCategorieCommand { get; set; }
         public Command SaveCheltuieliCommand { get; set; }
-        public Command DeleteCheltuieliCommand { get; set; }
+        //public Command DeleteCheltuieliCommand { get; set; }
         //public Command ChPerCategCommand { get; set; }
 
 
@@ -96,7 +98,7 @@ namespace FinantePersonale.ViewModels
             DateC = DateTime.Today;
             SaveCheltuieliCommand = new Command(InsertCheltuieli);
             //DeleteCheltuieliCommand = new Command(DeleteRowCH); modul veche de delete, cel fara comanda
-            PopUpAddCategorieCommand = new Command(PopUpScreen);
+            //PopUpAddCategorieCommand = new Command(PopUpScreen);
             GetSubcategorieCheltuieli();
 
             IstCheltuieli = new ObservableCollection<ValueModelCh>();
@@ -105,13 +107,13 @@ namespace FinantePersonale.ViewModels
             this.DeleteItemCommand = new DeleteCommand(this);
             //ChPerCategCommand = new Command(ChPeCategorie);
 
-            //SF chart
-            Data = new ObservableCollection<ValueModelCh>();
+            //SF chart ObsCollection
+            DataCh = new ObservableCollection<ValueModelCh>();
             FillData();
 
         }
 
-        //-------SF grafic adaugare date 
+        //-------SF adaugare date  in grafic
         private void FillData()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
@@ -123,7 +125,7 @@ namespace FinantePersonale.ViewModels
                         SubcategorieCh = item.SubcategorieCh,
                         SumaCh = item.SumaCh,
                     };
-                    Data.Add(obj);
+                    DataCh.Add(obj);
                 }
             }
         }
@@ -156,6 +158,22 @@ namespace FinantePersonale.ViewModels
         }
         //-----------pana aici
 
+        //public void InsertCheltuieli()
+        //{
+        //    ValueModelCh ch = new ValueModelCh()
+        //    {
+        //        SubcategorieCh = SubcategorieC,
+        //        SumaCh = SumaC,
+        //        DateCh = DateC
+        //    };
+        //    int response = ValueModelCh.InsertValue(ch);
+
+        //    if (response > 0)
+        //        Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+        //    else
+        //        Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
+        //}
+
         public void InsertCheltuieli()
         {
             ValueModelCh ch = new ValueModelCh()
@@ -164,12 +182,29 @@ namespace FinantePersonale.ViewModels
                 SumaCh = SumaC,
                 DateCh = DateC
             };
-            int response = ValueModelCh.InsertValue(ch);
 
-            if (response > 0)
-                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
-            else
-                Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
+            if (Metode.ExistaInregistrareCh(ch) == true)
+            {
+                int response = ValueModelCh.InsertValue(ch);
+
+                if (response > 0)
+                    Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+                else
+                    Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
+            }
+
+           else
+            {
+
+                var obiectUpdatat = Metode.UpdateCh(ch);
+
+                int response = ValueModelCh.InsertValue(obiectUpdatat);
+
+                if (response > 0)
+                    Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+                else
+                    Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
+            }
         }
 
         //public void DeleteRowCH()
@@ -203,13 +238,13 @@ namespace FinantePersonale.ViewModels
         //-------------pana aici
 
 
-        public void PopUpScreen()
-        {
-            App.Current.MainPage.Navigation.PushAsync(new Views.PopUpCategorie());
-        }
+        //public void PopUpScreen()
+        //{
+        //    App.Current.MainPage.Navigation.PushAsync(new Views.PopUpCategorie());
+        //}
 
         //----- legat de graficul SF
-        public ObservableCollection<ValueModelCh> Data { get; set; }
+        public ObservableCollection<ValueModelCh> DataCh { get; set; }
 
         //------pana aici
 
@@ -231,7 +266,7 @@ namespace FinantePersonale.ViewModels
 
         //PTR TESTARE
         //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII
-        private void GetSubcategorieCheltuieli()            
+        private  void GetSubcategorieCheltuieli()            
         {
             SubcategoriiCheltuieli.Clear();
             SubcategoriiCheltuieli.Add("Chirie");
@@ -241,6 +276,19 @@ namespace FinantePersonale.ViewModels
             SubcategoriiCheltuieli.Add("Transport");
             SubcategoriiCheltuieli.Add("Calatorii");
             SubcategoriiCheltuieli.Add("Altele");
+
+
+            //TEORETIC l este o lista de nume de subcategorii de tip string . Lista ce trebuie adaugata in lista de subcategorii pentru Pickerul din Cheltuieli VM------------------------------
+
+            //List<string> l = Categorie.CategoriiDeTipDat("Cheltuieli");
+            //SubcategoriiCheltuieli.ToList().ForEach(l.Add);
+
+            //----------------varianta asta nu da eroare
+            //foreach (var c in l)
+            //    SubcategoriiCheltuieli.Add(c);
+
+            //aici iau valorile din tabela Categorie unde la coloana categorie apare "Cheltuieli"
+
         }
     }
 }

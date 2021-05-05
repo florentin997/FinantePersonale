@@ -1,19 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using FinantePersonale.Models;
+using FinantePersonale.ViewModels.Commands;
+using Microcharts;
 using SQLite;
 using Xamarin.Forms;
-
 namespace FinantePersonale.ViewModels
 {
-    public class VenituriVM : INotifyPropertyChanged
+    public class VenituriVM //: INotifyPropertyChanged
     {
-        public ObservableCollection<ValueModelVen> Expenses
-        {
-            get;
-            set;
-        }
 
         private string subcategorie;
 
@@ -79,7 +79,48 @@ namespace FinantePersonale.ViewModels
             SaveVenituriCommand = new Command(InsertVenituri);
             DeleteVenituriCommand = new Command(DeleteRowVen);
             GetSubcategorieVenituri();
+
+            IstVenituri = new ObservableCollection<ValueModelVen>();
+            GetVen();
+
+            DataVen = new ObservableCollection<ValueModelVen>();     
+            FillData();
         }
+        //----------------- ptr SF chart
+        private void FillData()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                foreach (var item in conn.Table<ValueModelVen>().ToList())
+                {
+                    ValueModelVen obj = new ValueModelVen()
+                    {
+                        SubcategorieVen = item.SubcategorieVen,
+                        SumaVen = item.SumaVen,
+                    };
+                    DataVen.Add(obj);   //Datele sunt introduse in DataVen (am verificat cu breakpoint ptr fiecare), dar nu ajung in grafic
+                }
+            }
+        }
+        public ObservableCollection<ValueModelVen> DataVen { get; set; }
+
+        public ObservableCollection<ValueModelVen> IstVenituri
+        {
+            get;
+            set;
+        }
+        private void GetVen()
+        {
+            var venituri = ValueModelVen.GetValue();
+
+            IstVenituri.Clear();
+
+            foreach (var ven in venituri)
+            {
+                IstVenituri.Add(ven);
+            }
+        }
+        //-------------------
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -92,9 +133,9 @@ namespace FinantePersonale.ViewModels
         {
             ValueModelVen vn = new ValueModelVen()
             {
-                Subcategorie = SubcategorieV,
-                Suma = SumaV,
-                Date = DateV
+                SubcategorieVen = SubcategorieV,
+                SumaVen = SumaV,
+                DateVen = DateV
             };
             int response = ValueModelVen.InsertValue(vn);
 

@@ -32,13 +32,13 @@ namespace FinantePersonale.ViewModels
         //        && !String.IsNullOrWhiteSpace(sumaCh.ToString());
         //}
 
-        //public string Subcategorie
+        //public string SubcategorieVen
         //{
         //    get => subcategorieCh;
         //    set => SetProperty(ref subcategorieCh, value);
         //}
 
-        //public float Suma
+        //public float SumaVen
         //{
         //    get => sumaCh;
         //    set => SetProperty(ref sumaCh, value);
@@ -57,8 +57,8 @@ namespace FinantePersonale.ViewModels
         //{
         //    ValueModelCh newItem = new ValueModelCh()
         //    {
-        //        SubcategorieCh = Subcategorie,
-        //        SumaCh = Suma
+        //        SubcategorieCh = SubcategorieVen,
+        //        SumaCh = SumaVen
         //    };
 
         //    await DataStore.AddItemAsync(newItem);

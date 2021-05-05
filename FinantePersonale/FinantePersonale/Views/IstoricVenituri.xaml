@@ -16,13 +16,13 @@
         <StackLayout>
 
             <ListView 
-            ItemsSource="{Binding Source={StaticResource vm}, Path=IstVenituri}" IsPullToRefreshEnabled="True"
+            ItemsSource="{Binding Source={StaticResource vmVenituri}, Path=IstVenituri, Mode=TwoWay}" 
             SelectedItem="{Binding Source={StaticResource vmVenituri}, Path=ItemVen, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Suma}" 
+                        <TextCell Text="{Binding SumaVen}" 
                               TextColor="Black" 
-                              Detail="{Binding Subcategorie}"/>
+                              Detail="{Binding SubcategorieVen}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

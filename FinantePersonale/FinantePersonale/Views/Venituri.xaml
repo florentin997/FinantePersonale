@@ -2,24 +2,29 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.Venituri">
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <vm:VenituriVM x:Key="vm"/>
+            <vm:VenituriVM x:Key="vmVenituri"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salveaza"
-                     Command="{Binding Source={StaticResource vm}, Path=SaveVenituriCommand}"/>
+                     Command="{Binding Source={StaticResource vmVenituri}, Path=SaveVenituriCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
+        
+        <ScrollView>
+
+            <StackLayout>
+                
             <StackLayout Margin="125,0,125,0" 
-                         BindingContext="{Binding Source={StaticResource vm}}">
+                         BindingContext="{Binding Source={StaticResource vmVenituri}}">
                 <Entry Placeholder="Suma"
                        Text="{Binding SumaV,  Mode=OneWayToSource}"
                        Keyboard="Numeric"
@@ -29,14 +34,37 @@
                        ItemsSource="{Binding SubcategoriiVenituri}"
                        HorizontalTextAlignment="Center"/>
                 <DatePicker 
-                       Format="yyyy/MM/dd" 
+                       Format="dd/MM/yyyy" 
                        Date="{Binding DateV, Mode=TwoWay}"/>
             </StackLayout>
-            <microcharts:ChartView x:Name="charPieVenituri" HeightRequest="250" />
-          
-        </StackLayout>
 
-       
+                    <chart:SfChart BackgroundColor="Transparent">
+                        <chart:SfChart.Legend>
+                            <chart:ChartLegend/>
+                        </chart:SfChart.Legend>
+
+                        <chart:SfChart.Series VerticalOptions="FillAndExpand">
+
+                        <chart:PieSeries ItemsSource="{Binding DataVen, Source={StaticResource vmVenituri}}" 
+                                         XBindingPath="SubcategorieVen" 
+                                         YBindingPath="SumaVen" 
+                                         ExplodeAll="False" 
+                                         EnableSmartLabels = "True" 
+                                         ConnectorLineType = "Bezier" 
+					                     DataMarkerPosition = "OutsideExtended">
+                                <chart:PieSeries.DataMarker>
+                                    <chart:ChartDataMarker />
+                                </chart:PieSeries.DataMarker>
+
+                            </chart:PieSeries>
+
+                        </chart:SfChart.Series>
+                    </chart:SfChart>
+
+            </StackLayout>
+            
+        </ScrollView>
+
     </ContentPage.Content>
 
 

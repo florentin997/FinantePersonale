@@ -58,7 +58,7 @@ namespace FinantePersonale.ViewModels
                 OnPropertyChanged("itemCh");
             }
         }
-        public ObservableCollection<Categorie> CategoriiCollection    
+        public ObservableCollection<string> ColectieCategorii      //<Categorie>
         {
             get;
             set;
@@ -67,12 +67,17 @@ namespace FinantePersonale.ViewModels
         public Command SaveCategorieCommand { get; set; }
         public Command DeleteCategorieCommand { get; set; }
 
-        public CategorieVM()
-        {
-            CategoriiCollection = new ObservableCollection<Categorie>();
-            SaveCategorieCommand = new Command(InsertCheltuieli);
-            DeleteCategorieCommand = new Command(DeleteRowCategorie);
+        
 
+        
+        
+        public CategorieVM()
+        { 
+            ColectieCategorii = new ObservableCollection<string>();
+            SaveCategorieCommand = new Command(InsertCategorie);
+            DeleteCategorieCommand = new Command(DeleteRowCategorie);
+            //GetCategoriePrincipala();
+            ListaCategorii();
         }
 
 
@@ -82,23 +87,49 @@ namespace FinantePersonale.ViewModels
         }
 
 
-        public void InsertCheltuieli()
+        public void InsertCategorie()  // in cazul in care nu mai merge, mergea cand a fost InsertCheltuieli
         {
-            Categorie categ = new Categorie()     
+            Categorie categ = new Categorie()
             {
                 CategoriePrincipala = CategoriePrincipala,
                 NumeSubcategorie = NumeSubcategorie,
             };
-            int response = Categorie.InsertValue(categ);
 
-            if (response > 0)
-                //Application.Current.MainPage.Navigation.PopAsync();
-                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+            if(CategoriePrincipala == null || NumeSubcategorie == null)
+            {
+                Application.Current.MainPage.DisplayAlert("Eroare", "Nu ai completat toate campurile necesare", "OK");
+            }
+            //daca in BD nu sunt date, insereaza datele fara a mai verifica pentru duplicate
+            //if (Categorie.VerificareDacaBGEsteGoala() == false)
+            //{
+            //    int response = Categorie.InsertValue(categ);
+
+            //    if (response > 0)
+            //        Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+            //    else
+            //        Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
+            //}
+
+            //altfel verifica daca exista duplicate
             else
-                Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
+            {
+                if (Categorie.ExistaInregistrare(categ) == true)
+                {
+                    Application.Current.MainPage.DisplayAlert("Eroare", "Aceste date au mai fost introduse", "OK");
+                }
+                else
+                {
+                    int response = Categorie.InsertValue(categ);
+
+                    if (response > 0)
+                        Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+                    else
+                        Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
+                }
+            }   
         }
 
-    public void DeleteRowCategorie()
+        public void DeleteRowCategorie()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
@@ -111,7 +142,18 @@ namespace FinantePersonale.ViewModels
             }
         }
 
+        private void ListaCategorii()
+        {
+            ColectieCategorii.Clear();
+            ColectieCategorii.Add("Venituri");
+            ColectieCategorii.Add("Cheltuieli");
+        }
+
+
     }
+
+    
+    //-----------------------------------
 
     public class IstoricCategoriiVM
     {
@@ -139,6 +181,9 @@ namespace FinantePersonale.ViewModels
                 IstCategorii.Add(income);
             }
         }
+
     }
+
+
 
 }

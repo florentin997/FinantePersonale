@@ -4,7 +4,6 @@
              xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.PopUpCategorie">
 
-    
     <ContentPage.Resources>
         <ResourceDictionary>
             <vm:CategorieVM x:Key="vmCategorie"/>
@@ -15,24 +14,45 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <Label Text="Categorii de cheltuieli"
+            <Label Text="Categorii"
                    FontFamily="Calibri"
                    HorizontalOptions="CenterAndExpand"
                    FontSize="40"/>
+            <!--
             <Entry HorizontalOptions="Center"
                    Placeholder="Categorie"
                    Keyboard="Text"
+                   Text="{Binding Source={StaticResource vmCategorie},Path=CategoriePrincipala, Mode=OneWayToSource}"
+                   />
+            -->
+
+
+            <StackLayout>
+                <Picker ItemsSource="{Binding Source={StaticResource vmCategorie},Path=ColectieCategorii}"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="Center"
+                    SelectedItem="{Binding  Source={StaticResource vmCategorie},Path=CategoriePrincipala, Mode=OneWayToSource}"   
+                    HorizontalTextAlignment="Center">
+                </Picker>
+
+                <Entry HorizontalOptions="Center"
+                   Placeholder="Subcategorie"
+                   Keyboard="Text"
                    Text="{Binding Source={StaticResource vmCategorie},Path=NumeSubcategorie, Mode=OneWayToSource}"
                    />
+            </StackLayout>
+            
 
             <StackLayout>
                 <ListView ItemsSource="{Binding Source={StaticResource vmIstoric}, Path=IstCategorii}"
-                          SelectedItem="{Binding Source={StaticResource vmCategorie}, Path=ItemCategorie, Mode=TwoWay}">
+                          SelectedItem="{Binding Source={StaticResource vmCategorie}, Path=ItemCategorie, Mode=TwoWay}"
+>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell 
-                              Text="{Binding NumeSubcategorie, Mode=TwoWay}" 
-                              TextColor="Black"/>
+                                Text="{Binding NumeSubcategorie, Mode=TwoWay}" 
+                                TextColor="Black"
+                                Detail="{Binding CategoriePrincipala}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
