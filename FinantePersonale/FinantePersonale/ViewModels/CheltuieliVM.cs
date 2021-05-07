@@ -15,7 +15,7 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class CheltuieliVM //: ObservableCollection<ValueModelCh>
+    public class CheltuieliVM : INotifyPropertyChanged //: ObservableCollection<ValueModelCh>
     {
         private string subcategorie;
         public string SubcategorieC
@@ -23,18 +23,8 @@ namespace FinantePersonale.ViewModels
             get { return subcategorie; }
             set
             {
-                //if (subcategorie == value)
-                //    return;
-
-                //------------------
-                //inregistrare = new ValueModelCh
-                //{
-                //    SubcategorieCh = this.SubcategorieC,
-                //    SumaCh = this.SumaC
-                //};
-                //------------------
                 subcategorie = value;
-                OnPropertyChanged("SubcategorieC");
+                CallPropertyChanged(nameof(SubcategorieC));
             }
         }
 
@@ -48,7 +38,7 @@ namespace FinantePersonale.ViewModels
                 //if (sumaCheltuieli == value)
                 //    return;
                 sumaCheltuieli = value;
-                OnPropertyChanged("SumaC");
+                CallPropertyChanged(nameof(SumaC));
             }
         }
 
@@ -61,7 +51,7 @@ namespace FinantePersonale.ViewModels
                 //if (cheltuieliDate == value)
                 //    return;
                 cheltuieliDate = value;
-                OnPropertyChanged("DateC");
+                CallPropertyChanged(nameof(DateC));
             }
         }
 
@@ -76,9 +66,17 @@ namespace FinantePersonale.ViewModels
                     itemCh = value;
                 }
                 itemCh = value;
-                OnPropertyChanged("itemCh");
+                CallPropertyChanged(nameof(itemCh));
             }
         }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void CallPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
 
         public DeleteCommand DeleteItemCommand { get; set; } 
         public Command PopUpAddCategorieCommand { get; set; }
@@ -92,59 +90,61 @@ namespace FinantePersonale.ViewModels
             get;
             set;
         }
+
+
+        //AR TREBUI SA FAC ON OBSCOLLECTION CU OBIECTE DE TIPUL VALLUEMODELCH CARE SA SE UPDATEZE CAND SE UPDATEAZA SI DATELE INDIVIDUALE DE MAI SUS ?
         public CheltuieliVM()
         {
             SubcategoriiCheltuieli = new ObservableCollection<string>();
             DateC = DateTime.Today;
             SaveCheltuieliCommand = new Command(InsertCheltuieli);
             //DeleteCheltuieliCommand = new Command(DeleteRowCH); modul veche de delete, cel fara comanda
-            //PopUpAddCategorieCommand = new Command(PopUpScreen);
             GetSubcategorieCheltuieli();
 
             IstCheltuieli = new ObservableCollection<ValueModelCh>();
             GetCh();
             //-----
             this.DeleteItemCommand = new DeleteCommand(this);
-            //ChPerCategCommand = new Command(ChPeCategorie);
 
             //SF chart ObsCollection
-            DataCh = new ObservableCollection<ValueModelCh>();
-            FillData();
+            //DataCh = new ObservableCollection<ValueModelCh>();
+            //FillData();
 
+            ////Label total suma
+            //Total = new ObservableCollection<string>();
+            //TotalSumaCh();
+
+            ////Diferenta dintre V si C pe luna
+            //EconPerLuna = new ObservableCollection<ValueModelCh>();
+            //DiferentaLunara(DateTime.Today.Month.ToString());
+
+
+            //Picker ptr luna si an
+            
         }
 
-        //-------SF adaugare date  in grafic
-        private void FillData()
-        {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-            {
-                foreach(var item in conn.Table<ValueModelCh>().ToList())
-                {
-                    ValueModelCh obj = new ValueModelCh()
-                    {
-                        SubcategorieCh = item.SubcategorieCh,
-                        SumaCh = item.SumaCh,
-                    };
-                    DataCh.Add(obj);
-                }
-            }
-        }
+     
+
+        ////private void FillData()
+        ////{
+        ////    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+        ////    {
+        ////        foreach(var item in conn.Table<ValueModelCh>().ToList())
+        ////        {
+        ////            ValueModelCh obj = new ValueModelCh()
+        ////            {
+        ////                SubcategorieCh = item.SubcategorieCh,
+        ////                SumaCh = item.SumaCh,
+        ////            };
+        ////            DataCh.Add(obj);
+        ////        }
+        ////    }
+        ////}
         //------pana aici
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        //-----------ObservableCollection 
-
-        public ObservableCollection<ValueModelCh> IstCheltuieli
-        {
-            get;
-            set;
-        }
+        //-----------ObservableCollection luat din IstCheltuieliiVM
+        public ObservableCollection<ValueModelCh> IstCheltuieli{get;set;}
         private void GetCh()
         {
             var expenses = ValueModelCh.GetValue();
@@ -156,23 +156,27 @@ namespace FinantePersonale.ViewModels
                 IstCheltuieli.Add(expense);
             }
         }
+        private float suma()
+        {
+            float sum = 0;
+            foreach (var c in IstCheltuieli)
+            {
+                sum = sum + c.SumaCh;
+            }
+            return sum;
+        }
+
+        private float totalSumaCh { get; set; }
+        public float TotalSumaCh
+        {
+            get 
+            { 
+                return suma();
+            }
+        }
+
         //-----------pana aici
 
-        //public void InsertCheltuieli()
-        //{
-        //    ValueModelCh ch = new ValueModelCh()
-        //    {
-        //        SubcategorieCh = SubcategorieC,
-        //        SumaCh = SumaC,
-        //        DateCh = DateC
-        //    };
-        //    int response = ValueModelCh.InsertValue(ch);
-
-        //    if (response > 0)
-        //        Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
-        //    else
-        //        Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
-        //}
 
         public void InsertCheltuieli()
         {
@@ -182,30 +186,49 @@ namespace FinantePersonale.ViewModels
                 SumaCh = SumaC,
                 DateCh = DateC
             };
+            int response = ValueModelCh.InsertValue(ch);
 
-            if (Metode.ExistaInregistrareCh(ch) == true)
-            {
-                int response = ValueModelCh.InsertValue(ch);
-
-                if (response > 0)
-                    Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
-                else
-                    Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
-            }
-
-           else
-            {
-
-                var obiectUpdatat = Metode.UpdateCh(ch);
-
-                int response = ValueModelCh.InsertValue(obiectUpdatat);
-
-                if (response > 0)
-                    Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
-                else
-                    Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
-            }
+            if (response > 0)
+                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+            else
+                Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
         }
+
+        /// <summary>
+        /// Insert dupa ce verifica daca exista deja inregistrare cu Subcategoria respectiva, daca exista, fa update la 
+        /// </summary>
+        /// <param name="value"></param>
+        //public void InsertCheltuieli()
+        //{
+        //    ValueModelCh ch = new ValueModelCh()
+        //    {
+        //        SubcategorieCh = SubcategorieC,
+        //        SumaCh = SumaC,
+        //        DateCh = DateC
+        //    };
+
+        //    if (Metode.ExistaInregistrareCh(ch) == true)   // DE VERIFICAT LOGICA CU TRUE SI FALSE AICI, NU-S SIGUR DACA E BINE ASA CUM E 
+        //    {
+        //        int response = ValueModelCh.InsertValue(ch);
+
+        //        if (response > 0)
+        //            Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+        //        else
+        //            Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
+        //    }
+
+        //   else
+        //    {
+        //        var obiectUpdatat = Metode.UpdateCh(ch);
+
+        //        int response = ValueModelCh.InsertValue(obiectUpdatat);
+
+        //        if (response > 0)
+        //            Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+        //        else
+        //            Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
+        //    }
+        //}
 
         //public void DeleteRowCH()
         //{
@@ -243,29 +266,9 @@ namespace FinantePersonale.ViewModels
         //    App.Current.MainPage.Navigation.PushAsync(new Views.PopUpCategorie());
         //}
 
-        //----- legat de graficul SF
-        public ObservableCollection<ValueModelCh> DataCh { get; set; }
-
-        //------pana aici
 
 
 
-        //------------------------------ Valoare cheltuieli pe categorie 
-
-        //public void ChPeCategorie()
-        //{
-        //    using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-        //    {
-        //        var valCh = conn.Table<ValueModelCh>().ToList();
-
-        //        var nr = (from c in valCh group c.SumaCh by c.SubcategorieCh).ToList();
-        //    }
-        //}
-
-        //from c in valCh select count * groupby c.Value
-
-        //PTR TESTARE
-        //TREBUIE INLOCUIT CU O TABELA DE DATE PENTRU SUBCATEGORII
         private  void GetSubcategorieCheltuieli()            
         {
             try
@@ -282,5 +285,47 @@ namespace FinantePersonale.ViewModels
             catch(Exception e)
             {}
         }
+        
+        //public ObservableCollection<string> Total { get; set; }
+        //private void TotalSumaCh()  
+        //{
+        //    Total.Clear();
+        //    Total.Add(Metode.TotalCh().ToString());
+        //}
+
+        //public ObservableCollection<ValueModelCh> EconPerLuna { get; set; }
+        //private void DiferentaLunara(string luna)
+        //{
+        //    var x = Metode.DiferentaChVen(luna);
+
+        //}
+
+
+        //Ptr picker-ul de luni-------------
+        public List<string> listaLuni = new List<string> { "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" };
+        public List<string> Month
+        {
+            get { return listaLuni; }
+        }
+        //------------ pana aici-------------
+
+
+        //Picker-ul ptr ani----------
+        private static List<string> l() //Lista ultimilor 10 ani fata de anul curent 
+        {
+            List<string> lAni= new List<string>();
+            int d = Int16.Parse(DateTime.Now.Year.ToString());
+
+            int i = Int16.Parse(DateTime.Now.Year.ToString()) - 10;
+            do
+            {
+                lAni.Add(i.ToString());
+                i++;
+            }
+            while (i <= d);
+            return lAni;
+        }
+        public List<string> Year { get { return l(); } }
+        //-----------------pana aici-----------------
     }
 }

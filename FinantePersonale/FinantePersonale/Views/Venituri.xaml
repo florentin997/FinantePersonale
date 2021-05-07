@@ -22,25 +22,31 @@
         <ScrollView>
 
             <StackLayout>
-                
-            <StackLayout Margin="125,0,125,0" 
+
+                <StackLayout Margin="125,0,125,0" 
                          BindingContext="{Binding Source={StaticResource vmVenituri}}">
-                <Entry Placeholder="Suma"
+                    <Entry Placeholder="Suma"
                        Text="{Binding SumaV,  Mode=OneWayToSource}"
                        Keyboard="Numeric"
                        HorizontalTextAlignment="Center"/>
-                <Picker 
+                    <Picker 
                        SelectedItem="{Binding SubcategorieV, Mode=OneWayToSource}"
                        ItemsSource="{Binding SubcategoriiVenituri}"
                        HorizontalTextAlignment="Center"/>
-                <DatePicker 
+                    <DatePicker 
                        Format="dd/MM/yyyy" 
                        Date="{Binding DateV, Mode=TwoWay}"/>
-            </StackLayout>
+                </StackLayout>
 
-                    <chart:SfChart BackgroundColor="Transparent">
+                <chart:SfChart BackgroundColor="Transparent">
                         <chart:SfChart.Legend>
-                            <chart:ChartLegend/>
+                            <chart:ChartLegend>
+                                <chart:ChartLegend.LabelStyle>
+
+                                    <chart:ChartLegendLabelStyle Font="18"/>
+
+                                </chart:ChartLegend.LabelStyle>
+                            </chart:ChartLegend>
                         </chart:SfChart.Legend>
 
                         <chart:SfChart.Series VerticalOptions="FillAndExpand">
@@ -60,6 +66,29 @@
 
                         </chart:SfChart.Series>
                     </chart:SfChart>
+
+                <Grid Margin="35,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="Total (LEI):" />
+                    <Label Grid.Column="1"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="{Binding TotalSumaVen, Source={StaticResource vmVenituri}}" />
+
+
+                    <Label Grid.Column="0"  FontSize="20" Grid.Row="1" Text="Alege luna"/>
+                    <Picker Grid.Column="1" FontSize="20" Grid.Row="1" 
+                            ItemsSource="{Binding Source={StaticResource vmVenituri}, Path=Month}"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="Center"
+                            SelectedIndex="{Binding lunaSelectata, Source={StaticResource vmVenituri}}"
+                            />
+                    <Label Grid.Column="0"  FontSize="20" Grid.Row="2" Text="Alege anul"/>
+                    <Picker Grid.Column="1" FontSize="20" Grid.Row="2"
+                            ItemsSource="{Binding Source={StaticResource vmVenituri}, Path=Year}"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="Center"/>
+                </Grid>
 
             </StackLayout>
             

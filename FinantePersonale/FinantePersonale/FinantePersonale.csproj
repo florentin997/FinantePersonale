@@ -22,6 +22,9 @@
   <ItemGroup>
     <Compile Remove="Models\ListaSubcategoriiCh.cs" />
     <Compile Remove="Models\ListaSubcategoriiVen.cs" />
+    <Compile Remove="ViewModels\IstoricCheltuieliVM.cs" />
+    <Compile Remove="ViewModels\IstoricVenituriVM.cs" />
+    <Compile Remove="ViewModels\IstoricWishlistVM.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +39,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="AppShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BugetView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\IstoricCheltuieli.xaml">

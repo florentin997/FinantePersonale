@@ -18,7 +18,7 @@ namespace FinantePersonale.Models
 
         public float ItemValue { get; set; }
 
-        //public float Procent { get; set; }
+        //public int Procent { get; set; }
 
         public ModelWishlist()
         {

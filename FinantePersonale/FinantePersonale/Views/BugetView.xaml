@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
+             x:Class="FinantePersonale.Views.BugetView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:BugetVM x:Key="vm"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+
+        <StackLayout>
+            <Grid Margin="20,20,5,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Text="Buget zilnic" />
+                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Buget saptamanal" />
+                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Buget lunar" />
+                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Buget anual" />
+
+                <StackLayout  BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="0">
+                    <Label HorizontalTextAlignment="Center"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="1">
+                    <Label HorizontalTextAlignment="Center" />
+                </StackLayout>
+
+                <StackLayout x:Name="cca" BackgroundColor="DodgerBlue" Grid.Column="1" Grid.Row="2">
+                    <Entry x:Name="entryValoare" HorizontalTextAlignment="Center" Text="{Binding Source={StaticResource vm}, Path=BugetL, Mode=TwoWay}" />
+                </StackLayout>
+
+                <StackLayout BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="3">
+                    <Label HorizontalTextAlignment="Center" Text="{Binding Source={StaticResource vm}, Path=BugetAn}"/>
+                </StackLayout>
+
+            </Grid>
+
+            <Grid  HorizontalOptions="End" VerticalOptions="End" RowDefinitions="50" Margin="20,15,20,15">
+                <Button Grid.Column="0" Text="Salvare" BackgroundColor="Green"/>
+                <Button Grid.Column="1" Text="Stergere" BackgroundColor="Red"/>
+            </Grid>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -42,31 +42,83 @@
 
                 <chart:SfChart BackgroundColor="Transparent">
                     <chart:SfChart.Legend>
-                        <chart:ChartLegend/>
+                        <chart:ChartLegend>
+                            <chart:ChartLegend.LabelStyle>
+                                <chart:ChartLegendLabelStyle Font="18"/>
+                            </chart:ChartLegend.LabelStyle>
+                            </chart:ChartLegend>
                     </chart:SfChart.Legend>
 
                     <chart:SfChart.Series VerticalOptions="FillAndExpand">
 
-                        <chart:PieSeries ItemsSource="{Binding DataCh, Source={StaticResource vmCheltuieli}}" 
+                        
+                        <chart:PieSeries ItemsSource="{Binding IstCheltuieli, Source={StaticResource vmCheltuieli}}" 
                                          XBindingPath="SubcategorieCh" 
                                          YBindingPath="SumaCh" 
                                          ExplodeAll="False" 
+                                         ListenPropertyChange="True"
                                          EnableSmartLabels = "True" 
                                          ConnectorLineType = "Bezier" 
 					                     DataMarkerPosition = "OutsideExtended">
                             <chart:PieSeries.DataMarker>
-                                <chart:ChartDataMarker />
+                                <chart:ChartDataMarker/>
                             </chart:PieSeries.DataMarker>
 
                         </chart:PieSeries>
 
                     </chart:SfChart.Series>
                 </chart:SfChart>
-
                 <!--<microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250" Chart="{Binding Source={StaticResource vmCheltuieli}, Path=Chart}"/>-->
-            
-            
-            
+                
+                
+                <!-- NU APARE IN PAGINA-->
+                <chart:SfChart BackgroundColor="Transparent">
+                    <chart:SfChart.PrimaryAxis>
+                        <chart:CategoryAxis LabelRotationAngle = "-45">
+                            <chart:CategoryAxis.Title>
+                                <chart:ChartAxisTitle Text ="Evolutia economisirilor"/>
+                            </chart:CategoryAxis.Title>
+                        </chart:CategoryAxis>
+                    </chart:SfChart.PrimaryAxis>
+
+                    <chart:SfChart.SecondaryAxis>
+                        <chart:NumericalAxis>
+                            <chart:NumericalAxis.Title>
+                                <chart:ChartAxisTitle Text ="Suma"/>
+                            </chart:NumericalAxis.Title>
+                        </chart:NumericalAxis>
+                    </chart:SfChart.SecondaryAxis>
+
+                    <chart:BarSeries ItemsSource="{Binding IstCheltuieli, Source={StaticResource vmCheltuieli}}" XBindingPath="SubcategorieCh" YBindingPath="SumaCh"/>
+                </chart:SfChart>
+                
+                <Grid Margin="35,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="Total (LEI):" />
+                    <Label Grid.Column="1"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="{Binding TotalSumaCh, Source={StaticResource vmCheltuieli}}" />
+
+
+                    <Label Grid.Column="0"  FontSize="20" Grid.Row="1" Text="Alege luna"/>
+                    <Picker Grid.Column="1" FontSize="20" Grid.Row="1" 
+                            ItemsSource="{Binding Source={StaticResource vmCheltuieli}, Path=Month}"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="Center"
+                            SelectedIndex="{Binding lunaSelectata, Source={StaticResource vmCheltuieli}}"
+                            />
+                    <Label Grid.Column="0"  FontSize="20" Grid.Row="2" Text="Alege anul"/>
+                    <Picker Grid.Column="1" FontSize="20" Grid.Row="2"
+                            ItemsSource="{Binding Source={StaticResource vmCheltuieli}, Path=Year}"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="Center"/>
+                </Grid>
+
+                <!--<chart:SfChart>
+                    <chart:BarSeries ItemsSource="{Binding EconPerLuna}" XBindingPath="Luna" YBindingPath="ValMaxCh"/>
+                </chart:SfChart>-->
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

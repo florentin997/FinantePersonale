@@ -64,6 +64,23 @@ namespace FinantePersonale.ViewModels
                 OnPropertyChanged("itemCh");
             }
         }
+        private float totalSumaVen { get; set; }
+        public float TotalSumaVen
+        {
+            get
+            {
+                return suma();
+            }
+        }
+        private float suma()
+        {
+            float sum = 0;
+            foreach (var c in IstVenituri)
+            {
+                sum = sum + c.SumaVen;
+            }
+            return sum;
+        }
         public Command SaveVenituriCommand { get; set; }
         public Command DeleteVenituriCommand { get; set; }
         //-----------
@@ -72,6 +89,7 @@ namespace FinantePersonale.ViewModels
             get;
             set;
         }//------------
+
         public VenituriVM()
         {
             SubcategoriiVenituri = new ObservableCollection<string>();
@@ -140,9 +158,9 @@ namespace FinantePersonale.ViewModels
             int response = ValueModelVen.InsertValue(vn);
 
             if (response > 0)
-                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+                Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuată", "OK");
             else
-                Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
+                Application.Current.MainPage.DisplayAlert("Eroare", "Salvare eșuată", "Ok");
         }
 
         public void DeleteRowVen()
@@ -152,14 +170,14 @@ namespace FinantePersonale.ViewModels
                 int rows = conn.Delete(ItemVen);
 
                 if (rows > 0)
-                    App.Current.MainPage.DisplayAlert("Success", "Item succesfully deleted", "Ok");
+                    App.Current.MainPage.DisplayAlert("Succes", "Înregistrare a fost ștearsă", "Ok");
                 else
-                    App.Current.MainPage.DisplayAlert("Failure", "Item failed to be deleted", "Ok");
+                    App.Current.MainPage.DisplayAlert("Eroare", "Înregistrarea nu a putut fi ștearsă", "Ok");
             }
         }
 
 
-        private void GetSubcategorieVenituri()    //TREBUIE INLOCUIT CU O BAZA DE DATE PENTRU CATEGORII / sau le adaug intr-un file in file system
+        private void GetSubcategorieVenituri()    
         {
             try
             {
@@ -175,5 +193,32 @@ namespace FinantePersonale.ViewModels
             catch (Exception e)
             { }
         }
+
+        //Ptr picker-ul de luni-------------
+        public List<string> listaLuni = new List<string> { "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" };
+        public List<string> Month
+        {
+            get { return listaLuni; }
+        }
+        //------------ pana aici-------------
+
+        //Picker-ul ptr ani----------
+        private static List<string> l() //Lista ultimilor 10 ani fata de anul curent 
+        {
+            List<string> lAni = new List<string>();
+            int d = Int16.Parse(DateTime.Now.Year.ToString());
+
+            int i = Int16.Parse(DateTime.Now.Year.ToString()) - 10;
+            do
+            {
+                lAni.Add(i.ToString());
+                i++;
+            }
+            while (i <= d);
+            return lAni;
+        }
+        public List<string> Year { get { return l(); } }
+        //-----------------pana aici-----------------
+
     }
 }

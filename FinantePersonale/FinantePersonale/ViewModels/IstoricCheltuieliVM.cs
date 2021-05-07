@@ -68,32 +68,32 @@ namespace FinantePersonale.ViewModels
         //}
         /////////////////////-----------------------------------------------PANA AICI
 
-        public ObservableCollection<ValueModelCh> IstCheltuieli
-        {
-            get;
-            set;
-        }
+        //////////////public ObservableCollection<ValueModelCh> IstCheltuieli
+        //////////////{
+        //////////////    get;
+        //////////////    set;
+        //////////////}
 
-        public IstoricCheltuieliVM()
-        {
-            IstCheltuieli = new ObservableCollection<ValueModelCh>();
+        //////////////public IstoricCheltuieliVM()
+        //////////////{
+        //////////////    IstCheltuieli = new ObservableCollection<ValueModelCh>();
 
-            GetExpenses();
-        }
+        //////////////    GetExpenses();
+        //////////////}
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //////////////public event PropertyChangedEventHandler PropertyChanged;
 
-        private void GetExpenses()
-        {
-            var expenses = ValueModelCh.GetValue();
+        //////////////private void GetExpenses()
+        //////////////{
+        //////////////    var expenses = ValueModelCh.GetValue();
 
-            IstCheltuieli.Clear();
+        //////////////    IstCheltuieli.Clear();
 
-            foreach (var expense in expenses)
-            {
-                IstCheltuieli.Add(expense);
-            }
-        }
+        //////////////    foreach (var expense in expenses)
+        //////////////    {
+        //////////////        IstCheltuieli.Add(expense);
+        //////////////    }
+        //////////////}
 
 
         //-------

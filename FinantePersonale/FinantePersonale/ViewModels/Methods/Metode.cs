@@ -38,12 +38,52 @@ namespace FinantePersonale.ViewModels.Methods
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
 
-                var idRand= conn.Query<ValueModelCh>("SELECT IdCh FROM ValueModelCh WHERE SubcategorieCh='"+value.SubcategorieCh+"'").FirstOrDefault();  
-                var sumRand= conn.Query<ValueModelCh>("SELECT SumaCh FROM ValueModelCh WHERE SubcategorieCh='"+value.SubcategorieCh+"'").FirstOrDefault();     
+                var idRand = conn.Query<ValueModelCh>("SELECT IdCh FROM ValueModelCh WHERE SubcategorieCh='" + value.SubcategorieCh + "'").FirstOrDefault();
+                var sumRand = conn.Query<ValueModelCh>("SELECT SumaCh FROM ValueModelCh WHERE SubcategorieCh='" + value.SubcategorieCh + "'").FirstOrDefault();
 
-                ValueModelCh obiectDeUpdatat = conn.Query<ValueModelCh>("UPDATE ValueModelCh SET SumaCh=(SELECT SUM("+value.SumaCh+","+sumRand+") WHERE IdCh="+ idRand.IdCh).FirstOrDefault();
-                //SQLite.SQLiteException: 'incomplete input'
+                ValueModelCh obiectDeUpdatat = conn.Query<ValueModelCh>("UPDATE ValueModelCh SET SumaCh=(SELECT SUM(" + value.SumaCh + "," + sumRand + ") WHERE IdCh=" + idRand.IdCh).FirstOrDefault();
+                //SQLite.SQLiteException: 'incomplete input'------------------------------------------------------------!!!!!!!!!!!!!!
                 return obiectDeUpdatat;
+            }
+        }
+
+        //diferenta dintre VENITURI si CHELTUIELI pe luna selectat din UI
+        public static string DiferentaChVen(string luna)//CA PARAMETRU PASEZ NUMARUL LUNII PE CARE IL SELECTEAZA USERUL DIN UI
+        { 
+
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                var listaPeLunaCh = conn.Query<float>("SELECT SUM(SumaCh) FROM ValueModelCh WHERE DateCh=(SELECT strftime('%M'='" + luna+"','now'))").ToString();
+                //luna trebuie sa fie in format "01"..."12" etc   
+                //lista cu stringuri si dupa fac cast la (float) cand folosesc valorile ????
+                var listaPeLunaVen = conn.Query<float>("SELECT SUM(SumaVen) FROM ValueModelVen WHERE DateVen=(SELECT strftime('%M'='" + luna + "','now'))").ToString();
+
+                var difDintreSume = float.Parse(listaPeLunaVen) - float.Parse(listaPeLunaCh);
+
+                return difDintreSume.ToString();
+            }
+        }
+
+        public static string TotalCh()  // sum imi da 0, cred ca gresesc la queri
+        {
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                var records = conn.Query<ValueModelCh>("SELECT * FROM ValueModelCh");
+                float sum=0; 
+                foreach(var r in records)
+                {
+                    sum = sum + r.SumaCh;
+                }
+                return sum.ToString();
+            }
+        }
+        public static float TotalVen()
+        {
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                var sum = conn.Query<float>("SELECT SUM(SumaVen) FROM ValueModelVen").FirstOrDefault();
+
+                return sum;
             }
         }
 

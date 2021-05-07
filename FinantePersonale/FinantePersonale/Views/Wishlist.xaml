@@ -7,7 +7,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <vm:WishlistVM x:Key="vmWishlist"/>
-            <vm:IstoricWishlistVM x:Key="vm"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -37,9 +36,9 @@
 
             <StackLayout>
                 <ListView x:Name="lvWishlistItems"
-                          ItemsSource="{Binding Source={StaticResource vm}, Path=IstWishlistItems, Mode=OneWay}"
+                          ItemsSource="{Binding Source={StaticResource vmWishlist}, Path=WishlistItems, Mode=OneWay}"
                           SelectedItem="{Binding Source={StaticResource vmWishlist}, Path=ItemToDelete, Mode=TwoWay}"
-                          IsPullToRefreshEnabled="True"
+                          IsPullToRefreshEnabled="False"
                           RefreshCommand="{Binding Source={StaticResource vmWishlist}, Path=UpdateWishlistCommand}">
                     <ListView.ItemTemplate>
                         <DataTemplate>

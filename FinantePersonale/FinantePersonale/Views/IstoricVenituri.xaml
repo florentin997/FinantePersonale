@@ -6,7 +6,6 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <vm:IstoricVenituriVM x:Key="vm"/>
             <vm:VenituriVM x:Key="vmVenituri"/>
         </ResourceDictionary>
     </ContentPage.Resources>

@@ -96,6 +96,9 @@
     <FlyoutItem Title="Categorii" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:PopUpCategorie}" />
     </FlyoutItem>
+    <FlyoutItem Title="Buget" >
+    <ShellContent Route="BugetView" ContentTemplate="{DataTemplate local:BugetView}" />
+    </FlyoutItem>
 
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

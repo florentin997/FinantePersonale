@@ -9,7 +9,6 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <vm:IstoricCheltuieliVM x:Key="vm"/>
             <vm:CheltuieliVM x:Key="vmCheltuieli"/>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -58,13 +57,6 @@
                         </ViewCell>
             -->
 
-            <Button
-                VerticalOptions="End"
-                Text="Stergere"
-                BackgroundColor="Red"
-                Margin="100,0,100,0"
-                Command="{Binding Source={StaticResource vmCheltuieli}, Path=DeleteCheltuieliCommand}"
-            />
             <Button
                 VerticalOptions="Center"
                 Text="Stergere1"

@@ -20,7 +20,18 @@ namespace FinantePersonale.ViewModels
             set;
         }
 
-      
+        private void GetWishlist()
+        {
+            var items = ModelWishlist.GetValue();
+
+            WishlistItems.Clear();
+
+            foreach (var item in items)
+            {
+                WishlistItems.Add(item);
+            }
+        }
+
         private int itemID;
         public int ItemID
         {
@@ -82,7 +93,8 @@ namespace FinantePersonale.ViewModels
             WishlistItems = new ObservableCollection<ModelWishlist>();
             DeleteItemFromWLCommand = new Command(DeleteRowItem);
             SaveWishlistItemCommand = new Command(InsertItem);
-            RefreshCommand = new Command(RefreshWishlist);
+            GetWishlist();
+            //RefreshCommand = new Command(RefreshWishlist);
             //UpdateWishlistCommand = new Command(UpdateList);
         }
 
@@ -121,14 +133,14 @@ namespace FinantePersonale.ViewModels
             }
         }
 
-        public void RefreshWishlist()
-        {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-            {
+        //public void RefreshWishlist()
+        //{
+        //    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+        //    {
                  
-               //verific daca ce am in BD e acelasi cu ce am in View si daca nu, adaug ultimul element?
-            }
-        }
+        //       //verific daca ce am in BD e acelasi cu ce am in View si daca nu, adaug ultimul element?
+        //    }
+        //}
 
         //------
         //-----------
