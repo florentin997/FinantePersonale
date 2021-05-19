@@ -17,21 +17,22 @@
     <ContentPage.Content>
 
         <StackLayout>
-
+            <SearchBar Placeholder="Căutare..." BackgroundColor="LightGray"/>
+            <Label Text="Lista cheltuielilor" FontSize="30" HorizontalOptions="Center" TextColor="Black"/>
             <!-- <StackLayout>
                 <Label Text="{Binding Source={StaticResource vmCheltuieli}, Path=}"/>
             </StackLayout>
             -->
                                                <!-- la item source StaticResource era vm nu vmCheltuieli-->
             <ListView 
-                     ItemsSource="{Binding Source={StaticResource vmCheltuieli}, Path=IstCheltuieli, Mode=TwoWay}" 
-                     SelectedItem="{Binding Source={StaticResource vmCheltuieli}, Path=ItemCh, Mode=TwoWay}">
+                     ItemsSource="{Binding Source={StaticResource vmCheltuieli}, Path=IstCheltuieli}" 
+                     SelectedItem="{Binding Source={StaticResource vmCheltuieli}, Path=ItemCh, Mode=OneWayToSource}">  <!---era twoways si mergea-->
                 <!--StaticResource ptr ca am definit resursa in ResourceDictionary, avand cheia "vm"-->
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding SumaCh}" 
+                        <TextCell Text="{Binding SubcategorieCh}" 
                               TextColor="Black" 
-                              Detail="{Binding SubcategorieCh}"
+                              Detail="{Binding SumaCh}"
                               />
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -59,10 +60,10 @@
 
             <Button
                 VerticalOptions="Center"
-                Text="Stergere1"
+                Text="Ștergere"
                 BackgroundColor="Red"
-                Margin="100,0,100,0"
-                Command="{Binding Source={StaticResource vmCheltuieli}, Path=DeleteItemCommand}"
+                Margin="100,0,100,10"
+                Command="{Binding Source={StaticResource vmCheltuieli}, Path=DeleteCheltuieliCommand}"
                 CommandParameter="{Binding Source={StaticResource vmCheltuieli}, Path=ItemCh}"
             />
         </StackLayout>

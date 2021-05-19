@@ -84,7 +84,7 @@ namespace FinantePersonale.ViewModels
 
         public Command SaveWishlistItemCommand { get; set; }
         public Command DeleteItemFromWLCommand { get; set; }
-        public Command RefreshCommand { get; set; }
+        //public Command RefreshCommand { get; set; }
         //public Command UpdateWishlistCommand { get; set; }
 
 
@@ -112,6 +112,7 @@ namespace FinantePersonale.ViewModels
                 ItemName = ItemW,           
                 ItemValue = IValue
             };
+            WishlistItems.Add(givenItem);
             int response = ModelWishlist.InsertValue(givenItem);
 
             if (response > 0)
@@ -131,6 +132,7 @@ namespace FinantePersonale.ViewModels
                 else
                     App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
             }
+            WishlistItems.Remove(ItemToDelete);
         }
 
         //public void RefreshWishlist()

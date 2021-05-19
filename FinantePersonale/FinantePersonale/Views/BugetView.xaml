@@ -6,14 +6,14 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <vm:BugetVM x:Key="vm"/>
+            <vm:BugetVM x:Key="vmBuget"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     
     <ContentPage.Content>
 
         <StackLayout>
-            <Grid Margin="20,20,5,20">
+            <Grid Margin="20,20,20,20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
                     <RowDefinition Height="70" />
@@ -26,10 +26,11 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Text="Buget zilnic" />
-                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Buget saptamanal" />
-                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Buget lunar" />
-                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Buget anual" />
+                <Label FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="0" Text="Buget zilnic" />
+                <Label FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Buget saptamanal" />
+                <Label FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Buget lunar" />
+                <Label FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Buget anual" />
+                <Label FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" Grid.Row="4" Text="Situație economică = actuală " />
 
                 <StackLayout  BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="0">
                     <Label HorizontalTextAlignment="Center"/>
@@ -39,20 +40,33 @@
                     <Label HorizontalTextAlignment="Center" />
                 </StackLayout>
 
-                <StackLayout x:Name="cca" BackgroundColor="DodgerBlue" Grid.Column="1" Grid.Row="2">
-                    <Entry x:Name="entryValoare" HorizontalTextAlignment="Center" Text="{Binding Source={StaticResource vm}, Path=BugetL, Mode=TwoWay}" />
+                <StackLayout  BackgroundColor="DodgerBlue" Grid.Column="1" Grid.Row="2">
+                    <Entry HorizontalTextAlignment="Center" Text="{Binding Source={StaticResource vmBuget}, Path=BugetL, Mode=TwoWay}" />
                 </StackLayout>
 
                 <StackLayout BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="3">
-                    <Label HorizontalTextAlignment="Center" Text="{Binding Source={StaticResource vm}, Path=BugetAn}"/>
+                    <Label HorizontalTextAlignment="Center" />
+                </StackLayout>
+
+                
+                <StackLayout VerticalOptions="Center" BackgroundColor="LightGreen" Grid.Column="1" Grid.Row="4">
+                    <Label Text="{Binding valoareDiferentaVC, Source={StaticResource vmBuget}}"
+                           HorizontalOptions="Center"
+                           FontSize="18"
+                           />
                 </StackLayout>
 
             </Grid>
+            
+            <!-- DE ADAUGAT COMANDA PENTRU STERGERE  LA BUTON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1-->
 
-            <Grid  HorizontalOptions="End" VerticalOptions="End" RowDefinitions="50" Margin="20,15,20,15">
-                <Button Grid.Column="0" Text="Salvare" BackgroundColor="Green"/>
-                <Button Grid.Column="1" Text="Stergere" BackgroundColor="Red"/>
+            <Grid HorizontalOptions="End" VerticalOptions="End" RowDefinitions="50" Margin="20,15,20,0">
+                <Button Grid.Column="0" Text="Salvare" BackgroundColor="Green"
+                        Command="{Binding Source={StaticResource vmBuget}, Path=SaveBugetCommand}"/>
+                <Button Grid.Column="1" Text="Ștergere" BackgroundColor="Red"
+                         Command="{Binding Source={StaticResource vmBuget}, Path=DeleteBugetCommand}"/>
             </Grid>
+            
 
         </StackLayout>
 

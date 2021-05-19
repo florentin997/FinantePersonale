@@ -11,17 +11,16 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Salveaza"
-                     Command="{Binding Source={StaticResource vmWishlist}, Path=SaveWishlistItemCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
 
         <StackLayout>
-
+            <SearchBar Placeholder="Căutare..." BackgroundColor="LightGray"/>
+            <Label Text="Wishlist" FontSize="30" HorizontalOptions="Center" TextColor="Black"/>
             <StackLayout Margin="75,0,75,0" BindingContext="{Binding Source={StaticResource vmWishlist}}">
                 <Entry x:Name="WishlistItem"
-                       Placeholder="Item"
+                       Placeholder="Dorință"
                        HorizontalTextAlignment="Center"
                        Text="{Binding ItemW, Mode=TwoWay}"
                        MaxLength="25"
@@ -50,12 +49,13 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <Button
-                VerticalOptions="End"
-                Text="Stergere"
-                BackgroundColor="Red"
-                Margin="100,0,100,0"
-                Command="{Binding Source={StaticResource vmWishlist}, Path=DeleteItemFromWLCommand}"/>
+
+                <Grid HorizontalOptions="End" VerticalOptions="End" RowDefinitions="50" Margin="20,15,20,10">
+                    <Button Grid.Column="0" Text="Salvare" BackgroundColor="Green"
+                        Command="{Binding Source={StaticResource vmWishlist}, Path=SaveWishlistItemCommand}"/>
+                    <Button Grid.Column="1" Text="Ștergere" BackgroundColor="Red"
+                            Command="{Binding Source={StaticResource vmWishlist}, Path=DeleteItemFromWLCommand}"/>
+                </Grid>
 
             </StackLayout>
             

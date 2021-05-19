@@ -13,7 +13,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Salveaza"
+        <ToolbarItem Text="Salvare"
                      Command="{Binding Source={StaticResource vmVenituri}, Path=SaveVenituriCommand}"/>
     </ContentPage.ToolbarItems>
 
@@ -22,7 +22,7 @@
         <ScrollView>
 
             <StackLayout>
-
+                <Label Text="Venituri" FontSize="30" HorizontalTextAlignment="Center"/>
                 <StackLayout Margin="125,0,125,0" 
                          BindingContext="{Binding Source={StaticResource vmVenituri}}">
                     <Entry Placeholder="Suma"
@@ -35,7 +35,8 @@
                        HorizontalTextAlignment="Center"/>
                     <DatePicker 
                        Format="dd/MM/yyyy" 
-                       Date="{Binding DateV, Mode=TwoWay}"/>
+                       Date="{Binding DateV, Mode=TwoWay}"
+                        HorizontalOptions="Center"/>
                 </StackLayout>
 
                 <chart:SfChart BackgroundColor="Transparent">
@@ -51,7 +52,7 @@
 
                         <chart:SfChart.Series VerticalOptions="FillAndExpand">
 
-                        <chart:PieSeries ItemsSource="{Binding DataVen, Source={StaticResource vmVenituri}}" 
+                        <chart:PieSeries ItemsSource="{Binding IstVenituri, Source={StaticResource vmVenituri}}" 
                                          XBindingPath="SubcategorieVen" 
                                          YBindingPath="SumaVen" 
                                          ExplodeAll="False" 
@@ -72,7 +73,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="Total (LEI):" />
+                    <Label Grid.Column="0"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="Total (RON):" />
                     <Label Grid.Column="1"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="{Binding TotalSumaVen, Source={StaticResource vmVenituri}}" />
 
 

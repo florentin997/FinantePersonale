@@ -63,7 +63,35 @@ namespace FinantePersonale.ViewModels.Methods
                 return difDintreSume.ToString();
             }
         }
+        public static string DiferentaCV()
+        {
 
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                //varianta 1
+                //var sumaCh = conn.Query<ValueModelCh>("SELECT SumaCh FROM ValueModelCh").FirstOrDefault();  
+                //var sumaVen = conn.Query<ValueModelVen>("SELECT SumaVen FROM ValueModelVen").FirstOrDefault();
+                //var difDintreSume = sumaVen.SumaVen - sumaCh.SumaCh;
+                //return difDintreSume.ToString();
+
+                //varianta 2
+                //var sumaCh1 = conn.Query<float>("SELECT SUM(SumaCh) FROM ValueModelCh");
+                //var sumaVen1 = conn.Query<float>("SELECT SUM(SumaVen) FROM ValueModelVen");
+                //float SV = sumaVen1.Sum();
+                //float SC = sumaCh1.Sum();
+                //float dif = SV - SC;
+                //return dif.ToString();
+
+                //Varianta 3 
+                var listValVen = conn.Query<ValueModelVen>("SELECT * FROM ValueModelVen");
+                List<float> propV = listValVen.Select(o=>o.SumaVen).ToList();
+                var listValCh = conn.Query<ValueModelCh>("SELECT * FROM ValueModelCh");
+                List<float> propC = listValCh.Select(o => o.SumaCh).ToList();
+                var suma = propV.Sum()-propC.Sum();
+                return suma.ToString();
+
+            }
+        }
         public static string TotalCh()  // sum imi da 0, cred ca gresesc la queri
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))

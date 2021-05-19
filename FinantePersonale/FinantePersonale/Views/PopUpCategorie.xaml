@@ -14,6 +14,7 @@
     <ContentPage.Content>
 
         <StackLayout>
+            <SearchBar Placeholder="Căutare..." BackgroundColor="LightGray"/>
             <Label Text="Categorii"
                    FontFamily="Calibri"
                    HorizontalOptions="CenterAndExpand"
@@ -35,7 +36,7 @@
                     HorizontalTextAlignment="Center">
                 </Picker>
 
-                <Entry HorizontalOptions="Center"
+                <Entry HorizontalTextAlignment="Center"
                    Placeholder="Subcategorie"
                    Keyboard="Text"
                    Text="{Binding Source={StaticResource vmCategorie},Path=NumeSubcategorie, Mode=OneWayToSource}"
@@ -44,7 +45,8 @@
             
 
             <StackLayout>
-                <ListView ItemsSource="{Binding Source={StaticResource vmIstoric}, Path=IstCategorii}"
+                <ListView
+                          ItemsSource="{Binding Source={StaticResource vmIstoric}, Path=IstCategorii}"
                           SelectedItem="{Binding Source={StaticResource vmCategorie}, Path=ItemCategorie, Mode=TwoWay}"
 >
                     <ListView.ItemTemplate>
@@ -61,12 +63,12 @@
             <Grid RowDefinitions="50" 
                 Margin="20,15,20,15">
                 <Button 
-                    Text="Save"
+                    Text="Salvare"
                     BackgroundColor="Green"
                     Command="{Binding Source={StaticResource vmCategorie}, Path=SaveCategorieCommand}"/>
                 <Button 
                     Grid.Column="1"
-                    Text="Delete"
+                    Text="Ștergere"
                     BackgroundColor="Red"
                     Command="{Binding Source={StaticResource vmCategorie}, Path=DeleteCategorieCommand}"/>
             </Grid>

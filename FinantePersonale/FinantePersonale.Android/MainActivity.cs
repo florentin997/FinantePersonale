@@ -25,9 +25,10 @@ namespace FinantePersonale.Droid
             //LoadApplication(new App());
 
 
-            string dbName = "finante_db.sqlite";                                                               //denumire baza de date
-            string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);  //denumire path pana la folderul ce contine BD
-            string fullPath = Path.Combine(folderPath, dbName);                                                //combinam cele 2 de mai sus
+            string dbName = "finante_db.db";                                                                                  //denumire baza de date
+            string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);      //denumire path pana la folderul ce contine BD
+            string fullPath = Path.Combine(folderPath, dbName);                                                               //combinam cele 2 de mai sus
+
 
             LoadApplication(new App(fullPath));
         }

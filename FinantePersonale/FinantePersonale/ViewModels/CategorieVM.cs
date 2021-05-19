@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class CategorieVM : INotifyPropertyChanged
+    public class CategorieVM //: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,14 +20,13 @@ namespace FinantePersonale.ViewModels
         }
 
         private string categoriePrincipala;
-
         public string CategoriePrincipala
         {
             get { return categoriePrincipala; }
             set 
             { 
                 categoriePrincipala = value;
-                OnPropertyChanged("CategoriePrincipala");
+                OnPropertyChanged(nameof(CategoriePrincipala));
             }
             
         }
@@ -40,7 +39,7 @@ namespace FinantePersonale.ViewModels
             set
             {
                 numeSubcategorie = value;
-                OnPropertyChanged("NumeSubcategorie");
+                OnPropertyChanged(nameof(NumeSubcategorie));
             }
         }
 
@@ -55,7 +54,7 @@ namespace FinantePersonale.ViewModels
                     itemCategorie = value;
                 }
                 itemCategorie = value;
-                OnPropertyChanged("itemCh");
+                OnPropertyChanged(nameof(ItemCategorie));
             }
         }
         public ObservableCollection<string> ColectieCategorii      //<Categorie>
@@ -66,16 +65,18 @@ namespace FinantePersonale.ViewModels
 
         public Command SaveCategorieCommand { get; set; }
         public Command DeleteCategorieCommand { get; set; }
+        //public Command PullToRefershCommand { get; set; }
 
-        
-
-        
-        
         public CategorieVM()
-        { 
+        {
             ColectieCategorii = new ObservableCollection<string>();
             SaveCategorieCommand = new Command(InsertCategorie);
             DeleteCategorieCommand = new Command(DeleteRowCategorie);
+
+            //----------------sa incerc sa bag date intr-un obsColl de tipul Categorie 
+            Categorii = new ObservableCollection<Categorie>();
+            //--------------pana aici
+
             //GetCategoriePrincipala();
             ListaCategorii();
         }
@@ -149,8 +150,11 @@ namespace FinantePersonale.ViewModels
             ColectieCategorii.Add("Cheltuieli");
         }
     }
+    //-----------------luate din ObsColl--------------------------------------
 
-    
+
+    //---------------pana aici------------------------------------------------
+
     //-----------------------------------
 
     public class IstoricCategoriiVM

@@ -13,17 +13,20 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Salveaza"
+        <ToolbarItem Text="Salvare"
                     Command="{Binding Source={StaticResource vmCheltuieli}, Path=SaveCheltuieliCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-         
-        <ScrollView>
+        
+        <!-- <RefreshView Command="{Binding Source={StaticResource vmCheltuieli}, Path=RefreshCommand}">-->
+            <ScrollView>
+                
+                <StackLayout>
 
-            <StackLayout>
-                <StackLayout Margin="125,0,125,0" 
-                         HorizontalOptions="CenterAndExpand"
+                <Label Text="Cheltuieli" FontSize="30" HorizontalTextAlignment="Center"/>
+                <StackLayout 
+                         Margin="125,0,125,0" 
                          BindingContext="{Binding Source={StaticResource vmCheltuieli}}">
                 <Entry 
                     Placeholder="Suma"
@@ -36,7 +39,8 @@
                     HorizontalTextAlignment="Center"/>
                 <DatePicker 
                     Format="dd/MM/yyyy" 
-                    Date="{Binding DateC, Mode=TwoWay}"/>
+                    Date="{Binding DateC, Mode=TwoWay}"
+                    HorizontalOptions="Center"/>
                 </StackLayout>
 
 
@@ -70,34 +74,12 @@
                 </chart:SfChart>
                 <!--<microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250" Chart="{Binding Source={StaticResource vmCheltuieli}, Path=Chart}"/>-->
                 
-                
-                <!-- NU APARE IN PAGINA-->
-                <chart:SfChart BackgroundColor="Transparent">
-                    <chart:SfChart.PrimaryAxis>
-                        <chart:CategoryAxis LabelRotationAngle = "-45">
-                            <chart:CategoryAxis.Title>
-                                <chart:ChartAxisTitle Text ="Evolutia economisirilor"/>
-                            </chart:CategoryAxis.Title>
-                        </chart:CategoryAxis>
-                    </chart:SfChart.PrimaryAxis>
-
-                    <chart:SfChart.SecondaryAxis>
-                        <chart:NumericalAxis>
-                            <chart:NumericalAxis.Title>
-                                <chart:ChartAxisTitle Text ="Suma"/>
-                            </chart:NumericalAxis.Title>
-                        </chart:NumericalAxis>
-                    </chart:SfChart.SecondaryAxis>
-
-                    <chart:BarSeries ItemsSource="{Binding IstCheltuieli, Source={StaticResource vmCheltuieli}}" XBindingPath="SubcategorieCh" YBindingPath="SumaCh"/>
-                </chart:SfChart>
-                
                 <Grid Margin="35,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="Total (LEI):" />
+                    <Label Grid.Column="0"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="Total (RON):" />
                     <Label Grid.Column="1"  Grid.Row="0" FontSize="24" VerticalOptions="Start" Text="{Binding TotalSumaCh, Source={StaticResource vmCheltuieli}}" />
 
 
@@ -121,6 +103,8 @@
 
             </StackLayout>
         </ScrollView>
+       <!-- </RefreshView>  -->
+        
     </ContentPage.Content>
 
 

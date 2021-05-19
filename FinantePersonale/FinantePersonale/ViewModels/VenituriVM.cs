@@ -12,7 +12,7 @@ using SQLite;
 using Xamarin.Forms;
 namespace FinantePersonale.ViewModels
 {
-    public class VenituriVM //: INotifyPropertyChanged
+    public class VenituriVM : INotifyPropertyChanged
     {
 
         private string subcategorie;
@@ -64,23 +64,7 @@ namespace FinantePersonale.ViewModels
                 OnPropertyChanged("itemCh");
             }
         }
-        private float totalSumaVen { get; set; }
-        public float TotalSumaVen
-        {
-            get
-            {
-                return suma();
-            }
-        }
-        private float suma()
-        {
-            float sum = 0;
-            foreach (var c in IstVenituri)
-            {
-                sum = sum + c.SumaVen;
-            }
-            return sum;
-        }
+
         public Command SaveVenituriCommand { get; set; }
         public Command DeleteVenituriCommand { get; set; }
         //-----------
@@ -97,30 +81,33 @@ namespace FinantePersonale.ViewModels
             SaveVenituriCommand = new Command(InsertVenituri);
             DeleteVenituriCommand = new Command(DeleteRowVen);
             GetSubcategorieVenituri();
+            
+
 
             IstVenituri = new ObservableCollection<ValueModelVen>();
             GetVen();
 
-            DataVen = new ObservableCollection<ValueModelVen>();     
-            FillData();
+            //DataVen = new ObservableCollection<ValueModelVen>();     
+            //FillData();
         }
+
         //----------------- ptr SF chart
-        private void FillData()
-        {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-            {
-                foreach (var item in conn.Table<ValueModelVen>().ToList())
-                {
-                    ValueModelVen obj = new ValueModelVen()
-                    {
-                        SubcategorieVen = item.SubcategorieVen,
-                        SumaVen = item.SumaVen,
-                    };
-                    DataVen.Add(obj);   //Datele sunt introduse in DataVen (am verificat cu breakpoint ptr fiecare), dar nu ajung in grafic
-                }
-            }
-        }
-        public ObservableCollection<ValueModelVen> DataVen { get; set; }
+        //private void FillData()
+        //{
+        //    using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+        //    {
+        //        foreach (var item in conn.Table<ValueModelVen>().ToList())
+        //        {
+        //            ValueModelVen obj = new ValueModelVen()
+        //            {
+        //                SubcategorieVen = item.SubcategorieVen,
+        //                SumaVen = item.SumaVen,
+        //            };
+        //            DataVen.Add(obj);   //Datele sunt introduse in DataVen (am verificat cu breakpoint ptr fiecare), dar nu ajung in grafic
+        //        }
+        //    }
+        //}
+        //public ObservableCollection<ValueModelVen> DataVen { get; set; }
 
         public ObservableCollection<ValueModelVen> IstVenituri
         {
@@ -146,7 +133,28 @@ namespace FinantePersonale.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        private float s()
+        {
+            float sum = 0;
+            foreach (var c in IstVenituri)
+            {
+                sum = sum + c.SumaVen;
+            }
+            return sum;
+        }
 
+        public float TotalSumaVen
+        {
+            get
+            {
+                return s();
+            }
+            set
+            {
+                value = s();
+                OnPropertyChanged("TotalSumaVen");
+            }
+        }
         public void InsertVenituri()
         {
             ValueModelVen vn = new ValueModelVen()
@@ -155,10 +163,14 @@ namespace FinantePersonale.ViewModels
                 SumaVen = SumaV,
                 DateVen = DateV
             };
+            IstVenituri.Add(vn);
             int response = ValueModelVen.InsertValue(vn);
 
-            if (response > 0)
+            if (response > 0) 
+            {
+                TotalSumaVen = 0;
                 Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuată", "OK");
+            }
             else
                 Application.Current.MainPage.DisplayAlert("Eroare", "Salvare eșuată", "Ok");
         }
@@ -168,9 +180,12 @@ namespace FinantePersonale.ViewModels
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
                 int rows = conn.Delete(ItemVen);
-
+                IstVenituri.Remove(ItemVen);
                 if (rows > 0)
+                {
+                    TotalSumaVen = 0;
                     App.Current.MainPage.DisplayAlert("Succes", "Înregistrare a fost ștearsă", "Ok");
+                }
                 else
                     App.Current.MainPage.DisplayAlert("Eroare", "Înregistrarea nu a putut fi ștearsă", "Ok");
             }
@@ -191,7 +206,9 @@ namespace FinantePersonale.ViewModels
                 }
             }
             catch (Exception e)
-            { }
+            { 
+            //exceptie
+            }
         }
 
         //Ptr picker-ul de luni-------------
@@ -208,7 +225,7 @@ namespace FinantePersonale.ViewModels
             List<string> lAni = new List<string>();
             int d = Int16.Parse(DateTime.Now.Year.ToString());
 
-            int i = Int16.Parse(DateTime.Now.Year.ToString()) - 10;
+            int i = Int16.Parse(DateTime.Now.Year.ToString()) - 2;
             do
             {
                 lAni.Add(i.ToString());

@@ -13,24 +13,25 @@
     <ContentPage.Content>
 
         <StackLayout>
-
+            <SearchBar Placeholder="Căutare..." BackgroundColor="LightGray"/>
+            <Label Text="Lista veniturilor" FontSize="30" HorizontalOptions="Center" TextColor="Black"/>
             <ListView 
-            ItemsSource="{Binding Source={StaticResource vmVenituri}, Path=IstVenituri, Mode=TwoWay}" 
-            SelectedItem="{Binding Source={StaticResource vmVenituri}, Path=ItemVen, Mode=TwoWay}">
+                        ItemsSource="{Binding Source={StaticResource vmVenituri}, Path=IstVenituri, Mode=TwoWay}" 
+                        SelectedItem="{Binding Source={StaticResource vmVenituri}, Path=ItemVen, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding SumaVen}" 
+                        <TextCell Text="{Binding SubcategorieVen}" 
                               TextColor="Black" 
-                              Detail="{Binding SubcategorieVen}"/>
+                              Detail="{Binding SumaVen}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
             <Button
                 VerticalOptions="End"
-                Text="Stergere"
+                Text="Ștergere"
                 BackgroundColor="Red"
-                Margin="100,0,100,0"
+                Margin="100,0,100,10"
                 Command="{Binding Source={StaticResource vmVenituri}, Path=DeleteVenituriCommand}"
             />
             

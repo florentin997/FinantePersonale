@@ -1,17 +1,18 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FinantePersonale.Models
 {
     //[Table("ValueModelCh")]
-    public class ValueModelCh
+    public class ValueModelCh 
     {
         [PrimaryKey, AutoIncrement, NotNull]
         public int IdCh { get; set; }
-
         public string SubcategorieCh { get; set; }
 
         public float SumaCh { get; set; }

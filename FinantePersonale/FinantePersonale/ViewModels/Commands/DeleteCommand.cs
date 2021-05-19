@@ -33,7 +33,8 @@ namespace FinantePersonale.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            this.obiectDeSters.DeleteMethod(parameter as ValueModelCh);
+            //this.obiectDeSters.DeleteMethod(parameter as ValueModelCh);
+
         }
     }
 }

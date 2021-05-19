@@ -3,4 +3,9 @@
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="29" />
 	<application android:label="FinantePersonale.Android" android:theme="@style/MainTheme" android:icon="@mipmap/FinantePersonaleIcon"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+  <!--scrise de mine-->
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <!--pana aici-->
 </manifest>

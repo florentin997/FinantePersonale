@@ -11,10 +11,10 @@
                 #37D4A0
             </Color>
             <Color x:Key="textColor">
-                #000000
+                black
             </Color>
             <Color x:Key="culoareFundal">
-                #ffdead
+                white
             </Color>
             <Color x:Key="culoareTabMenu">
                 #000000
@@ -27,6 +27,10 @@
                 <Setter Property="TextColor" Value="{StaticResource textColor}"/>
             </Style>
 
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <!-- am pus contentPage, fiindca acela aste tipul din LoginPage-->
                 <Setter Property="BackgroundColor"  Value="{StaticResource culoareFundal}"/>
@@ -37,7 +41,7 @@
                 <Setter Property="UnselectedTabColor" Value="Black"/>
             </Style>
             <Style TargetType="ListView">
-                <Setter Property="BackgroundColor" Value="NavajoWhite"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="PlaceholderColor"  Value="black"/>

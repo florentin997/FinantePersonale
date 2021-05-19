@@ -21,6 +21,11 @@ namespace FinantePersonale.Models
 
         }
 
+        public Categorie(int id, string categP, string NumeSubcateg)
+        {
+
+        }
+
         public static int InsertValue(Categorie value)
         {
             using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
@@ -132,8 +137,6 @@ namespace FinantePersonale.Models
                 conn.CreateTable<Categorie>();
 
                 var listaCateg = conn.Query<Categorie>("SELECT * FROM Categorie WHERE CategoriePrincipala='"+numeCategoriePrincipala+"'").ToList();
-
-
 
                 return listaCateg;
             }
