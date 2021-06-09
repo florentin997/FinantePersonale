@@ -1,4 +1,5 @@
 ﻿using FinantePersonale.Models;
+using FinantePersonale.ViewModels.Methods;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,13 @@ using Xamarin.Forms;
 
 namespace FinantePersonale.ViewModels
 {
-    public class CategorieVM //: INotifyPropertyChanged
+    public class CategorieVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public ObservableCollection<Categorie> Categorii
         {
             get;
@@ -32,7 +36,6 @@ namespace FinantePersonale.ViewModels
         }
 
         private string numeSubcategorie;
-
         public string NumeSubcategorie
         {
             get { return numeSubcategorie; }
@@ -72,60 +75,34 @@ namespace FinantePersonale.ViewModels
             ColectieCategorii = new ObservableCollection<string>();
             SaveCategorieCommand = new Command(InsertCategorie);
             DeleteCategorieCommand = new Command(DeleteRowCategorie);
-
-            //----------------sa incerc sa bag date intr-un obsColl de tipul Categorie 
             Categorii = new ObservableCollection<Categorie>();
-            //--------------pana aici
-
-            //GetCategoriePrincipala();
             ListaCategorii();
         }
 
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
-        public void InsertCategorie()  // in cazul in care nu mai merge, mergea cand a fost InsertCheltuieli
+        public void InsertCategorie()  
         {
             Categorie categ = new Categorie()
             {
                 CategoriePrincipala = CategoriePrincipala,
                 NumeSubcategorie = NumeSubcategorie,
             };
-
             if(CategoriePrincipala == null || NumeSubcategorie == null)
             {
-                Application.Current.MainPage.DisplayAlert("Eroare", "Nu ai completat toate campurile necesare", "OK");
+                Application.Current.MainPage.DisplayAlert("Eroare", "Nu ai completat toate câmpurile necesare", "OK");
             }
-            //daca in BD nu sunt date, insereaza datele fara a mai verifica pentru duplicate
-            //if (Categorie.VerificareDacaBGEsteGoala() == false)
-            //{
-            //    int response = Categorie.InsertValue(categ);
-
-            //    if (response > 0)
-            //        Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
-            //    else
-            //        Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
-            //}
-
-            //altfel verifica daca exista duplicate
             else
             {
-                if (Categorie.ExistaInregistrare(categ) == true)
+                if (MetodeCategorie.ExistaInregistrare(categ) == true)
                 {
                     Application.Current.MainPage.DisplayAlert("Eroare", "Aceste date au mai fost introduse", "OK");
                 }
                 else
                 {
-                    int response = Categorie.InsertValue(categ);
-
+                    int response = MetodeCategorie.InsertValue(categ);
                     if (response > 0)
-                        Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
+                        Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuată", "OK");
                     else
-                        Application.Current.MainPage.DisplayAlert("Error", "Salvare esuata", "Ok");
+                        Application.Current.MainPage.DisplayAlert("Eroare", "Salvare eșuată", "Ok");
                 }
             }   
         }
@@ -135,11 +112,10 @@ namespace FinantePersonale.ViewModels
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
                 int rows = conn.Delete(ItemCategorie);   
-
                 if (rows > 0)
-                    App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
+                    App.Current.MainPage.DisplayAlert("Succes", "Înregistrare a fost ștearsă", "Ok");
                 else
-                    App.Current.MainPage.DisplayAlert("Eroare", "Inregistrarea nu a putut fi stearsa", "Ok");
+                    App.Current.MainPage.DisplayAlert("Eroare", "Înregistrarea nu a putut fi ștearsă", "Ok");
             }
         }
 
@@ -150,12 +126,7 @@ namespace FinantePersonale.ViewModels
             ColectieCategorii.Add("Cheltuieli");
         }
     }
-    //-----------------luate din ObsColl--------------------------------------
-
-
-    //---------------pana aici------------------------------------------------
-
-    //-----------------------------------
+    //------------------------------------------------------------------
 
     public class IstoricCategoriiVM
     {
@@ -164,17 +135,15 @@ namespace FinantePersonale.ViewModels
             get;
             set;
         }
-
         public IstoricCategoriiVM()
         {
             IstCategorii = new ObservableCollection<Categorie>();
 
-            GetIncome();
+            GetIstCateg();
         }
-
-        private void GetIncome()
+        private void GetIstCateg()
         {
-            var categorie = Categorie.GetValue();
+            var categorie = MetodeCategorie.GetValue();
 
             IstCategorii.Clear();
 
@@ -183,9 +152,5 @@ namespace FinantePersonale.ViewModels
                 IstCategorii.Add(income);
             }
         }
-
     }
-
-
-
 }

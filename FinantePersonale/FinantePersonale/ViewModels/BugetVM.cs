@@ -25,40 +25,24 @@ namespace FinantePersonale.ViewModels
             }
         }
 
-        private string myVar;
-
-        public string MyProperty
-        {
-            get { return myVar; }
-            set { myVar = value; }
-        }
-
-        public string valoareDiferentaVC
-        {
-            get
-            {
-                return Methods.Metode.DiferentaCV();
-            }
-        }
-
-        //public string sum()
+        //public string valoareDiferentaVC
         //{
-        //    return Methods.Metode.DiferentaCV();
+        //    get
+        //    {
+        //        return Methods.Metode.DiferentaCV();
+        //    }
         //}
-        ////TREBUIE SA IAU VALOAREA DIN FILA SI SA O ADAUG INTR-O VARIABILA
-
-        //int BugetAn= Int16.Parse(BugetL.ToString()) * 12;
 
         //---------incercare conectare la Assets Buget
 
-        public  void SaveCountAsync(string BugetL)
-        {
-            var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Buget.txt");
-            using (var writer = File.CreateText(backingFile))
-            {
-                 writer.WriteLineAsync(BugetL.ToString());
-            }
-        }
+        //public  void SaveCountAsync(string BugetL)
+        //{
+        //    var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Buget.txt");
+        //    using (var writer = File.CreateText(backingFile))
+        //    {
+        //         writer.WriteLineAsync(BugetL.ToString());
+        //    }
+        //}
         //----------------pana aici-------
 
 
@@ -67,9 +51,9 @@ namespace FinantePersonale.ViewModels
         public Command DeleteBugetCommand { get; set; }
         public BugetVM()
         {
-            SaveBugetCommand = new Command(CreateFile);   
+            //SaveBugetCommand = new Command(CreateFile);   
             GetValoareBugetL();
-            ReadBuget();
+            //ReadBuget();
 
             //------ delete command ptr numarul din fisier/db
             DeleteBugetCommand = new Command(DeleteRowItem);
@@ -87,19 +71,19 @@ namespace FinantePersonale.ViewModels
         }
 
         //NU INTRODUCE BugelL IN  FILA
-        private void CreateFile()
-        {
-            var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Buget.txt");
+        //private void CreateFile()
+        //{
+        //    var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Buget.txt");
 
-            if (backingFile == null || !File.Exists(backingFile))
-            {
-                File.Create(backingFile);
-            }
+        //    if (backingFile == null || !File.Exists(backingFile))
+        //    {
+        //        File.Create(backingFile);
+        //    }
 
-            using (var writer = File.CreateText(backingFile))
-            {
-                 writer.WriteLine(BugetL);
-            }
+        //    using (var writer = File.CreateText(backingFile))
+        //    {
+        //         writer.WriteLine(BugetL);
+        //    }
             //bool doesExist = File.Exists(fileName);
             //if (!doesExist)
             //{
@@ -108,24 +92,24 @@ namespace FinantePersonale.ViewModels
             //}
             //else
             //    Application.Current.MainPage.DisplayAlert("Eroare", "Salvare esuata", "Ok");
-        }
-            string ReadBuget()
-            {
-                var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Buget.txt");
+        //}
+        //    string ReadBuget()
+        //    {
+        //        var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Buget.txt");
 
-                if (backingFile == null || !File.Exists(backingFile))
-                {
-                    return "";
-                }
+        //        if (backingFile == null || !File.Exists(backingFile))
+        //        {
+        //            return "";
+        //        }
 
-                string content;
-                using (var reader = new StreamReader(backingFile, true))
-                {
-                    content = reader.ReadToEnd();
-                }
+        //        string content;
+        //        using (var reader = new StreamReader(backingFile, true))
+        //        {
+        //            content = reader.ReadToEnd();
+        //        }
 
-                return content;
-            }
+        //        return content;
+        //    }
         
         private void GetValoareBugetL()
         {

@@ -13,58 +13,18 @@ namespace FinantePersonale.Models
     {
         [PrimaryKey, AutoIncrement, NotNull]
         public int IdCh { get; set; }
+        [NotNull]
         public string SubcategorieCh { get; set; }
-
+        [NotNull]
         public float SumaCh { get; set; }
-
+        [NotNull]
         public DateTime DateCh { get; set; }
-
-        public ValueModelCh()
-        {
-
-        }
-
-        //---------------legat de graficul syncfusion
-        public ValueModelCh(string xValue, float yValue)
-        {
-            SubcategorieCh = xValue;
-            SumaCh = yValue;
-        }
-        //---------------pana aici
-
-        public static int InsertValue(ValueModelCh value)
-        {
-            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-            {
-                conn.CreateTable<ValueModelCh>();
-                return conn.Insert(value);
-            }
-        }
-
-        public static List<ValueModelCh> GetValue()
-        {
-            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-            {
-                conn.CreateTable<ValueModelCh>();
-                return conn.Table<ValueModelCh>().ToList();
-            }
-        }
-
-        public static List<ValueModelCh> GetValue(string subcategorie)
-        {
-            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-            {
-                conn.CreateTable<ValueModelCh>();
-                return conn.Table<ValueModelCh>().Where(e => e.SubcategorieCh == subcategorie).ToList();
-            }
-        }
-
-        public static ValueModelCh GetRowFromDB(int id)
-        {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
-            {
-                return conn.Table<ValueModelCh>().FirstOrDefault(x => x.IdCh == id);
-            }
-        }
+        public ValueModelCh(){}
+        //---------------pentru graficul Syncfusion
+        //public ValueModelCh(string xValue, float yValue)
+        //{
+        //    SubcategorieCh = xValue;
+        //    SumaCh = yValue;
+        //}
     }
 }

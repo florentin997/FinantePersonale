@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:vm="clr-namespace:FinantePersonale.ViewModels"
              x:Class="FinantePersonale.Views.Cheltuieli">
@@ -48,14 +47,11 @@
                     <chart:SfChart.Legend>
                         <chart:ChartLegend>
                             <chart:ChartLegend.LabelStyle>
-                                <chart:ChartLegendLabelStyle Font="18"/>
+                                <chart:ChartLegendLabelStyle Font="18" TextColor="Black"/>
                             </chart:ChartLegend.LabelStyle>
-                            </chart:ChartLegend>
+                        </chart:ChartLegend>
                     </chart:SfChart.Legend>
-
                     <chart:SfChart.Series VerticalOptions="FillAndExpand">
-
-                        
                         <chart:PieSeries ItemsSource="{Binding IstCheltuieli, Source={StaticResource vmCheltuieli}}" 
                                          XBindingPath="SubcategorieCh" 
                                          YBindingPath="SumaCh" 
@@ -63,15 +59,15 @@
                                          ListenPropertyChange="True"
                                          EnableSmartLabels = "True" 
                                          ConnectorLineType = "Bezier" 
-					                     DataMarkerPosition = "OutsideExtended">
+					                     DataMarkerPosition = "OutsideExtended"
+                                         ExplodeOnTouch="True">
                             <chart:PieSeries.DataMarker>
                                 <chart:ChartDataMarker/>
                             </chart:PieSeries.DataMarker>
-
                         </chart:PieSeries>
-
                     </chart:SfChart.Series>
                 </chart:SfChart>
+                    
                 <!--<microcharts:ChartView x:Name="charPieCheltuieli" HeightRequest="250" Chart="{Binding Source={StaticResource vmCheltuieli}, Path=Chart}"/>-->
                 
                 <Grid Margin="35,10">

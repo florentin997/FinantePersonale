@@ -94,7 +94,7 @@
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:Wishlist}" />
     </FlyoutItem>
     <FlyoutItem Title="Categorii" Icon="icon_feed.png">
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:PopUpCategorie}" />
+        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:CategorieView}" />
     </FlyoutItem>
     <FlyoutItem Title="Buget" >
     <ShellContent Route="BugetView" ContentTemplate="{DataTemplate local:BugetView}" />

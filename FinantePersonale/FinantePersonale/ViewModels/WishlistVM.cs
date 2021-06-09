@@ -8,6 +8,7 @@ using SQLite;
 using Xamarin.Forms;
 using FinantePersonale.Views;
 using System.Threading.Tasks;
+using FinantePersonale.ViewModels.Methods;
 
 namespace FinantePersonale.ViewModels
 {
@@ -20,17 +21,6 @@ namespace FinantePersonale.ViewModels
             set;
         }
 
-        private void GetWishlist()
-        {
-            var items = ModelWishlist.GetValue();
-
-            WishlistItems.Clear();
-
-            foreach (var item in items)
-            {
-                WishlistItems.Add(item);
-            }
-        }
 
         private int itemID;
         public int ItemID
@@ -99,10 +89,21 @@ namespace FinantePersonale.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void GetWishlist()
+        {
+            var items = MetodeWishlist.GetValue();
+
+            WishlistItems.Clear();
+
+            foreach (var item in items)
+            {
+                WishlistItems.Add(item);
+            }
         }
 
         public void InsertItem()  
@@ -113,8 +114,7 @@ namespace FinantePersonale.ViewModels
                 ItemValue = IValue
             };
             WishlistItems.Add(givenItem);
-            int response = ModelWishlist.InsertValue(givenItem);
-
+            int response = MetodeWishlist.InsertValue(givenItem);
             if (response > 0)
                 Application.Current.MainPage.DisplayAlert("Succes", "Salvare efectuata", "OK");
             else
@@ -126,7 +126,6 @@ namespace FinantePersonale.ViewModels
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
             {
                 int rows = conn.Delete(ItemToDelete);
-
                 if (rows > 0)
                     App.Current.MainPage.DisplayAlert("Succes", "Inregistrare a fost stearsa", "Ok");
                 else

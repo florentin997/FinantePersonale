@@ -12,19 +12,28 @@
 
   <ItemGroup>
     <Compile Remove="Behaviors\**" />
+    <Compile Remove="CustomRenderers\**" />
     <Compile Remove="Services\**" />
     <EmbeddedResource Remove="Behaviors\**" />
+    <EmbeddedResource Remove="CustomRenderers\**" />
     <EmbeddedResource Remove="Services\**" />
     <None Remove="Behaviors\**" />
+    <None Remove="CustomRenderers\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Models\ListaSubcategoriiCh.cs" />
     <Compile Remove="Models\ListaSubcategoriiVen.cs" />
+    <Compile Remove="Models\ModelBuget.cs" />
     <Compile Remove="ViewModels\IstoricCheltuieliVM.cs" />
     <Compile Remove="ViewModels\IstoricVenituriVM.cs" />
     <Compile Remove="ViewModels\IstoricWishlistVM.cs" />
+    <Compile Remove="Views\MainPage.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\MainPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +53,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CategorieView.xaml.cs">
+      <DependentUpon>CategorieView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="AppShell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -56,7 +71,7 @@
     <EmbeddedResource Update="Views\IstoricVenituri.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\PopUpCategorie.xaml">
+    <EmbeddedResource Update="Views\CategorieView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Venituri.xaml">

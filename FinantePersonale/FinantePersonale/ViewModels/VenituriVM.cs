@@ -7,9 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinantePersonale.Models;
 using FinantePersonale.ViewModels.Commands;
+using FinantePersonale.ViewModels.Methods;
 using Microcharts;
 using SQLite;
 using Xamarin.Forms;
+
 namespace FinantePersonale.ViewModels
 {
     public class VenituriVM : INotifyPropertyChanged
@@ -82,8 +84,6 @@ namespace FinantePersonale.ViewModels
             DeleteVenituriCommand = new Command(DeleteRowVen);
             GetSubcategorieVenituri();
             
-
-
             IstVenituri = new ObservableCollection<ValueModelVen>();
             GetVen();
 
@@ -116,7 +116,7 @@ namespace FinantePersonale.ViewModels
         }
         private void GetVen()
         {
-            var venituri = ValueModelVen.GetValue();
+            var venituri = MetodeVen.GetValue();
 
             IstVenituri.Clear();
 
@@ -164,7 +164,7 @@ namespace FinantePersonale.ViewModels
                 DateVen = DateV
             };
             IstVenituri.Add(vn);
-            int response = ValueModelVen.InsertValue(vn);
+            int response = MetodeVen.InsertValue(vn);
 
             if (response > 0) 
             {
@@ -196,7 +196,7 @@ namespace FinantePersonale.ViewModels
         {
             try
             {
-                var categorie = Categorie.GetValue("Venituri");
+                var categorie = MetodeCategorie.GetValue("Venituri");
 
                 SubcategoriiVenituri.Clear();
 

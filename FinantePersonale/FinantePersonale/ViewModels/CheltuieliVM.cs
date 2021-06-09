@@ -92,6 +92,7 @@ namespace FinantePersonale.ViewModels
             set;
         }
 
+     
 
         //AR TREBUI SA FAC ON OBSCOLLECTION CU OBIECTE DE TIPUL VALLUEMODELCH CARE SA SE UPDATEZE CAND SE UPDATEAZA SI DATELE INDIVIDUALE DE MAI SUS ?
         public CheltuieliVM()
@@ -110,17 +111,9 @@ namespace FinantePersonale.ViewModels
             //this.DeleteItemCommand = new DeleteCommand(this);
             //DeleteItemFromObsColl();
 
-            ////Label total suma
-            //Total = new ObservableCollection<string>();
-            //TotalSumaCh();
-
             ////Diferenta dintre V si C pe luna
             //EconPerLuna = new ObservableCollection<ValueModelCh>();
             //DiferentaLunara(DateTime.Today.Month.ToString());
-
-
-            //Picker ptr luna si an
-
         }
 
         //-----------ObservableCollection luat din IstCheltuieliiVM
@@ -131,7 +124,7 @@ namespace FinantePersonale.ViewModels
         }
         private void GetCh()
         {
-            var expenses = ValueModelCh.GetValue();
+            var expenses = MetodeCh.GetValue();
 
             IstCheltuieli.Clear();
 
@@ -183,7 +176,7 @@ namespace FinantePersonale.ViewModels
                 DateCh = DateC
             };
             IstCheltuieli.Add(ch);
-            int response = ValueModelCh.InsertValue(ch);
+            int response = MetodeCh.InsertValue(ch);
 
             if (response > 0)
             {
@@ -236,7 +229,7 @@ namespace FinantePersonale.ViewModels
         {
             try
             {
-                var categorie = Categorie.GetValue("Cheltuieli");
+                var categorie = MetodeCategorie.GetValue("Cheltuieli");
 
                 SubcategoriiCheltuieli.Clear();
 

@@ -41,14 +41,14 @@
                 </StackLayout>
 
                 <StackLayout  BackgroundColor="DodgerBlue" Grid.Column="1" Grid.Row="2">
-                    <Entry HorizontalTextAlignment="Center" Text="{Binding Source={StaticResource vmBuget}, Path=BugetL, Mode=TwoWay}" />
+                    <Entry HorizontalTextAlignment="Center" Text="{Binding Source={StaticResource vmBuget}, Path=BugetL, Mode=TwoWay}" Keyboard="Numeric"/>
                 </StackLayout>
 
                 <StackLayout BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="3">
                     <Label HorizontalTextAlignment="Center" />
                 </StackLayout>
 
-                
+
                 <StackLayout VerticalOptions="Center" BackgroundColor="LightGreen" Grid.Column="1" Grid.Row="4">
                     <Label Text="{Binding valoareDiferentaVC, Source={StaticResource vmBuget}}"
                            HorizontalOptions="Center"
@@ -57,8 +57,6 @@
                 </StackLayout>
 
             </Grid>
-            
-            <!-- DE ADAUGAT COMANDA PENTRU STERGERE  LA BUTON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1-->
 
             <Grid HorizontalOptions="End" VerticalOptions="End" RowDefinitions="50" Margin="20,15,20,0">
                 <Button Grid.Column="0" Text="Salvare" BackgroundColor="Green"

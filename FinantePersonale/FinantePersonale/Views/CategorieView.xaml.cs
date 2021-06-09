@@ -10,10 +10,10 @@ using Xamarin.Forms.Xaml;
 namespace FinantePersonale.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PopUpCategorie : ContentPage
+    public partial class CategorieView : ContentPage
     {
        // CategorieVM _viewModel;
-        public PopUpCategorie()
+        public CategorieView()
         {
             InitializeComponent();
 

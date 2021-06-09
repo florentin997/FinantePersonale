@@ -42,11 +42,9 @@
                 <chart:SfChart BackgroundColor="Transparent">
                         <chart:SfChart.Legend>
                             <chart:ChartLegend>
-                                <chart:ChartLegend.LabelStyle>
-
-                                    <chart:ChartLegendLabelStyle Font="18"/>
-
-                                </chart:ChartLegend.LabelStyle>
+                            <chart:ChartLegend.LabelStyle>
+                                <chart:ChartLegendLabelStyle Font="18" TextColor="Black"/>
+                            </chart:ChartLegend.LabelStyle>
                             </chart:ChartLegend>
                         </chart:SfChart.Legend>
 
@@ -55,7 +53,8 @@
                         <chart:PieSeries ItemsSource="{Binding IstVenituri, Source={StaticResource vmVenituri}}" 
                                          XBindingPath="SubcategorieVen" 
                                          YBindingPath="SumaVen" 
-                                         ExplodeAll="False" 
+                                         ExplodeAll="False"
+                                         ExplodeOnTouch="True"
                                          EnableSmartLabels = "True" 
                                          ConnectorLineType = "Bezier" 
 					                     DataMarkerPosition = "OutsideExtended">
